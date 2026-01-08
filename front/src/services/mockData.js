@@ -12,10 +12,10 @@
 // Estas cores serão aplicadas automaticamente no site
 // Para mudar as cores, altere os valores hexadecimais abaixo
 export const mockTheme = {
-    // Cores principais do escritório - Paleta Miguel & Xavier (INVERTIDA)
-    primary: '#771220',      // Vermelho vinho (fundo principal)
-    secondary: '#cfa750',    // Dourado claro (destaques)
-    accent: '#e6b84d',       // Dourado brilhante (acento)
+    // Cores principais do escritório - Paleta Miguel & Xavier (REFINADA)
+    primary: '#771220',      // Vermelho vinho (destaques)
+    secondary: '#cfa750',    // Dourado claro
+    accent: '#e6b84d',       // Dourado brilhante
 
     // Tons de dourado adicionais
     gold1: '#997114',
@@ -26,15 +26,15 @@ export const mockTheme = {
     gold6: '#e6b84d',
 
     // Cores de fundo
-    background: '#771220',      // Vermelho vinho (fundo principal)
-    backgroundDark: '#5a0e18',  // Vermelho mais escuro
-    backgroundLight: '#8f1628', // Vermelho mais claro
+    background: '#f5f1eb',      // Bege claro (fundo principal)
+    backgroundDark: '#771220',  // Vermelho vinho (seções escuras)
+    backgroundLight: '#faf8f5', // Creme muito claro
     backgroundCard: '#ffffff',  // Branco para cards
 
     // Cores de texto
-    textPrimary: '#ffffff',     // Branco (texto principal)
-    textSecondary: '#e6b84d',   // Dourado claro (texto secundário)
-    textDark: '#2d2416',        // Marrom escuro (para fundos claros)
+    textPrimary: '#2d2416',     // Marrom escuro (texto principal)
+    textSecondary: '#5a4a35',   // Marrom médio (texto secundário)
+    textDark: '#1a1410',        // Marrom muito escuro
     textLight: '#ffffff',       // Branco
 
     // Cores de status
@@ -72,8 +72,7 @@ export const mockHero = {
     subtitle: 'Mais de 20 anos de experiência defendendo seus direitos com seriedade e dedicação',
     description: 'Escritório de advocacia especializado em soluções jurídicas personalizadas para pessoas físicas e empresas.',
     ctaButtons: [
-        { text: 'Fale com um Advogado', href: '#contact', primary: true },
-        { text: 'Análise de Caso com IA', href: '#ai-chat', primary: false }
+        { text: 'Fale com um Advogado', href: '#contact', primary: true }
     ],
     // URL da imagem de fundo (futuramente virá da API)
     backgroundImage: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80'

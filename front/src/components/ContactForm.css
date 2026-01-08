@@ -103,6 +103,7 @@
     padding: var(--spacing-md) var(--spacing-xl);
     font-size: var(--font-lg);
     cursor: pointer;
+    margin-top: var(--spacing-sm);
 }
 
 .submit-button:disabled {

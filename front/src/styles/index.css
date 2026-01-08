@@ -62,10 +62,10 @@ body {
    ============================================ */
 
 :root {
-  /* Cores principais - Paleta do Cliente Miguel & Xavier (INVERTIDA) */
-  /* Vermelho vinho - cor primária (fundo da logo) */
+  /* Cores principais - Paleta do Cliente Miguel & Xavier (REFINADA) */
+  /* Vermelho vinho - cor primária (destaques) */
   --color-primary: #771220;
-  /* Dourado claro - cor secundária (destaques) */
+  /* Dourado claro - cor secundária */
   --color-secondary: #cfa750;
   /* Dourado brilhante - cor de acento */
   --color-accent: #e6b84d;
@@ -79,22 +79,22 @@ body {
   --color-gold-6: #e6b84d;
 
   /* Cores de fundo */
-  --color-background: #771220;
-  /* Vermelho vinho (fundo principal) */
-  --color-background-dark: #5a0e18;
-  /* Vermelho mais escuro */
-  --color-background-light: #8f1628;
-  /* Vermelho mais claro */
+  --color-background: #f5f1eb;
+  /* Bege claro (fundo principal) */
+  --color-background-dark: #771220;
+  /* Vermelho vinho (seções escuras) */
+  --color-background-light: #faf8f5;
+  /* Creme muito claro */
   --color-background-card: #ffffff;
   /* Branco para cards */
 
   /* Cores de texto */
-  --color-text-primary: #ffffff;
-  /* Branco (texto principal) */
-  --color-text-secondary: #e6b84d;
-  /* Dourado claro (texto secundário) */
-  --color-text-dark: #2d2416;
-  /* Marrom escuro (para fundos claros) */
+  --color-text-primary: #2d2416;
+  /* Marrom escuro (texto principal) */
+  --color-text-secondary: #5a4a35;
+  /* Marrom médio (texto secundário) */
+  --color-text-dark: #1a1410;
+  /* Marrom muito escuro */
   --color-text-light: #ffffff;
   /* Branco */
 
