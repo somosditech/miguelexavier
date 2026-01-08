@@ -169,11 +169,11 @@ export const mockTeam = {
     members: [
         {
             id: 1,
-            name: 'Dr. Miguel Santos',
+            name: 'Dr. David Miguel',
             role: 'Sócio Fundador',
             specialization: 'Direito Empresarial e Civil',
             oab: 'OAB/SP 123.456',
-            description: 'Mais de 15 anos de experiência em direito empresarial, com especialização em contratos e recuperação judicial.',
+            description: 'Mais de 10 anos de experiência em direito empresarial, com especialização em contratos e recuperação judicial.',
             image: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=400&q=80',
             social: {
                 linkedin: '#',
@@ -182,7 +182,7 @@ export const mockTeam = {
         },
         {
             id: 2,
-            name: 'Dra. Ana Xavier',
+            name: 'Dra. Ariane Xavier',
             role: 'Sócia Fundadora',
             specialization: 'Direito de Família e Sucessões',
             oab: 'OAB/SP 234.567',
@@ -190,7 +190,7 @@ export const mockTeam = {
             image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80',
             social: {
                 linkedin: '#',
-                email: 'ana@miguelxavier.adv.br'
+                email: 'ariane@miguelxavier.adv.br'
             }
         }
     ]

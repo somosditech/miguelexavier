@@ -11,7 +11,7 @@ import './WhatsAppButton.css';
 function WhatsAppButton() {
     // Número do WhatsApp (formato internacional sem + e sem espaços)
     // Exemplo: 5511999999999 (55 = Brasil, 11 = DDD, 999999999 = número)
-    const phoneNumber = '5511999999999'; // ALTERE ESTE NÚMERO
+    const phoneNumber = '554184737511'; // ALTERE ESTE NÚMERO
 
     // Mensagem pré-definida que aparecerá no WhatsApp
     const message = 'Olá! Gostaria de agendar uma consulta jurídica.';
