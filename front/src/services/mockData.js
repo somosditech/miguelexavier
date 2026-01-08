@@ -61,7 +61,7 @@ export const mockHeader = {
         { id: 'contato', label: 'Contato', href: '#contact' }
     ],
     ctaButton: {
-        text: 'Consulta Gratuita',
+        text: 'Fale com um Advogado',
         href: '#contact'
     }
 };
