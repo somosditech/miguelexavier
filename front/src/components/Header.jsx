@@ -72,8 +72,11 @@ function Header() {
                 <div className="header-content">
                     {/* Logo do escritório */}
                     <div className="logo">
-                        <span className="logo-text">{content.logo.text}</span>
-                        <span className="logo-subtitle">{content.logo.subtitle}</span>
+                        <img
+                            src="/logo.png"
+                            alt="Miguel & Xavier Advocacia"
+                            className="logo-image"
+                        />
                     </div>
 
                     {/* Botão hambúrguer para mobile */}

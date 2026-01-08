@@ -12,24 +12,35 @@
 // Estas cores serão aplicadas automaticamente no site
 // Para mudar as cores, altere os valores hexadecimais abaixo
 export const mockTheme = {
-    // Cores principais do escritório
-    primary: '#1a365d',      // Azul escuro (seriedade e confiança)
-    secondary: '#c49b63',    // Dourado (sofisticação)
-    accent: '#2c5282',       // Azul médio
+    // Cores principais do escritório - Paleta Miguel & Xavier (INVERTIDA)
+    primary: '#771220',      // Vermelho vinho (fundo principal)
+    secondary: '#cfa750',    // Dourado claro (destaques)
+    accent: '#e6b84d',       // Dourado brilhante (acento)
+
+    // Tons de dourado adicionais
+    gold1: '#997114',
+    gold2: '#cfa750',
+    gold3: '#a1791d',
+    gold4: '#caa24a',
+    gold5: '#a88025',
+    gold6: '#e6b84d',
 
     // Cores de fundo
-    background: '#ffffff',   // Branco
-    backgroundDark: '#0f1419', // Preto azulado
+    background: '#771220',      // Vermelho vinho (fundo principal)
+    backgroundDark: '#5a0e18',  // Vermelho mais escuro
+    backgroundLight: '#8f1628', // Vermelho mais claro
+    backgroundCard: '#ffffff',  // Branco para cards
 
     // Cores de texto
-    textPrimary: '#1a202c',  // Texto escuro
-    textSecondary: '#4a5568', // Texto cinza
-    textLight: '#ffffff',    // Texto branco
+    textPrimary: '#ffffff',     // Branco (texto principal)
+    textSecondary: '#e6b84d',   // Dourado claro (texto secundário)
+    textDark: '#2d2416',        // Marrom escuro (para fundos claros)
+    textLight: '#ffffff',       // Branco
 
     // Cores de status
     success: '#38a169',      // Verde (sucesso)
-    error: '#e53e3e',        // Vermelho (erro)
-    warning: '#dd6b20'       // Laranja (aviso)
+    error: '#ff6b6b',        // Vermelho claro (erro)
+    warning: '#e6b84d'       // Dourado (aviso)
 };
 
 // ============================================
@@ -181,32 +192,6 @@ export const mockTeam = {
             social: {
                 linkedin: '#',
                 email: 'ana@miguelxavier.adv.br'
-            }
-        },
-        {
-            id: 3,
-            name: 'Dr. Carlos Mendes',
-            role: 'Advogado Associado',
-            specialization: 'Direito Trabalhista',
-            oab: 'OAB/SP 345.678',
-            description: 'Especialista em direito trabalhista com atuação tanto para empregados quanto empregadores.',
-            image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
-            social: {
-                linkedin: '#',
-                email: 'carlos@miguelxavier.adv.br'
-            }
-        },
-        {
-            id: 4,
-            name: 'Dra. Juliana Costa',
-            role: 'Advogada Associada',
-            specialization: 'Direito Penal',
-            oab: 'OAB/SP 456.789',
-            description: 'Criminalista com vasta experiência em defesas criminais e recursos em tribunais superiores.',
-            image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80',
-            social: {
-                linkedin: '#',
-                email: 'juliana@miguelxavier.adv.br'
             }
         }
     ]

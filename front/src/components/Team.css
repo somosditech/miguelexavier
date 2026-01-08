@@ -3,7 +3,8 @@
  */
 
 .team {
-    background: var(--color-background);
+    background: var(--color-background-dark);
+    padding: var(--spacing-3xl) 0;
 }
 
 /* ============================================
@@ -17,18 +18,20 @@
 }
 
 .team-card {
-    background: var(--color-background);
+    background: rgba(26, 20, 16, 0.6);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-gold);
     transition: all var(--transition-base);
-    border: 2px solid transparent;
+    border: 2px solid var(--color-secondary);
+    backdrop-filter: blur(10px);
 }
 
 .team-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--color-secondary);
+    box-shadow: 0 0 30px rgba(230, 184, 77, 0.5);
+    border-color: var(--color-accent);
+    background: rgba(26, 20, 16, 0.8);
 }
 
 /* ============================================
@@ -62,7 +65,7 @@
 }
 
 .team-name {
-    color: var(--color-primary);
+    color: var(--color-accent);
     font-size: var(--font-2xl);
     margin-bottom: var(--spacing-xs);
 }
@@ -90,10 +93,11 @@
 }
 
 .team-description {
-    color: var(--color-text-secondary);
+    color: var(--color-text-light);
     font-size: var(--font-sm);
     line-height: 1.6;
     margin-bottom: var(--spacing-md);
+    opacity: 0.9;
 }
 
 /* ============================================
@@ -104,15 +108,15 @@
     display: flex;
     gap: var(--spacing-sm);
     padding-top: var(--spacing-md);
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid rgba(207, 167, 80, 0.3);
 }
 
 .social-link {
     width: 40px;
     height: 40px;
     border-radius: var(--radius-full);
-    background: var(--color-primary);
-    color: var(--color-text-light);
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+    color: var(--color-primary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -121,8 +125,9 @@
 }
 
 .social-link:hover {
-    background: var(--color-secondary);
+    background: linear-gradient(135deg, var(--color-accent), var(--color-gold-6));
     transform: translateY(-3px);
+    box-shadow: var(--shadow-gold);
 }
 
 /* ============================================
