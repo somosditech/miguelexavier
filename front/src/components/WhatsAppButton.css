@@ -1,0 +1,64 @@
+/**
+ * ESTILOS DO COMPONENTE: WhatsAppButton
+ */
+
+.whatsapp-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    /* Circular */
+    background: #25D366;
+    /* Verde do WhatsApp */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    cursor: pointer;
+    z-index: 999;
+    transition: all var(--transition-base);
+    text-decoration: none;
+}
+
+.whatsapp-button:hover {
+    background: #128C7E;
+    /* Verde mais escuro no hover */
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    transform: translateY(-3px);
+}
+
+.whatsapp-button:active {
+    transform: translateY(-1px);
+}
+
+/* Animação de pulso para chamar atenção */
+@keyframes whatsappPulse {
+    0% {
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.7);
+    }
+
+    100% {
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    }
+}
+
+.whatsapp-button {
+    animation: whatsappPulse 2s infinite;
+}
+
+/* Responsivo - ajusta posição em mobile */
+@media (max-width: 768px) {
+    .whatsapp-button {
+        bottom: 20px;
+        right: 20px;
+        width: 56px;
+        height: 56px;
+    }
+}

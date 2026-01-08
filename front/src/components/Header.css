@@ -1,0 +1,214 @@
+/**
+ * ESTILOS DO COMPONENTE: Header
+ * 
+ * Estilos para o cabeçalho do site.
+ * Inclui estilos para desktop e mobile (responsivo).
+ */
+
+.header {
+    position: fixed;
+    /* Fixa o header no topo ao rolar a página */
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    /* Fundo branco semi-transparente */
+    backdrop-filter: blur(10px);
+    /* Efeito de desfoque no fundo */
+    box-shadow: var(--shadow-md);
+    z-index: 1000;
+    /* Garante que o header fique acima de outros elementos */
+    transition: all var(--transition-base);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-sm) 0;
+    min-height: 70px;
+}
+
+/* ============================================
+   LOGO
+   ============================================ */
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.logo-text {
+    font-size: var(--font-xl);
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+.logo-subtitle {
+    font-size: var(--font-sm);
+    color: var(--color-secondary);
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* ============================================
+   NAVEGAÇÃO
+   ============================================ */
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-lg);
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin: 0;
+}
+
+.nav-link {
+    color: var(--color-text-primary);
+    font-weight: 500;
+    font-size: var(--font-base);
+    position: relative;
+    transition: color var(--transition-fast);
+}
+
+/* Efeito de sublinhado ao passar o mouse */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-secondary);
+    transition: width var(--transition-base);
+}
+
+.nav-link:hover {
+    color: var(--color-primary);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Botão CTA no header */
+.cta-button {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-sm);
+    white-space: nowrap;
+    background: var(--color-primary);
+    /* Azul escuro */
+    color: var(--color-text-light) !important;
+    /* Texto branco sempre */
+    border: none;
+    text-decoration: none;
+}
+
+.cta-button:hover {
+    background: var(--color-secondary);
+    /* Dourado no hover */
+    color: var(--color-text-light) !important;
+    /* Texto branco sempre */
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   MENU HAMBÚRGUER (MOBILE)
+   ============================================ */
+
+.menu-toggle {
+    display: none;
+    /* Escondido por padrão (desktop) */
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-base);
+}
+
+/* Animação do X quando o menu está aberto */
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* ============================================
+   RESPONSIVIDADE - TABLET E MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+        /* Mostra o botão hambúrguer em mobile */
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        /* Esconde o menu fora da tela */
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--color-background);
+        box-shadow: var(--shadow-xl);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--spacing-3xl) var(--spacing-lg);
+        gap: var(--spacing-md);
+        transition: right var(--transition-base);
+    }
+
+    /* Menu aberto */
+    .nav.active {
+        right: 0;
+        /* Traz o menu para dentro da tela */
+    }
+
+    .nav-list {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        width: 100%;
+    }
+
+    .nav-link {
+        font-size: var(--font-lg);
+        display: block;
+        padding: var(--spacing-xs) 0;
+    }
+
+    .cta-button {
+        width: 100%;
+        text-align: center;
+    }
+}

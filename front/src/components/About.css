@@ -1,0 +1,129 @@
+/**
+ * ESTILOS DO COMPONENTE: About
+ */
+
+.about {
+    background: var(--color-background);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+}
+
+/* ============================================
+   IMAGEM
+   ============================================ */
+
+.about-image-wrapper {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+}
+
+.about-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--transition-slow);
+}
+
+.about-image-wrapper:hover .about-image {
+    transform: scale(1.05);
+    /* Zoom suave ao passar o mouse */
+}
+
+/* ============================================
+   CONTEÚDO
+   ============================================ */
+
+.section-subtitle {
+    color: var(--color-secondary);
+    font-size: var(--font-base);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-sm);
+}
+
+.section-title {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.about-description {
+    font-size: var(--font-lg);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   DESTAQUES (ESTATÍSTICAS)
+   ============================================ */
+
+.highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+}
+
+.highlight-card {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+}
+
+.highlight-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.highlight-icon {
+    font-size: var(--font-4xl);
+    margin-bottom: var(--spacing-sm);
+    /* Estilos para ícones Lucide React */
+    color: var(--color-text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.highlight-title {
+    color: var(--color-text-light);
+    font-size: var(--font-2xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+.highlight-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--font-sm);
+    margin: 0;
+}
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .about-image-wrapper {
+        order: -1;
+        /* Coloca a imagem primeiro em mobile */
+    }
+
+    .highlights-grid {
+        grid-template-columns: 1fr;
+    }
+}

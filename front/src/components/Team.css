@@ -1,0 +1,140 @@
+/**
+ * ESTILOS DO COMPONENTE: Team
+ */
+
+.team {
+    background: var(--color-background);
+}
+
+/* ============================================
+   GRID DE EQUIPE
+   ============================================ */
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.team-card {
+    background: var(--color-background);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+    border: 2px solid transparent;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--color-secondary);
+}
+
+/* ============================================
+   IMAGEM
+   ============================================ */
+
+.team-image-wrapper {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+}
+
+.team-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.team-card:hover .team-image {
+    transform: scale(1.1);
+}
+
+/* ============================================
+   INFORMAÇÕES
+   ============================================ */
+
+.team-info {
+    padding: var(--spacing-xl);
+}
+
+.team-name {
+    color: var(--color-primary);
+    font-size: var(--font-2xl);
+    margin-bottom: var(--spacing-xs);
+}
+
+.team-role {
+    color: var(--color-secondary);
+    font-size: var(--font-base);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.team-specialization {
+    color: var(--color-text-secondary);
+    font-size: var(--font-base);
+    font-weight: 500;
+    margin-bottom: var(--spacing-xs);
+}
+
+.team-oab {
+    color: var(--color-text-secondary);
+    font-size: var(--font-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.team-description {
+    color: var(--color-text-secondary);
+    font-size: var(--font-sm);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   REDES SOCIAIS
+   ============================================ */
+
+.team-social {
+    display: flex;
+    gap: var(--spacing-sm);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid #e2e8f0;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: var(--color-primary);
+    color: var(--color-text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: all var(--transition-fast);
+}
+
+.social-link:hover {
+    background: var(--color-secondary);
+    transform: translateY(-3px);
+}
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-image-wrapper {
+        height: 250px;
+    }
+}
