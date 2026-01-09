@@ -4,7 +4,8 @@
 
 .skip-link {
     position: absolute;
-    top: -40px;
+    top: -100px;
+    /* Aumentado de -40px para -100px para esconder completamente */
     left: 0;
     background: var(--color-primary);
     color: var(--color-text-light);
