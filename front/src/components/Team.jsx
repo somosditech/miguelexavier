@@ -9,6 +9,7 @@
 
 import { useContent } from '../hooks/useContent';
 import { motion } from 'framer-motion'; // Biblioteca de animações
+import LazyImage from './LazyImage';
 import './Team.css';
 
 function Team() {
@@ -49,12 +50,10 @@ function Team() {
                         >
                             {/* Foto do advogado */}
                             <div className="team-image-wrapper">
-                                <motion.img
+                                <LazyImage
                                     src={member.image}
-                                    alt={member.name}
+                                    alt={`${member.name} - ${member.role} - ${member.specialization}`}
                                     className="team-image"
-                                    whileHover={{ scale: 1.05 }} // Zoom na imagem ao passar o mouse
-                                    transition={{ duration: 0.3 }}
                                 />
                             </div>
 

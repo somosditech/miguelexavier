@@ -1,0 +1,229 @@
+/**
+ * ESTILOS DO COMPONENTE: Testimonials
+ */
+
+.testimonials {
+    background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Elemento decorativo de fundo */
+.testimonials::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(207, 167, 80, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   CARROSSEL
+   ============================================ */
+
+.testimonials-carousel {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--spacing-2xl) 0;
+}
+
+.testimonial-card {
+    background: var(--color-background);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-3xl);
+    box-shadow: 0 10px 40px rgba(119, 18, 32, 0.08);
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--color-background), var(--color-background)),
+        linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    position: relative;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* ============================================
+   ÍCONE DE ASPAS
+   ============================================ */
+
+.quote-icon {
+    color: var(--color-secondary);
+    opacity: 0.2;
+    position: absolute;
+    top: var(--spacing-lg);
+    left: var(--spacing-lg);
+}
+
+/* ============================================
+   CONTEÚDO DO DEPOIMENTO
+   ============================================ */
+
+.testimonial-text {
+    font-size: var(--font-xl);
+    line-height: 1.8;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xl);
+    font-style: italic;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.author-info {
+    text-align: center;
+}
+
+.author-name {
+    font-size: var(--font-lg);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.author-role {
+    font-size: var(--font-sm);
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   BOTÕES DE NAVEGAÇÃO
+   ============================================ */
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--color-background);
+    border: 2px solid var(--color-secondary);
+    border-radius: var(--radius-full);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+    z-index: 2;
+}
+
+.carousel-button:hover {
+    background: var(--color-secondary);
+    color: var(--color-background);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 0 20px rgba(207, 167, 80, 0.4);
+}
+
+.carousel-button-prev {
+    left: -24px;
+}
+
+.carousel-button-next {
+    right: -24px;
+}
+
+/* ============================================
+   DOTS DE NAVEGAÇÃO
+   ============================================ */
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-xl);
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: var(--radius-full);
+    background: var(--color-background-dark);
+    border: 2px solid var(--color-secondary);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    padding: 0;
+}
+
+.carousel-dot:hover {
+    background: var(--color-secondary);
+    transform: scale(1.2);
+}
+
+.carousel-dot.active {
+    background: var(--color-secondary);
+    width: 32px;
+    border-radius: var(--radius-md);
+}
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .testimonials-carousel {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .testimonial-card {
+        padding: var(--spacing-xl);
+        min-height: 350px;
+    }
+
+    .testimonial-text {
+        font-size: var(--font-lg);
+    }
+
+    .carousel-button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .carousel-button-prev {
+        left: 0;
+    }
+
+    .carousel-button-next {
+        right: 0;
+    }
+
+    .quote-icon {
+        opacity: 0.1;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial-card {
+        padding: var(--spacing-lg);
+    }
+
+    .testimonial-text {
+        font-size: var(--font-base);
+    }
+
+    .carousel-button {
+        width: 36px;
+        height: 36px;
+    }
+}

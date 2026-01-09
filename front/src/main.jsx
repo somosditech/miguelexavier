@@ -13,8 +13,10 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import './styles/index.css';
+import { registerServiceWorker } from './utils/serviceWorkerRegistration';
 
 // Cria a raiz da aplicação React
 // O elemento com id="root" está no arquivo index.html
@@ -22,8 +24,17 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // Renderiza a aplicação
 // React.StrictMode ajuda a identificar problemas durante o desenvolvimento
+// HelmetProvider permite gerenciar meta tags com react-helmet-async
 root.render(
     <React.StrictMode>
-        <App />
+        <HelmetProvider>
+            <App />
+        </HelmetProvider>
     </React.StrictMode>
 );
+
+// Registra o Service Worker para PWA
+// Apenas em produção (não em desenvolvimento)
+if (import.meta.env.PROD) {
+    registerServiceWorker();
+}

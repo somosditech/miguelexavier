@@ -53,7 +53,8 @@
 .footer-social {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-xs);
+    /* Reduzido de sm para xs - botões mais próximos */
 }
 
 .social-button {

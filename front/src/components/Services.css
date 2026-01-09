@@ -28,12 +28,39 @@
     box-shadow: var(--shadow-md);
     transition: all var(--transition-base);
     border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de brilho dourado sutil no fundo */
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(207, 167, 80, 0.05) 100%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    z-index: 0;
+}
+
+.service-card:hover::before {
+    opacity: 1;
 }
 
 .service-card:hover {
     transform: translateY(-8px);
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 20px 40px -10px rgba(119, 18, 32, 0.15),
+        0 0 20px rgba(207, 167, 80, 0.3);
     border-color: var(--color-secondary);
+}
+
+/* Garantir que o conteúdo fique acima do overlay */
+.service-card>* {
+    position: relative;
+    z-index: 1;
 }
 
 /* ============================================

@@ -21,6 +21,7 @@ import {
     fetchAbout,
     fetchServices,
     fetchTeam,
+    fetchTestimonials,
     fetchFooter,
     fetchAIChatConfig
 } from '../services/api';
@@ -32,6 +33,7 @@ const contentFetchers = {
     about: fetchAbout,
     services: fetchServices,
     team: fetchTeam,
+    testimonials: fetchTestimonials,
     footer: fetchFooter,
     aiChat: fetchAIChatConfig
 };

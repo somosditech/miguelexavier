@@ -1,0 +1,71 @@
+/**
+ * ESTILOS DO COMPONENTE: LazyImage
+ */
+
+.lazy-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+}
+
+.lazy-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+/* Estado de loading - imagem borrada */
+.lazy-image.loading {
+    opacity: 0;
+    filter: blur(10px);
+}
+
+/* Estado loaded - imagem nítida */
+.lazy-image.loaded {
+    opacity: 1;
+    filter: blur(0);
+}
+
+/* Placeholder com shimmer effect */
+.lazy-image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            var(--color-background-light) 0%,
+            var(--color-background-dark) 20%,
+            var(--color-background-light) 40%,
+            var(--color-background-light) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* Erro ao carregar */
+.lazy-image-error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-background-dark);
+    color: var(--color-text-secondary);
+    font-size: var(--font-sm);
+}
+
+/* Animação shimmer já definida em index.css, mas garantindo aqui também */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}

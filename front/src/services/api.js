@@ -15,6 +15,7 @@ import {
     mockAbout,
     mockServices,
     mockTeam,
+    mockTestimonials,
     mockFooter,
     mockAIChat
 } from './mockData';
@@ -149,6 +150,25 @@ export const fetchTeam = async () => {
     } catch (error) {
         console.error('Erro ao buscar team:', error);
         return mockTeam;
+    }
+};
+
+/**
+ * Busca o conteúdo da seção Depoimentos
+ * Futuramente: GET /api/content/testimonials
+ */
+export const fetchTestimonials = async () => {
+    try {
+        return new Promise((resolve) => {
+            setTimeout(() => resolve(mockTestimonials), 500);
+        });
+
+        // VERSÃO REAL:
+        // const response = await api.get('/content/testimonials');
+        // return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar testimonials:', error);
+        return mockTestimonials;
     }
 };
 

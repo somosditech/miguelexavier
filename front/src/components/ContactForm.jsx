@@ -9,6 +9,7 @@
 
 import { useState } from 'react';
 import { sendContactForm } from '../services/api';
+import { mockAreasDeInteresse } from '../services/mockData';
 import { motion } from 'framer-motion'; // Biblioteca de animações
 import './ContactForm.css';
 
@@ -18,6 +19,7 @@ function ContactForm() {
         name: '',
         email: '',
         phone: '',
+        areaInteresse: '',
         subject: '',
         message: ''
     });
@@ -83,6 +85,7 @@ function ContactForm() {
                 name: '',
                 email: '',
                 phone: '',
+                areaInteresse: '',
                 subject: '',
                 message: ''
             });
@@ -169,21 +172,43 @@ function ContactForm() {
                             />
                         </div>
 
-                        {/* Assunto */}
+                        {/* Área de Interesse */}
                         <div className="form-group">
-                            <label htmlFor="subject" className="form-label">
-                                Assunto
+                            <label htmlFor="areaInteresse" className="form-label">
+                                Área de Interesse *
                             </label>
-                            <input
-                                type="text"
-                                id="subject"
-                                name="subject"
-                                value={formData.subject}
+                            <select
+                                id="areaInteresse"
+                                name="areaInteresse"
+                                value={formData.areaInteresse}
                                 onChange={handleChange}
-                                className="form-input"
-                                placeholder="Assunto da mensagem"
-                            />
+                                className="form-select"
+                                required
+                            >
+                                <option value="">Selecione uma área</option>
+                                {mockAreasDeInteresse.map((area) => (
+                                    <option key={area.id} value={area.id}>
+                                        {area.label}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
+                    </div>
+
+                    {/* Assunto - Largura Total */}
+                    <div className="form-group">
+                        <label htmlFor="subject" className="form-label">
+                            Assunto
+                        </label>
+                        <input
+                            type="text"
+                            id="subject"
+                            name="subject"
+                            value={formData.subject}
+                            onChange={handleChange}
+                            className="form-input"
+                            placeholder="Assunto da mensagem"
+                        />
                     </div>
 
                     {/* Mensagem */}

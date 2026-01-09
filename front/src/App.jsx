@@ -20,9 +20,14 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
 import Team from './components/Team';
+import Testimonials from './components/Testimonials';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import LoadingSkeleton from './components/LoadingSkeleton';
+import SEO from './components/SEO';
+import SchemaMarkup from './components/SchemaMarkup';
+import SkipLink from './components/SkipLink';
 
 function App() {
     // Carrega o tema (cores) da API
@@ -35,30 +40,25 @@ function App() {
         // Continua mesmo com erro, usando cores padrão do CSS
     }
 
-    // Enquanto carrega o tema, mostra um loading
+    // Enquanto carrega o tema, mostra um skeleton loading
     if (loading) {
-        return (
-            <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minHeight: '100vh',
-                flexDirection: 'column',
-                gap: '1rem'
-            }}>
-                <div className="spinner"></div>
-                <p>Carregando...</p>
-            </div>
-        );
+        return <LoadingSkeleton />;
     }
 
     return (
         <div className="app">
+            {/* SEO e Meta Tags */}
+            <SEO />
+            <SchemaMarkup />
+
+            {/* Skip Link para Acessibilidade */}
+            <SkipLink />
+
             {/* Cabeçalho fixo no topo */}
             <Header />
 
             {/* Conteúdo principal */}
-            <main>
+            <main id="main-content">
                 {/* Seção Hero (principal) */}
                 <Hero />
 
@@ -70,6 +70,9 @@ function App() {
 
                 {/* Seção Equipe */}
                 <Team />
+
+                {/* Seção Depoimentos */}
+                <Testimonials />
 
                 {/* Seção Formulário de Contato */}
                 <ContactForm />

@@ -10,6 +10,7 @@
 import { useContent } from '../hooks/useContent';
 import * as LucideIcons from 'lucide-react'; // Importa todos os ícones do Lucide
 import { motion } from 'framer-motion'; // Biblioteca de animações
+import LazyImage from './LazyImage';
 import './About.css';
 
 function About() {
@@ -39,9 +40,9 @@ function About() {
                         viewport={{ once: true, amount: 0.3 }} // Anima apenas uma vez
                         transition={{ duration: 0.6 }}
                     >
-                        <img
+                        <LazyImage
                             src={content.image}
-                            alt="Escritório Miguel & Xavier"
+                            alt="Escritório Miguel & Xavier - Ambiente profissional e acolhedor"
                             className="about-image"
                         />
                     </motion.div>
