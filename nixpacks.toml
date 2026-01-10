@@ -1,0 +1,15 @@
+[phases.setup]
+nixPkgs = ["php82", "php82Extensions.pdo", "php82Extensions.pdo_mysql", "php82Extensions.mbstring", "php82Extensions.tokenizer"]
+
+[phases.install]
+cmds = ["cd back && composer install --no-dev --optimize-autoloader"]
+
+[phases.build]
+cmds = [
+  "cd back && php artisan config:cache",
+  "cd back && php artisan route:cache",
+  "cd back && php artisan view:cache"
+]
+
+[start]
+cmd = "cd back && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"
