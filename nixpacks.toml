@@ -2,7 +2,11 @@
 nixPkgs = ["php82", "php82Extensions.pdo", "php82Extensions.pdo_mysql", "php82Extensions.mbstring", "php82Packages.composer"]
 
 [phases.install]
-cmds = ["cd back && composer install --no-dev --optimize-autoloader --no-interaction"]
+cmds = [
+  "cd back && composer clear-cache",
+  "cd back && rm -rf vendor composer.lock",
+  "cd back && composer install --no-dev --optimize-autoloader --no-interaction"
+]
 
 [phases.build]
 cmds = [
