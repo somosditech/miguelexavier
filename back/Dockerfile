@@ -32,8 +32,12 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-pl
 # Set permissions
 RUN chmod -R 755 /app/storage /app/bootstrap/cache
 
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Expose port
 EXPOSE 8000
 
 # Start command
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD ["docker-entrypoint.sh"]
