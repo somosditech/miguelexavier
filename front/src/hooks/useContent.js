@@ -23,7 +23,7 @@ import {
     fetchTeam,
     fetchTestimonials,
     fetchFooter,
-    fetchAIChatConfig
+    fetchAIChat as fetchAIChatConfig
 } from '../services/api';
 
 // Mapeamento de seções para suas respectivas funções de busca

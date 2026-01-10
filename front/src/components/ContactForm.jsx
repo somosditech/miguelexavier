@@ -8,7 +8,7 @@
  */
 
 import { useState } from 'react';
-import { sendContactForm } from '../services/api';
+import { submitContactForm } from '../services/api';
 import { mockAreasDeInteresse } from '../services/mockData';
 import { motion } from 'framer-motion'; // Biblioteca de animações
 import './ContactForm.css';
@@ -72,7 +72,7 @@ function ContactForm() {
             setStatusMessage({ type: '', text: '' });
 
             // Envia o formulário para a API
-            const response = await sendContactForm(formData);
+            const response = await submitContactForm(formData);
 
             // Sucesso
             setStatusMessage({

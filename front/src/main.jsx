@@ -1,36 +1,62 @@
 /**
- * PONTO DE ENTRADA DA APLICAÇÃO
- * 
- * Este arquivo é o primeiro a ser executado quando a aplicação inicia.
- * Ele monta o componente App no elemento HTML com id="root".
- * 
- * Fluxo:
- * 1. Importa o React e ReactDOM
- * 2. Importa o componente App
- * 3. Importa os estilos globais
- * 4. Monta a aplicação no DOM
+ * MAIN ENTRY POINT COM ROTAS
  */
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import App from './App';
+import App from './App.jsx';
+import Login from './admin/pages/Login.jsx';
+import Dashboard from './admin/pages/Dashboard.jsx';
+import ThemeEditor from './admin/pages/ThemeEditor.jsx';
+import HeroEditor from './admin/pages/HeroEditor.jsx';
+import AboutEditor from './admin/pages/AboutEditor.jsx';
+import ServicesManager from './admin/pages/ServicesManager.jsx';
+import TeamManager from './admin/pages/TeamManager.jsx';
+import TestimonialsManager from './admin/pages/TestimonialsManager.jsx';
+import FooterEditor from './admin/pages/FooterEditor.jsx';
+import Messages from './admin/pages/Messages.jsx';
+import AdminLayout from './admin/components/AdminLayout.jsx';
+import { AuthProvider } from './admin/context/AuthContext.jsx';
 import './styles/index.css';
 import { registerServiceWorker } from './utils/serviceWorkerRegistration';
 
-// Cria a raiz da aplicação React
-// O elemento com id="root" está no arquivo index.html
-const root = ReactDOM.createRoot(document.getElementById('root'));
-
-// Renderiza a aplicação
-// React.StrictMode ajuda a identificar problemas durante o desenvolvimento
-// HelmetProvider permite gerenciar meta tags com react-helmet-async
-root.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <HelmetProvider>
-            <App />
-        </HelmetProvider>
-    </React.StrictMode>
+        <BrowserRouter>
+            <AuthProvider>
+                <Routes>
+                    {/* Site Público */}
+                    <Route path="/" element={
+                        <HelmetProvider>
+                            <App />
+                        </HelmetProvider>
+                    } />
+
+                    {/* Admin - Login */}
+                    <Route path="/admin/login" element={<Login />} />
+
+                    {/* Admin - Painel (protegido) */}
+                    <Route path="/admin" element={<AdminLayout />}>
+                        <Route index element={<Navigate to="/admin/dashboard" replace />} />
+                        <Route path="dashboard" element={<Dashboard />} />
+                        <Route path="theme" element={<ThemeEditor />} />
+                        <Route path="hero" element={<HeroEditor />} />
+                        <Route path="about" element={<AboutEditor />} />
+                        <Route path="services" element={<ServicesManager />} />
+                        <Route path="team" element={<TeamManager />} />
+                        <Route path="testimonials" element={<TestimonialsManager />} />
+                        <Route path="footer" element={<FooterEditor />} />
+                        <Route path="messages" element={<Messages />} />
+                    </Route>
+
+                    {/* 404 */}
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+            </AuthProvider>
+        </BrowserRouter>
+    </React.StrictMode>,
 );
 
 // Registra o Service Worker para PWA

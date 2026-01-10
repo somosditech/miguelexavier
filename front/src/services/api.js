@@ -1,10 +1,8 @@
 /**
  * SERVIÇO DE API
  * 
- * Este arquivo centraliza todas as chamadas à API.
- * Por enquanto, retorna dados mockados (simulados).
- * Quando a API estiver pronta, basta substituir as funções abaixo
- * por chamadas reais usando axios.
+ * Este arquivo centraliza todas as chamadas à API Laravel.
+ * API Backend: http://localhost:8000/api
  */
 
 import axios from 'axios';
@@ -23,189 +21,290 @@ import {
 // ============================================
 // CONFIGURAÇÃO DO AXIOS
 // ============================================
-// Quando a API estiver pronta, descomente e configure a URL base
-/*
+
 const api = axios.create({
-  baseURL: 'https://sua-api.com/api', // URL da sua API
-  timeout: 10000, // Timeout de 10 segundos
-  headers: {
-    'Content-Type': 'application/json'
-  }
+    baseURL: 'http://localhost:8000/api',
+    timeout: 10000,
+    headers: {
+        'Content-Type': 'application/json'
+    }
 });
-*/
+
+// Cache para armazenar os dados do endpoint /content
+let contentCache = null;
 
 // ============================================
-// FUNÇÕES PARA BUSCAR DADOS
+// FUNÇÕES DE MAPEAMENTO (snake_case → camelCase)
 // ============================================
 
 /**
- * Busca as configurações de tema (cores)
- * Futuramente: GET /api/theme
+ * Mapeia dados do tema da API para o formato do frontend
  */
-export const fetchTheme = async () => {
-    try {
-        // VERSÃO MOCKADA (atual)
-        return new Promise((resolve) => {
-            setTimeout(() => resolve(mockTheme), 500); // Simula delay de rede
-        });
+const mapTheme = (apiTheme) => {
+    if (!apiTheme) return mockTheme;
 
-        // VERSÃO REAL (quando a API estiver pronta, descomente abaixo)
-        // const response = await api.get('/theme');
-        // return response.data;
-    } catch (error) {
-        console.error('Erro ao buscar tema:', error);
-        return mockTheme; // Retorna dados mockados em caso de erro
-    }
+    return {
+        primary: apiTheme.primary_color || mockTheme.primary,
+        secondary: apiTheme.secondary_color || mockTheme.secondary,
+        accent: apiTheme.accent_color || mockTheme.accent,
+        background: apiTheme.background_color || mockTheme.background,
+        backgroundDark: apiTheme.background_dark || mockTheme.backgroundDark,
+        backgroundLight: apiTheme.background_light || mockTheme.backgroundLight,
+        textPrimary: apiTheme.text_primary || mockTheme.textPrimary,
+        textSecondary: apiTheme.text_secondary || mockTheme.textSecondary,
+        textLight: apiTheme.text_light || mockTheme.textLight,
+        // Mantém cores extras do mock
+        ...mockTheme
+    };
 };
 
 /**
- * Busca o conteúdo do cabeçalho
- * Futuramente: GET /api/content/header
+ * Mapeia dados do hero da API para o formato do frontend
  */
+const mapHero = (apiHero) => {
+    if (!apiHero) return mockHero;
+
+    return {
+        title: apiHero.title || mockHero.title,
+        subtitle: apiHero.subtitle || mockHero.subtitle,
+        description: apiHero.description || mockHero.description,
+        backgroundImage: apiHero.background_image_url || mockHero.backgroundImage,
+        ctaButtons: [
+            {
+                text: apiHero.cta_button_text || 'Fale com um Advogado',
+                href: apiHero.cta_button_href || '#contact',
+                primary: true
+            }
+        ]
+    };
+};
+
+/**
+ * Mapeia dados do about da API para o formato do frontend
+ */
+const mapAbout = (apiAbout) => {
+    if (!apiAbout) return mockAbout;
+
+    return {
+        title: apiAbout.title || mockAbout.title,
+        subtitle: apiAbout.subtitle || mockAbout.subtitle,
+        description: apiAbout.description || mockAbout.description,
+        imageUrl: apiAbout.image_url || mockAbout.imageUrl,
+        highlights: mockAbout.highlights // Mantém do mock
+    };
+};
+
+/**
+ * Mapeia dados dos serviços da API para o formato do frontend
+ */
+const mapServices = (apiServices) => {
+    if (!apiServices || !Array.isArray(apiServices)) return mockServices;
+
+    return {
+        title: 'Áreas de Atuação',
+        subtitle: 'Soluções Jurídicas Completas',
+        services: apiServices.map(service => ({
+            id: service.id,
+            icon: service.icon,
+            title: service.title,
+            description: service.description,
+            features: service.features || []
+        }))
+    };
+};
+
+/**
+ * Mapeia dados da equipe da API para o formato do frontend
+ */
+const mapTeam = (apiTeam) => {
+    if (!apiTeam || !Array.isArray(apiTeam)) return mockTeam;
+
+    return {
+        title: 'Nossa Equipe',
+        subtitle: 'Profissionais Experientes',
+        members: apiTeam.map(member => ({
+            id: member.id,
+            name: member.name,
+            role: member.role,
+            specialization: member.specialization,
+            oab: member.oab,
+            description: member.description,
+            image: member.image_url,
+            social: {
+                linkedin: member.linkedin_url,
+                email: member.email
+            }
+        }))
+    };
+};
+
+/**
+ * Mapeia dados dos depoimentos da API para o formato do frontend
+ */
+const mapTestimonials = (apiTestimonials) => {
+    if (!apiTestimonials || !Array.isArray(apiTestimonials)) return mockTestimonials;
+
+    return {
+        title: 'O Que Nossos Clientes Dizem',
+        subtitle: 'Depoimentos',
+        testimonials: apiTestimonials.map(testimonial => ({
+            id: testimonial.id,
+            name: testimonial.name,
+            role: testimonial.role,
+            text: testimonial.text
+        }))
+    };
+};
+
+/**
+ * Mapeia dados do footer da API para o formato do frontend
+ */
+const mapFooter = (apiFooter) => {
+    if (!apiFooter) return mockFooter;
+
+    return {
+        about: {
+            title: apiFooter.about_title || mockFooter.about.title,
+            description: apiFooter.about_description || mockFooter.about.description
+        },
+        contact: {
+            title: apiFooter.contact_title || mockFooter.contact.title,
+            address: apiFooter.contact_address || mockFooter.contact.address,
+            phone: apiFooter.contact_phone || mockFooter.contact.phone,
+            email: apiFooter.contact_email || mockFooter.contact.email,
+            hours: apiFooter.contact_hours || mockFooter.contact.hours
+        },
+        socialLinks: apiFooter.social_links || mockFooter.socialLinks,
+        legalLinks: apiFooter.legal_links || mockFooter.legalLinks,
+        copyright: apiFooter.copyright_text || mockFooter.copyright
+    };
+};
+
+// ============================================
+// FUNÇÃO PARA BUSCAR DADOS
+// ============================================
+
+/**
+ * Função para buscar todo o conteúdo de uma vez
+ */
+const fetchAllContent = async () => {
+    if (contentCache) {
+        return contentCache;
+    }
+
+    try {
+        const response = await api.get('/content');
+        // Laravel retorna: { success: true, data: { hero: {}, services: [], ... } }
+        // Axios já extrai response.data, então temos: { success: true, data: {...} }
+        const apiData = response.data;
+        const rawContent = apiData.data || apiData;
+
+        // Mapeia todos os dados para o formato esperado pelo frontend
+        contentCache = {
+            theme: mapTheme(rawContent.theme),
+            hero: mapHero(rawContent.hero),
+            about: mapAbout(rawContent.about),
+            services: mapServices(rawContent.services),
+            team: mapTeam(rawContent.team),
+            testimonials: mapTestimonials(rawContent.testimonials),
+            footer: mapFooter(rawContent.footer)
+        };
+
+        return contentCache;
+    } catch (error) {
+        console.error('Error fetching content:', error);
+        return null;
+    }
+};
+
+// ============================================
+// FUNÇÕES PARA BUSCAR DADOS INDIVIDUAIS
+// ============================================
+
+export const fetchTheme = async () => {
+    try {
+        const content = await fetchAllContent();
+        return content?.theme || mockTheme;
+    } catch (error) {
+        console.error('Error fetching theme:', error);
+        return mockTheme;
+    }
+};
+
 export const fetchHeader = async () => {
     try {
-        return new Promise((resolve) => {
-            setTimeout(() => resolve(mockHeader), 500);
-        });
-
-        // VERSÃO REAL:
-        // const response = await api.get('/content/header');
-        // return response.data;
+        return mockHeader; // Header ainda usa mock
     } catch (error) {
-        console.error('Erro ao buscar header:', error);
+        console.error('Error fetching header:', error);
         return mockHeader;
     }
 };
 
-/**
- * Busca o conteúdo da seção Hero
- * Futuramente: GET /api/content/hero
- */
 export const fetchHero = async () => {
     try {
-        return new Promise((resolve) => {
-            setTimeout(() => resolve(mockHero), 500);
-        });
-
-        // VERSÃO REAL:
-        // const response = await api.get('/content/hero');
-        // return response.data;
+        const content = await fetchAllContent();
+        return content?.hero || mockHero;
     } catch (error) {
-        console.error('Erro ao buscar hero:', error);
+        console.error('Error fetching hero:', error);
         return mockHero;
     }
 };
 
-/**
- * Busca o conteúdo da seção Sobre
- * Futuramente: GET /api/content/about
- */
 export const fetchAbout = async () => {
     try {
-        return new Promise((resolve) => {
-            setTimeout(() => resolve(mockAbout), 500);
-        });
-
-        // VERSÃO REAL:
-        // const response = await api.get('/content/about');
-        // return response.data;
+        const content = await fetchAllContent();
+        return content?.about || mockAbout;
     } catch (error) {
-        console.error('Erro ao buscar about:', error);
+        console.error('Error fetching about:', error);
         return mockAbout;
     }
 };
 
-/**
- * Busca o conteúdo da seção Serviços
- * Futuramente: GET /api/content/services
- */
 export const fetchServices = async () => {
     try {
-        return new Promise((resolve) => {
-            setTimeout(() => resolve(mockServices), 500);
-        });
-
-        // VERSÃO REAL:
-        // const response = await api.get('/content/services');
-        // return response.data;
+        const content = await fetchAllContent();
+        return content?.services || mockServices;
     } catch (error) {
-        console.error('Erro ao buscar services:', error);
+        console.error('Error fetching services:', error);
         return mockServices;
     }
 };
 
-/**
- * Busca o conteúdo da seção Equipe
- * Futuramente: GET /api/content/team
- */
 export const fetchTeam = async () => {
     try {
-        return new Promise((resolve) => {
-            setTimeout(() => resolve(mockTeam), 500);
-        });
-
-        // VERSÃO REAL:
-        // const response = await api.get('/content/team');
-        // return response.data;
+        const content = await fetchAllContent();
+        return content?.team || mockTeam;
     } catch (error) {
-        console.error('Erro ao buscar team:', error);
+        console.error('Error fetching team:', error);
         return mockTeam;
     }
 };
 
-/**
- * Busca o conteúdo da seção Depoimentos
- * Futuramente: GET /api/content/testimonials
- */
 export const fetchTestimonials = async () => {
     try {
-        return new Promise((resolve) => {
-            setTimeout(() => resolve(mockTestimonials), 500);
-        });
-
-        // VERSÃO REAL:
-        // const response = await api.get('/content/testimonials');
-        // return response.data;
+        const content = await fetchAllContent();
+        return content?.testimonials || mockTestimonials;
     } catch (error) {
-        console.error('Erro ao buscar testimonials:', error);
+        console.error('Error fetching testimonials:', error);
         return mockTestimonials;
     }
 };
 
-/**
- * Busca o conteúdo do rodapé
- * Futuramente: GET /api/content/footer
- */
 export const fetchFooter = async () => {
     try {
-        return new Promise((resolve) => {
-            setTimeout(() => resolve(mockFooter), 500);
-        });
-
-        // VERSÃO REAL:
-        // const response = await api.get('/content/footer');
-        // return response.data;
+        const content = await fetchAllContent();
+        return content?.footer || mockFooter;
     } catch (error) {
-        console.error('Erro ao buscar footer:', error);
+        console.error('Error fetching footer:', error);
         return mockFooter;
     }
 };
 
-/**
- * Busca configurações do chat IA
- * Futuramente: GET /api/ai/config
- */
-export const fetchAIChatConfig = async () => {
+export const fetchAIChat = async () => {
     try {
-        return new Promise((resolve) => {
-            setTimeout(() => resolve(mockAIChat), 500);
-        });
-
-        // VERSÃO REAL:
-        // const response = await api.get('/ai/config');
-        // return response.data;
+        return mockAIChat;
     } catch (error) {
-        console.error('Erro ao buscar AI config:', error);
+        console.error('Error fetching AI chat:', error);
         return mockAIChat;
     }
 };
@@ -214,70 +313,29 @@ export const fetchAIChatConfig = async () => {
 // FUNÇÕES PARA ENVIAR DADOS
 // ============================================
 
-/**
- * Envia o formulário de contato
- * Futuramente: POST /api/contact
- * 
- * @param {Object} formData - Dados do formulário
- * @param {string} formData.name - Nome do cliente
- * @param {string} formData.email - Email do cliente
- * @param {string} formData.phone - Telefone do cliente
- * @param {string} formData.subject - Assunto
- * @param {string} formData.message - Mensagem
- */
-export const sendContactForm = async (formData) => {
+export const submitContactForm = async (formData) => {
     try {
-        // VERSÃO MOCKADA (atual)
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                console.log('Formulário enviado:', formData);
-                resolve({ success: true, message: 'Mensagem enviada com sucesso!' });
-            }, 1000);
-        });
-
-        // VERSÃO REAL:
-        // const response = await api.post('/contact', formData);
-        // return response.data;
+        const response = await api.post('/contact', formData);
+        return response.data;
     } catch (error) {
-        console.error('Erro ao enviar formulário:', error);
-        throw new Error('Erro ao enviar mensagem. Tente novamente.');
+        console.error('Error submitting contact form:', error);
+        throw error;
     }
 };
 
-/**
- * Envia mensagem para o chat IA
- * Futuramente: POST /api/ai/analyze
- * 
- * @param {string} message - Mensagem do usuário descrevendo o caso
- */
-export const sendAIMessage = async (message) => {
-    try {
-        // VERSÃO MOCKADA (atual) - Simula resposta da IA
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                // Lógica simples para simular diferentes respostas
-                let response = mockAIChat.responses.default;
+// ============================================
+// EXPORTAÇÃO DEFAULT
+// ============================================
 
-                const messageLower = message.toLowerCase();
-                if (messageLower.includes('trabalh') || messageLower.includes('demiti') || messageLower.includes('rescis')) {
-                    response = mockAIChat.responses.trabalhista;
-                } else if (messageLower.includes('divórcio') || messageLower.includes('pensão') || messageLower.includes('guarda')) {
-                    response = mockAIChat.responses.familia;
-                } else if (messageLower.includes('empresa') || messageLower.includes('contrato') || messageLower.includes('societário')) {
-                    response = mockAIChat.responses.empresarial;
-                } else if (messageLower.includes('criminal') || messageLower.includes('penal') || messageLower.includes('processo')) {
-                    response = mockAIChat.responses.penal;
-                }
-
-                resolve({ response, timestamp: new Date().toISOString() });
-            }, 1500); // Simula processamento da IA
-        });
-
-        // VERSÃO REAL:
-        // const response = await api.post('/ai/analyze', { message });
-        // return response.data;
-    } catch (error) {
-        console.error('Erro ao enviar mensagem para IA:', error);
-        throw new Error('Erro ao processar sua mensagem. Tente novamente.');
-    }
+export default {
+    fetchTheme,
+    fetchHeader,
+    fetchHero,
+    fetchAbout,
+    fetchServices,
+    fetchTeam,
+    fetchTestimonials,
+    fetchFooter,
+    fetchAIChat,
+    submitContactForm
 };
