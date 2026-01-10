@@ -1,14 +1,14 @@
 [phases.setup]
-nixPkgs = ["php82", "php82Extensions.pdo", "php82Extensions.pdo_mysql", "php82Extensions.mbstring"]
+nixPkgs = ["php82", "php82Extensions.pdo", "php82Extensions.pdo_mysql", "php82Extensions.mbstring", "php82Packages.composer"]
 
 [phases.install]
-cmds = ["cd back && composer install --no-dev --optimize-autoloader"]
+cmds = ["cd back && composer install --no-dev --optimize-autoloader --no-interaction"]
 
 [phases.build]
 cmds = [
-  "cd back && php artisan key:generate --force",
-  "cd back && php artisan migrate --force",
-  "cd back && php artisan db:seed --force"
+  "cd back && php artisan key:generate --force --no-interaction",
+  "cd back && php artisan migrate --force --no-interaction",
+  "cd back && php artisan db:seed --force --no-interaction"
 ]
 
 [start]
