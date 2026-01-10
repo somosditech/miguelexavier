@@ -27,7 +27,7 @@ WORKDIR /app
 COPY . /app/
 
 # Install dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs
 
 # Set permissions
 RUN chmod -R 755 /app/storage /app/bootstrap/cache
