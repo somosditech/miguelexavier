@@ -1,15 +1,16 @@
 [phases.setup]
-nixPkgs = ["php82", "php82Extensions.pdo", "php82Extensions.pdo_mysql", "php82Extensions.mbstring", "php82Extensions.tokenizer"]
+nixPkgs = ["php82", "php82Extensions.pdo", "php82Extensions.pdo_mysql", "php82Extensions.mbstring"]
 
 [phases.install]
-cmds = ["cd back && composer install --no-dev --optimize-autoloader"]
+cmds = ["composer install --no-dev --optimize-autoloader --working-dir=back"]
 
 [phases.build]
 cmds = [
-  "cd back && php artisan config:cache",
-  "cd back && php artisan route:cache",
-  "cd back && php artisan view:cache"
+  "cd back && php artisan key:generate --force",
+  "cd back && php artisan migrate --force",
+  "cd back && php artisan db:seed --force"
 ]
 
 [start]
 cmd = "cd back && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"
+
