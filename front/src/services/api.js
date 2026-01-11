@@ -2,7 +2,7 @@
  * SERVIÇO DE API
  * 
  * Este arquivo centraliza todas as chamadas à API Laravel.
- * API Backend: http://localhost:8000/api
+ * API Backend: https://miguelexavier-api.onrender.com/api
  */
 
 import axios from 'axios';
@@ -23,7 +23,7 @@ import {
 // ============================================
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api',
+    baseURL: import.meta.env.VITE_API_URL || 'https://miguelexavier-api.onrender.com/api',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json'
