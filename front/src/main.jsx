@@ -19,42 +19,45 @@ import FooterEditor from './admin/pages/FooterEditor.jsx';
 import Messages from './admin/pages/Messages.jsx';
 import AdminLayout from './admin/components/AdminLayout.jsx';
 import { AuthProvider } from './admin/context/AuthContext.jsx';
+import ThemeProvider from './components/ThemeProvider.jsx';
 import './styles/index.css';
 import { registerServiceWorker } from './utils/serviceWorkerRegistration';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <BrowserRouter>
-            <AuthProvider>
-                <Routes>
-                    {/* Site Público */}
-                    <Route path="/" element={
-                        <HelmetProvider>
-                            <App />
-                        </HelmetProvider>
-                    } />
+            <ThemeProvider>
+                <AuthProvider>
+                    <Routes>
+                        {/* Site Público */}
+                        <Route path="/" element={
+                            <HelmetProvider>
+                                <App />
+                            </HelmetProvider>
+                        } />
 
-                    {/* Admin - Login */}
-                    <Route path="/admin/login" element={<Login />} />
+                        {/* Admin - Login */}
+                        <Route path="/admin/login" element={<Login />} />
 
-                    {/* Admin - Painel (protegido) */}
-                    <Route path="/admin" element={<AdminLayout />}>
-                        <Route index element={<Navigate to="/admin/dashboard" replace />} />
-                        <Route path="dashboard" element={<Dashboard />} />
-                        <Route path="theme" element={<ThemeEditor />} />
-                        <Route path="hero" element={<HeroEditor />} />
-                        <Route path="about" element={<AboutEditor />} />
-                        <Route path="services" element={<ServicesManager />} />
-                        <Route path="team" element={<TeamManager />} />
-                        <Route path="testimonials" element={<TestimonialsManager />} />
-                        <Route path="footer" element={<FooterEditor />} />
-                        <Route path="messages" element={<Messages />} />
-                    </Route>
+                        {/* Admin - Painel (protegido) */}
+                        <Route path="/admin" element={<AdminLayout />}>
+                            <Route index element={<Navigate to="/admin/dashboard" replace />} />
+                            <Route path="dashboard" element={<Dashboard />} />
+                            <Route path="theme" element={<ThemeEditor />} />
+                            <Route path="hero" element={<HeroEditor />} />
+                            <Route path="about" element={<AboutEditor />} />
+                            <Route path="services" element={<ServicesManager />} />
+                            <Route path="team" element={<TeamManager />} />
+                            <Route path="testimonials" element={<TestimonialsManager />} />
+                            <Route path="footer" element={<FooterEditor />} />
+                            <Route path="messages" element={<Messages />} />
+                        </Route>
 
-                    {/* 404 */}
-                    <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
-            </AuthProvider>
+                        {/* 404 */}
+                        <Route path="*" element={<Navigate to="/" replace />} />
+                    </Routes>
+                </AuthProvider>
+            </ThemeProvider>
         </BrowserRouter>
     </React.StrictMode>,
 );

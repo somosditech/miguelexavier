@@ -8,8 +8,9 @@
  * O conteúdo (textos e links) vem da API através do hook useContent.
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useContent } from '../hooks/useContent';
+import { fetchTheme } from '../services/api';
 import './Header.css';
 
 function Header() {
@@ -18,6 +19,22 @@ function Header() {
 
     // Estado para controlar se o menu mobile está aberto ou fechado
     const [menuOpen, setMenuOpen] = useState(false);
+
+    // Estado para armazenar o tema (logo)
+    const [theme, setTheme] = useState(null);
+
+    // Carrega o tema ao montar o componente
+    useEffect(() => {
+        const loadTheme = async () => {
+            try {
+                const themeData = await fetchTheme();
+                setTheme(themeData);
+            } catch (error) {
+                console.error('Error loading theme:', error);
+            }
+        };
+        loadTheme();
+    }, []);
 
     // Função para alternar o menu (abrir/fechar)
     const toggleMenu = () => {
@@ -72,11 +89,15 @@ function Header() {
                 <div className="header-content">
                     {/* Logo do escritório */}
                     <div className="logo">
-                        <img
-                            src="/logo.png"
-                            alt="Miguel & Xavier Advocacia"
-                            className="logo-image"
-                        />
+                        {theme?.logoUrl ? (
+                            <img
+                                src={`http://localhost:8000/storage/${theme.logoUrl}`}
+                                alt="Miguel & Xavier Advocacia"
+                                className="logo-image"
+                            />
+                        ) : (
+                            <span className="logo-text">Miguel & Xavier</span>
+                        )}
                     </div>
 
                     {/* Botão hambúrguer para mobile */}

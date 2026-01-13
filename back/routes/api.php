@@ -30,6 +30,9 @@ Route::prefix('content')->group(function () {
 // Formulário de contato
 Route::post('/contact', [ContactController::class, 'store']);
 
+// TESTE: Upload sem autenticação (REMOVER DEPOIS)
+Route::post('/test-upload', [App\Http\Controllers\Admin\UploadController::class, 'uploadLogo']);
+
 // ============================================
 // ROTAS DE AUTENTICAÇÃO
 // ============================================
@@ -46,6 +49,9 @@ Route::prefix('auth')->group(function () {
 // ============================================
 
 Route::middleware('auth:api')->prefix('admin')->group(function () {
+    // Upload
+    Route::post('/upload/logo', [App\Http\Controllers\Admin\UploadController::class, 'uploadLogo']);
+    
     // Theme
     Route::get('/theme', [App\Http\Controllers\Admin\ThemeController::class, 'show']);
     Route::put('/theme', [App\Http\Controllers\Admin\ThemeController::class, 'update']);

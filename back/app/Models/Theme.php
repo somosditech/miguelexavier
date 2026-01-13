@@ -18,5 +18,6 @@ class Theme extends Model
         'text_primary',
         'text_secondary',
         'text_light',
+        'logo_url',
     ];
 }

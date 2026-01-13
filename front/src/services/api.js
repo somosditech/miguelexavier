@@ -53,6 +53,7 @@ const mapTheme = (apiTheme) => {
         textPrimary: apiTheme.text_primary || mockTheme.textPrimary,
         textSecondary: apiTheme.text_secondary || mockTheme.textSecondary,
         textLight: apiTheme.text_light || mockTheme.textLight,
+        logoUrl: apiTheme.logo_url || null,
         // Mantém cores extras do mock
         ...mockTheme
     };

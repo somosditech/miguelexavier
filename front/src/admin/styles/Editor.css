@@ -168,3 +168,55 @@
     color: #5a4a35;
     font-size: 13px;
 }
+
+/* Upload Button */
+.upload-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #771220;
+    color: white;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.upload-label:hover {
+    background: #5a0e18;
+    transform: translateY(-2px);
+}
+
+/* Logo Preview */
+.logo-preview {
+    margin-top: 16px;
+    padding: 16px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.logo-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* Form Section */
+.form-section {
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.form-section h3 {
+    font-size: 18px;
+    color: #2d2416;
+    margin-bottom: 20px;
+}
