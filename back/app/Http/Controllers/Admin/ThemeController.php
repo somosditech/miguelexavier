@@ -43,6 +43,7 @@ class ThemeController extends Controller
             'text_primary' => 'sometimes|string|max:7',
             'text_secondary' => 'sometimes|string|max:7',
             'text_light' => 'sometimes|string|max:7',
+            'logo_url' => 'nullable|string|max:500',
         ]);
         
         $theme = Theme::first();
