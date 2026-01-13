@@ -10,18 +10,49 @@ Site institucional moderno para o escritório de advocacia Miguel & Xavier, dese
 - **Lucide React** - Ícones vetoriais
 - **Axios** - Cliente HTTP para integração com API
 
-## 📁 Estrutura do Projeto
+## 📁 Estrutura de Pastas
 
 ```
 miguelexavier/
 ├── front/          # Aplicação React (front-end)
 │   ├── src/
-│   │   ├── components/    # Componentes React
-│   │   ├── hooks/         # Hooks customizados
-│   │   ├── services/      # Serviços e API
-│   │   └── styles/        # Estilos globais
+│   ├── public/
 │   └── ...
-└── back/           # Documentação da API (back-end futuro)
+└── back/           # API Laravel (back-end)
+    ├── app/
+    ├── database/
+    └── ...
+```
+
+## 🚀 Deploy
+
+### Desenvolvimento Local
+
+Veja instruções detalhadas em:
+- [Front-end README](front/README.md)
+- [Back-end README](back/README.md)
+
+### Produção (Locaweb)
+
+**Guia Completo:** [DEPLOY-LOCAWEB.md](DEPLOY-LOCAWEB.md)  
+**Guia Rápido:** [DEPLOY-QUICK.md](DEPLOY-QUICK.md)
+
+**Resumo:**
+```bash
+# 1. Build do front-end
+cd front
+npm run build
+
+# 2. Upload via FTP
+# front/dist/* → public_html/
+# back/* → public_html/api/
+
+# 3. Configurar no servidor
+ssh servidor
+cd public_html/api
+composer install --no-dev
+php artisan key:generate
+php artisan migrate --force
 ```
 
 ## 🎨 Características
