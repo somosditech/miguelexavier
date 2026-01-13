@@ -73,7 +73,14 @@ php artisan migrate
 php artisan db:seed
 ```
 
-### 7. Inicie o servidor
+### 7. Configure o storage para upload de imagens
+
+```bash
+# Cria link simbólico de storage/app/public para public/storage
+php artisan storage:link
+```
+
+### 8. Inicie o servidor
 
 ```bash
 php artisan serve
@@ -194,9 +201,52 @@ Authorization: Bearer {token}
 ```http
 # Todas as rotas admin requerem o header:
 Authorization: Bearer {seu_token_jwt}
-
-# Rotas admin para edição de conteúdo serão implementadas conforme necessário
 ```
+
+#### Upload de Imagens
+
+```http
+POST /api/admin/upload/image
+Authorization: Bearer {token}
+Content-Type: multipart/form-data
+
+# Form Data:
+image: [arquivo de imagem]
+folder: "team" | "hero" | "about" | "general" (opcional)
+
+# Resposta:
+{
+  "success": true,
+  "message": "Imagem enviada com sucesso",
+  "data": {
+    "filename": "1234567890_abc123.jpg",
+    "path": "images/team/1234567890_abc123.jpg",
+    "url": "/storage/images/team/1234567890_abc123.jpg",
+    "fullUrl": "http://localhost:8000/storage/images/team/1234567890_abc123.jpg"
+  }
+}
+```
+
+```http
+DELETE /api/admin/upload/image
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+  "path": "/storage/images/team/1234567890_abc123.jpg"
+}
+```
+
+```http
+GET /api/admin/upload/images?folder=team
+Authorization: Bearer {token}
+
+# Lista todas as imagens de uma pasta
+```
+
+#### Outras Rotas Admin
+
+Rotas admin para edição de conteúdo (Theme, Hero, About, Services, Team, Testimonials, Footer, Contact Messages).
 
 ## 🧪 Testando a API
 

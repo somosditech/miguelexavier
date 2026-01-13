@@ -55,30 +55,36 @@ Route::middleware('auth:api')->prefix('admin')->group(function () {
     // Theme
     Route::get('/theme', [App\Http\Controllers\Admin\ThemeController::class, 'show']);
     Route::put('/theme', [App\Http\Controllers\Admin\ThemeController::class, 'update']);
-    
+
     // Hero
     Route::get('/hero', [App\Http\Controllers\Admin\HeroController::class, 'show']);
     Route::put('/hero', [App\Http\Controllers\Admin\HeroController::class, 'update']);
-    
+
     // About
     Route::get('/about', [App\Http\Controllers\Admin\AboutController::class, 'show']);
     Route::put('/about', [App\Http\Controllers\Admin\AboutController::class, 'update']);
-    
+
     // Services (CRUD completo)
     Route::apiResource('services', App\Http\Controllers\Admin\ServiceController::class);
-    
+
     // Team (CRUD completo)
     Route::apiResource('team', App\Http\Controllers\Admin\TeamMemberController::class);
-    
+
     // Testimonials (CRUD completo)
     Route::apiResource('testimonials', App\Http\Controllers\Admin\TestimonialController::class);
-    
+
     // Footer
     Route::get('/footer', [App\Http\Controllers\Admin\FooterController::class, 'show']);
     Route::put('/footer', [App\Http\Controllers\Admin\FooterController::class, 'update']);
-    
+
+
     // Contact Messages (read-only)
     Route::get('/contact-messages', [App\Http\Controllers\Admin\ContactMessageController::class, 'index']);
     Route::get('/contact-messages/{id}', [App\Http\Controllers\Admin\ContactMessageController::class, 'show']);
     Route::put('/contact-messages/{id}/mark-read', [App\Http\Controllers\Admin\ContactMessageController::class, 'markAsRead']);
+
+    // Image Upload
+    Route::post('/upload/image', [App\Http\Controllers\Admin\ImageUploadController::class, 'upload']);
+    Route::delete('/upload/image', [App\Http\Controllers\Admin\ImageUploadController::class, 'delete']);
+    Route::get('/upload/images', [App\Http\Controllers\Admin\ImageUploadController::class, 'list']);
 });

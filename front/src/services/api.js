@@ -34,6 +34,7 @@ const api = axios.create({
 let contentCache = null;
 
 // ============================================
+<<<<<<< HEAD
 // FUNÇÕES DE MAPEAMENTO (snake_case → camelCase)
 // ============================================
 
@@ -182,11 +183,14 @@ const mapFooter = (apiFooter) => {
 };
 
 // ============================================
+=======
+>>>>>>> b07ad2643195b0527b1dcc2d39927b4c2bdd6662
 // FUNÇÃO PARA BUSCAR DADOS
 // ============================================
 
 /**
  * Função para buscar todo o conteúdo de uma vez
+ * A API já retorna os dados em camelCase, não precisa mapear
  */
 const fetchAllContent = async () => {
     if (contentCache) {
@@ -195,23 +199,28 @@ const fetchAllContent = async () => {
 
     try {
         const response = await api.get('/content');
-        // Laravel retorna: { success: true, data: { hero: {}, services: [], ... } }
-        // Axios já extrai response.data, então temos: { success: true, data: {...} }
+        // Laravel retorna: { success: true, data: { theme: {}, hero: {}, services: [], ... } }
         const apiData = response.data;
-        const rawContent = apiData.data || apiData;
 
-        // Mapeia todos os dados para o formato esperado pelo frontend
-        contentCache = {
-            theme: mapTheme(rawContent.theme),
-            hero: mapHero(rawContent.hero),
-            about: mapAbout(rawContent.about),
-            services: mapServices(rawContent.services),
-            team: mapTeam(rawContent.team),
-            testimonials: mapTestimonials(rawContent.testimonials),
-            footer: mapFooter(rawContent.footer)
-        };
+        if (apiData.success && apiData.data) {
+            // A API já retorna em camelCase, usa direto com fallback para mock
+            contentCache = {
+                theme: apiData.data.theme || mockTheme,
+                hero: apiData.data.hero || mockHero,
+                about: {
+                    ...apiData.data.about,
+                    highlights: mockAbout.highlights // Highlights ainda vem do mock
+                },
+                services: apiData.data.services || mockServices,
+                team: apiData.data.team || mockTeam,
+                testimonials: apiData.data.testimonials || mockTestimonials,
+                footer: apiData.data.footer || mockFooter
+            };
 
-        return contentCache;
+            return contentCache;
+        }
+
+        return null;
     } catch (error) {
         console.error('Error fetching content:', error);
         return null;

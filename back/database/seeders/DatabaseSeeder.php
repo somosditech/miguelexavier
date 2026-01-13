@@ -19,9 +19,11 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             ThemeSeeder::class,
             HeroSectionSeeder::class,
+            AboutSectionSeeder::class,
             ServicesSeeder::class,
             TeamMembersSeeder::class,
             TestimonialsSeeder::class,
+            FooterContentSeeder::class,
         ]);
     }
 }
