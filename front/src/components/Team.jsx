@@ -17,7 +17,7 @@ function Team() {
     const { content, loading } = useContent('team');
 
     // Enquanto carrega, mostra um placeholder
-    if (loading) {
+    if (loading || !content) {
         return (
             <section id="team" className="team section">
                 <div className="container">
@@ -27,18 +27,23 @@ function Team() {
         );
     }
 
+    // Se content é um array, usa diretamente; senão, pega content.members
+    const members = Array.isArray(content) ? content : (content.members || []);
+    const title = content.title || 'Nossa Equipe';
+    const subtitle = content.subtitle || 'Profissionais Experientes';
+
     return (
         <section id="team" className="team section">
             <div className="container">
                 {/* Cabeçalho da seção */}
                 <div className="section-header">
-                    <p className="section-subtitle">{content.subtitle}</p>
-                    <h2 className="section-title">{content.title}</h2>
+                    <p className="section-subtitle">{subtitle}</p>
+                    <h2 className="section-title">{title}</h2>
                 </div>
 
                 {/* Grid de membros da equipe */}
                 <div className="team-grid">
-                    {content.members.map((member, index) => (
+                    {members.map((member, index) => (
                         <motion.div
                             key={member.id}
                             className="team-card"

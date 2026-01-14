@@ -17,7 +17,7 @@ function Services() {
     const { content, loading } = useContent('services');
 
     // Enquanto carrega, mostra um placeholder
-    if (loading) {
+    if (loading || !content) {
         return (
             <section id="services" className="services section">
                 <div className="container">
@@ -27,20 +27,31 @@ function Services() {
         );
     }
 
+    // Se content é um array, usa diretamente; senão, pega content.services
+    const services = Array.isArray(content) ? content : (content.services || []);
+    const title = content.title || 'Áreas de Atuação';
+    const subtitle = content.subtitle || 'Soluções Jurídicas Completas';
+
     return (
         <section id="services" className="services section">
             <div className="container">
                 {/* Cabeçalho da seção */}
                 <div className="section-header">
-                    <p className="section-subtitle">{content.subtitle}</p>
-                    <h2 className="section-title">{content.title}</h2>
+                    <p className="section-subtitle">{subtitle}</p>
+                    <h2 className="section-title">{title}</h2>
                 </div>
 
                 {/* Grid de serviços */}
                 <div className="services-grid">
-                    {content.services.map((service, index) => {
+                    {services.map((service, index) => {
                         // Pega o componente de ícone dinamicamente pelo nome
                         const IconComponent = LucideIcons[service.icon];
+
+                        // Se o ícone não for encontrado, usa Briefcase como fallback e avisa no console
+                        if (!IconComponent) {
+                            console.warn(`Ícone "${service.icon}" não encontrado. Usando Briefcase como fallback.`);
+                        }
+                        const FinalIcon = IconComponent || LucideIcons.Briefcase;
 
                         return (
                             <motion.div
@@ -58,8 +69,8 @@ function Services() {
                                     whileHover={{ scale: 1.1, rotate: 5 }} // Animação do ícone
                                     transition={{ duration: 0.3 }}
                                 >
-                                    {/* Renderiza o ícone Lucide React */}
-                                    {IconComponent && <IconComponent size={56} strokeWidth={1.5} />}
+                                    {/* Renderiza o ícone Lucide React ou fallback */}
+                                    <FinalIcon size={56} strokeWidth={1.5} />
                                 </motion.div>
 
                                 {/* Título do serviço */}

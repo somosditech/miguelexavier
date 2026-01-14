@@ -41,7 +41,7 @@ function About() {
                         transition={{ duration: 0.6 }}
                     >
                         <LazyImage
-                            src={content.image}
+                            src={content.imageUrl}
                             alt="Escritório Miguel & Xavier - Ambiente profissional e acolhedor"
                             className="about-image"
                         />
@@ -60,7 +60,7 @@ function About() {
                         <p className="about-description">{content.description}</p>
 
                         {/* Grid de destaques (estatísticas) */}
-                        <div className="highlights-grid">
+                        {/* <div className="highlights-grid">
                             {content.highlights.map((highlight, index) => {
                                 // Pega o componente de ícone dinamicamente pelo nome
                                 const IconComponent = LucideIcons[highlight.icon];
@@ -75,16 +75,16 @@ function About() {
                                         transition={{ duration: 0.5, delay: index * 0.1 }} // Delay escalonado
                                         whileHover={{ scale: 1.05 }} // Aumenta ao passar o mouse
                                     >
-                                        <div className="highlight-icon">
-                                            {/* Renderiza o ícone Lucide React */}
-                                            {IconComponent && <IconComponent size={48} strokeWidth={1.5} />}
+                                        <div className="highlight-icon"> */}
+                        {/* Renderiza o ícone Lucide React */}
+                        {/* {IconComponent && <IconComponent size={48} strokeWidth={1.5} />}
                                         </div>
                                         <h3 className="highlight-title">{highlight.title}</h3>
                                         <p className="highlight-description">{highlight.description}</p>
                                     </motion.div>
                                 );
                             })}
-                        </div>
+                        </div> */}
                     </motion.div>
                 </div>
             </div>

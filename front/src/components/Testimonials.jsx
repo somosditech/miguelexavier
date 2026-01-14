@@ -18,7 +18,8 @@ function Testimonials() {
 
     // Auto-play do carrossel
     useEffect(() => {
-        if (!content?.testimonials || content.testimonials.length === 0) return;
+        const testimonials = Array.isArray(content) ? content : (content?.testimonials || []);
+        if (testimonials.length === 0) return;
 
         const interval = setInterval(() => {
             handleNext();
@@ -27,7 +28,7 @@ function Testimonials() {
         return () => clearInterval(interval);
     }, [currentIndex, content]);
 
-    if (loading) {
+    if (loading || !content) {
         return (
             <section id="testimonials" className="testimonials section">
                 <div className="container">
@@ -37,21 +38,26 @@ function Testimonials() {
         );
     }
 
-    if (!content?.testimonials || content.testimonials.length === 0) {
+    // Se content é um array, usa diretamente; senão, pega content.testimonials
+    const testimonials = Array.isArray(content) ? content : (content.testimonials || []);
+    const title = content.title || 'O Que Nossos Clientes Dizem';
+    const subtitle = content.subtitle || 'Depoimentos';
+
+    if (testimonials.length === 0) {
         return null; // Não renderiza se não houver depoimentos
     }
 
     const handleNext = () => {
         setDirection(1);
         setCurrentIndex((prev) =>
-            prev === content.testimonials.length - 1 ? 0 : prev + 1
+            prev === testimonials.length - 1 ? 0 : prev + 1
         );
     };
 
     const handlePrev = () => {
         setDirection(-1);
         setCurrentIndex((prev) =>
-            prev === 0 ? content.testimonials.length - 1 : prev - 1
+            prev === 0 ? testimonials.length - 1 : prev - 1
         );
     };
 
@@ -86,8 +92,8 @@ function Testimonials() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <p className="section-subtitle">{content.subtitle}</p>
-                    <h2 className="section-title">{content.title}</h2>
+                    <p className="section-subtitle">{subtitle}</p>
+                    <h2 className="section-title">{title}</h2>
                 </motion.div>
 
                 {/* Carrossel de depoimentos */}
@@ -107,7 +113,7 @@ function Testimonials() {
                             className="testimonial-card"
                             role="group"
                             aria-roledescription="slide"
-                            aria-label={`Depoimento ${currentIndex + 1} de ${content.testimonials.length}`}
+                            aria-label={`Depoimento ${currentIndex + 1} de ${testimonials.length}`}
                         >
                             {/* Ícone de aspas */}
                             <div className="quote-icon" aria-hidden="true">
@@ -116,17 +122,17 @@ function Testimonials() {
 
                             {/* Texto do depoimento */}
                             <p className="testimonial-text">
-                                "{content.testimonials[currentIndex].text}"
+                                "{testimonials[currentIndex].text}"
                             </p>
 
                             {/* Informações do cliente */}
                             <div className="testimonial-author">
                                 <div className="author-info">
                                     <h4 className="author-name">
-                                        {content.testimonials[currentIndex].name}
+                                        {testimonials[currentIndex].name}
                                     </h4>
                                     <p className="author-role">
-                                        {content.testimonials[currentIndex].role}
+                                        {testimonials[currentIndex].role}
                                     </p>
                                 </div>
                             </div>
@@ -153,7 +159,7 @@ function Testimonials() {
 
                     {/* Dots de navegação */}
                     <div className="carousel-dots" role="tablist" aria-label="Navegação de depoimentos">
-                        {content.testimonials.map((_, index) => (
+                        {testimonials.map((_, index) => (
                             <button
                                 key={index}
                                 className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}

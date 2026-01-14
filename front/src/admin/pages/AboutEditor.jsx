@@ -4,14 +4,16 @@
 
 import { useState, useEffect } from 'react';
 import { getAbout, updateAbout } from '../services/adminApi';
-import { Save, FileText } from 'lucide-react';
+import { Save, FileText, Upload } from 'lucide-react';
 import '../styles/Editor.css';
 
 function AboutEditor() {
     const [about, setAbout] = useState(null);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+    const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
+    const [imagePreview, setImagePreview] = useState(null);
 
     useEffect(() => {
         loadAbout();
@@ -21,6 +23,9 @@ function AboutEditor() {
         try {
             const data = await getAbout();
             setAbout(data);
+            if (data.image_url) {
+                setImagePreview(`http://localhost:8000/storage/${data.image_url}`);
+            }
         } catch (error) {
             console.error('Error loading about:', error);
             setMessage('Erro ao carregar about');
@@ -31,6 +36,45 @@ function AboutEditor() {
 
     const handleChange = (field, value) => {
         setAbout({ ...about, [field]: value });
+    };
+
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        setUploading(true);
+        setMessage('');
+
+        try {
+            const formData = new FormData();
+            formData.append('image', file);
+
+            const token = localStorage.getItem('admin_token');
+
+            const response = await fetch('http://localhost:8000/api/admin/about/upload-image', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                setMessage('Imagem enviada com sucesso!');
+                setImagePreview(`http://localhost:8000${result.url}`);
+                setAbout({ ...about, image_url: result.path });
+                setTimeout(() => setMessage(''), 3000);
+            } else {
+                setMessage('Erro ao enviar imagem');
+            }
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            setMessage('Erro ao enviar imagem');
+        } finally {
+            setUploading(false);
+        }
     };
 
     const handleSave = async () => {
@@ -58,10 +102,6 @@ function AboutEditor() {
                     <h1><FileText size={28} /> Editor de About</h1>
                     <p>Edite a seção sobre o escritório</p>
                 </div>
-                <button onClick={handleSave} disabled={saving} className="btn-primary">
-                    <Save size={18} />
-                    {saving ? 'Salvando...' : 'Salvar Alterações'}
-                </button>
             </div>
 
             {message && (
@@ -102,14 +142,33 @@ function AboutEditor() {
                 </div>
 
                 <div className="form-field">
-                    <label>URL da Imagem</label>
+                    <label>Imagem</label>
+                    <label htmlFor="about-image-upload" className="upload-label">
+                        <Upload size={20} />
+                        {uploading ? 'Enviando...' : 'Escolher Imagem'}
+                    </label>
                     <input
-                        type="url"
-                        value={about?.image_url || ''}
-                        onChange={(e) => handleChange('image_url', e.target.value)}
-                        placeholder="https://exemplo.com/imagem.jpg"
+                        id="about-image-upload"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        disabled={uploading}
+                        style={{ display: 'none' }}
                     />
-                    <small>Cole a URL de uma imagem externa</small>
+                    <small>Formatos aceitos: JPG, PNG, GIF (máx: 5MB)</small>
+                    {imagePreview && (
+                        <div className="logo-preview">
+                            <img src={imagePreview} alt="About Preview" style={{ maxHeight: '200px', marginTop: '10px' }} />
+                        </div>
+                    )}
+                </div>
+
+                {/* Botão Salvar */}
+                <div className="form-actions remove-border">
+                    <button onClick={handleSave} disabled={saving} className="btn-primary btn-large">
+                        <Save size={18} />
+                        {saving ? 'Salvando...' : 'Salvar Alterações'}
+                    </button>
                 </div>
             </div>
         </div>

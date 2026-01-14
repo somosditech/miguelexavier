@@ -1,18 +1,41 @@
 /* ESTILOS ADICIONAIS PARA SIDEBAR E HEADER */
 
+/* Scrollbar da sidebar - sobrescreve estilos globais */
 .admin-sidebar::-webkit-scrollbar {
-    width: 6px;
+    width: 8px !important;
 }
 
 .admin-sidebar::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.2) !important;
 }
 
 .admin-sidebar::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 4px !important;
 }
 
 .admin-sidebar::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Scrollbar para conteúdo geral do admin - sobrescreve estilos globais */
+.admin-content::-webkit-scrollbar,
+.admin-layout ::-webkit-scrollbar {
+    width: 10px !important;
+}
+
+.admin-content::-webkit-scrollbar-track,
+.admin-layout ::-webkit-scrollbar-track {
+    background: #f1f5f9 !important;
+}
+
+.admin-content::-webkit-scrollbar-thumb,
+.admin-layout ::-webkit-scrollbar-thumb {
+    background: #cbd5e1 !important;
+    border-radius: 5px !important;
+}
+
+.admin-content::-webkit-scrollbar-thumb:hover,
+.admin-layout ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8 !important;
 }

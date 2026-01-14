@@ -68,18 +68,18 @@ function Footer() {
 
                     {/* Coluna 3: Redes Sociais */}
                     <div className="footer-column">
-                        <h3 className="footer-title">{content.social.title}</h3>
+                        <h3 className="footer-title">Redes Sociais</h3>
                         <div className="footer-social">
-                            {content.social.links.map((link, index) => (
+                            {content.socialLinks && content.socialLinks.map((link, index) => (
                                 <a
                                     key={index}
                                     href={link.url}
                                     className="social-button"
-                                    aria-label={link.platform}
+                                    aria-label={link.name}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    {link.platform}
+                                    {link.name}
                                 </a>
                             ))}
                         </div>
@@ -91,11 +91,11 @@ function Footer() {
 
                 {/* Rodapé inferior */}
                 <div className="footer-bottom">
-                    <p className="footer-copyright">{content.legal.copyright}</p>
+                    <p className="footer-copyright">{content.copyright}</p>
                     <div className="footer-links">
-                        {content.legal.links.map((link, index) => (
+                        {content.legalLinks && content.legalLinks.map((link, index) => (
                             <a key={index} href={link.url} className="footer-link">
-                                {link.text}
+                                {link.name}
                             </a>
                         ))}
                     </div>

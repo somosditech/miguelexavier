@@ -2,7 +2,7 @@
  * GERENCIADOR DE SERVIÇOS (CRUD)
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getServices, createService, updateService, deleteService } from '../services/adminApi';
 import { Plus, Edit, Trash2, Save, X } from 'lucide-react';
 import '../styles/Manager.css';
@@ -19,10 +19,20 @@ function ServicesManager() {
         order: 0
     });
     const [message, setMessage] = useState('');
+    const messageRef = useRef(null);
 
     useEffect(() => {
         loadServices();
     }, []);
+
+    // Rola para a mensagem quando ela aparecer
+    useEffect(() => {
+        if (message && messageRef.current) {
+            setTimeout(() => {
+                messageRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    }, [message]);
 
     const loadServices = async () => {
         try {
@@ -38,12 +48,13 @@ function ServicesManager() {
     const handleEdit = (service) => {
         setEditing(service.id);
         setFormData({
-            icon: service.icon,
+            icon: service.icon || 'Briefcase',
             title: service.title,
             description: service.description,
             features: service.features || [],
             order: service.order
         });
+        setMessage(''); // Limpa mensagem ao abrir modal
     };
 
     const handleNew = () => {
@@ -55,6 +66,7 @@ function ServicesManager() {
             features: [],
             order: services.length + 1
         });
+        setMessage(''); // Limpa mensagem ao abrir modal
     };
 
     const handleCancel = () => {
@@ -76,7 +88,51 @@ function ServicesManager() {
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
             console.error('Error saving service:', error);
-            setMessage('Erro ao salvar serviço');
+
+            // Extrai mensagem de erro do backend
+            let errorMessage = 'Erro ao salvar serviço';
+
+            if (error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            } else if (error.response?.data?.errors) {
+                // Se houver erros de validação, mostra campo e mensagem
+                const errors = error.response.data.errors;
+                const fieldName = Object.keys(errors)[0];
+                const fieldError = errors[fieldName];
+                let errorText = Array.isArray(fieldError) ? fieldError[0] : fieldError;
+
+                // Traduz nome do campo para português
+                const fieldTranslations = {
+                    'icon': 'Ícone',
+                    'title': 'Título',
+                    'description': 'Descrição',
+                    'features': 'Features',
+                    'order': 'Ordem'
+                };
+
+                // Traduz mensagens de validação comuns do Laravel
+                const validationTranslations = {
+                    'validation.required': 'Este campo é obrigatório',
+                    'validation.string': 'Este campo deve ser um texto',
+                    'validation.max.string': 'Este campo é muito longo',
+                    'validation.min.string': 'Este campo é muito curto',
+                    'validation.numeric': 'Este campo deve ser um número',
+                    'validation.integer': 'Este campo deve ser um número inteiro',
+                    'validation.array': 'Este campo deve ser uma lista'
+                };
+
+                // Se a mensagem for uma chave de validação, traduz
+                if (errorText.startsWith('validation.')) {
+                    errorText = validationTranslations[errorText] || errorText;
+                }
+
+                const translatedField = fieldTranslations[fieldName] || fieldName;
+                errorMessage = `${translatedField}: ${errorText}`;
+            } else if (error.message) {
+                errorMessage = error.message;
+            }
+
+            setMessage(errorMessage);
         }
     };
 
@@ -124,12 +180,6 @@ function ServicesManager() {
                 </button>
             </div>
 
-            {message && (
-                <div className={`message ${message.includes('sucesso') ? 'success' : 'error'}`}>
-                    {message}
-                </div>
-            )}
-
             {editing && (
                 <div className="edit-modal">
                     <div className="edit-modal-content">
@@ -141,9 +191,22 @@ function ServicesManager() {
                                 type="text"
                                 value={formData.icon}
                                 onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
-                                placeholder="Ex: Briefcase, Heart, Scale"
+                                placeholder="Ex: Briefcase, Scale, Building2"
                             />
-                            <small>Nome do ícone Lucide React</small>
+                            <small>
+                                Nome do ícone em <strong>PascalCase</strong> (ex: VectorSquare, não vector-square) -{' '}
+                                <a
+                                    href="https://lucide.dev/icons/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ color: '#3b82f6', textDecoration: 'underline' }}
+                                >
+                                    Ver todos os ícones disponíveis
+                                </a>
+                            </small>
+                            <small style={{ display: 'block', marginTop: '8px', color: '#666' }}>
+                                <strong>Ícones comuns:</strong> Briefcase, Scale, Building2, Heart, Shield, FileText, Users, Gavel, Home, Landmark
+                            </small>
                         </div>
 
                         <div className="form-field">
@@ -194,6 +257,12 @@ function ServicesManager() {
                                 onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
                             />
                         </div>
+
+                        {message && (
+                            <div ref={messageRef} className={`message ${message.includes('sucesso') ? 'success' : 'error'}`}>
+                                {message}
+                            </div>
+                        )}
 
                         <div className="modal-actions">
                             <button onClick={handleCancel} className="btn-secondary">Cancelar</button>

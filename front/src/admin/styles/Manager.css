@@ -1,7 +1,7 @@
 /* ESTILOS DOS GERENCIADORES (CRUD) */
 
 .manager-page {
-    max-width: 1400px;
+    max-width: 1200px;
 }
 
 .manager-header {
@@ -22,22 +22,28 @@
     font-size: 14px;
 }
 
-.btn-secondary {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: #f5f5f5;
-    color: #2d2416;
-    border: 1px solid #e5e5e5;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s;
+/* Botões secundários do admin - sobrescreve estilos globais */
+.manager-page .btn-secondary,
+.edit-modal .btn-secondary,
+button.btn-secondary {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 16px !important;
+    background: #f5f5f5 !important;
+    color: #2d2416 !important;
+    border: 1px solid #e5e5e5 !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
 }
 
-.btn-secondary:hover {
-    background: #e5e5e5;
+.manager-page .btn-secondary:hover,
+.edit-modal .btn-secondary:hover,
+button.btn-secondary:hover {
+    background: #e5e5e5 !important;
+    border-color: #d4d4d4 !important;
 }
 
 /* Items Grid */
@@ -98,8 +104,8 @@
 }
 
 .btn-icon:hover {
-    background: #771220;
-    border-color: #771220;
+    background: #3b82f6;
+    border-color: #3b82f6;
     color: white;
 }
 
@@ -138,6 +144,26 @@
     font-size: 24px;
     color: #2d2416;
     margin-bottom: 24px;
+}
+
+/* Mensagem dentro do modal */
+.edit-modal-content .message {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.edit-modal-content .message.success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+}
+
+.edit-modal-content .message.error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
 }
 
 .feature-input {

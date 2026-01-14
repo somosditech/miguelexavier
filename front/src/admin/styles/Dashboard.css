@@ -37,7 +37,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     text-decoration: none;
     transition: all 0.3s;
-    border-left: 4px solid var(--card-color, #771220);
+    border-left: 4px solid var(--card-color, #3b82f6);
 }
 
 .stat-card:hover {
@@ -51,7 +51,7 @@
     justify-content: center;
     width: 64px;
     height: 64px;
-    background: var(--card-color, #771220);
+    background: var(--card-color, #3b82f6);
     color: white;
     border-radius: 12px;
 }
@@ -98,7 +98,7 @@
 }
 
 .quick-link:hover {
-    background: #771220;
+    background: #3b82f6;
     color: white;
     transform: translateX(4px);
 }

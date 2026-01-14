@@ -131,6 +131,7 @@ class PublicContentController extends Controller
             'textPrimary' => $theme->text_primary,
             'textSecondary' => $theme->text_secondary,
             'textLight' => $theme->text_light,
+            'logoUrl' => $theme->logo_url,
         ];
     }
 
@@ -142,11 +143,17 @@ class PublicContentController extends Controller
         if (!$hero)
             return null;
 
+        // Se background_image_url não começa com http, é um caminho local do storage
+        $backgroundImage = $hero->background_image_url;
+        if ($backgroundImage && !str_starts_with($backgroundImage, 'http')) {
+            $backgroundImage = asset('storage/' . $backgroundImage);
+        }
+
         return [
             'title' => $hero->title,
             'subtitle' => $hero->subtitle,
             'description' => $hero->description,
-            'backgroundImage' => $hero->background_image_url,
+            'backgroundImage' => $backgroundImage,
             'ctaButtons' => [
                 [
                     'text' => $hero->cta_button_text,
@@ -165,11 +172,17 @@ class PublicContentController extends Controller
         if (!$about)
             return null;
 
+        // Se image_url não começa com http, é um caminho local do storage
+        $imageUrl = $about->image_url;
+        if ($imageUrl && !str_starts_with($imageUrl, 'http')) {
+            $imageUrl = asset('storage/' . $imageUrl);
+        }
+
         return [
             'title' => $about->title,
             'subtitle' => $about->subtitle,
             'description' => $about->description,
-            'imageUrl' => $about->image_url,
+            'imageUrl' => $imageUrl,
             'highlights' => $about->highlights ?? [],
         ];
     }

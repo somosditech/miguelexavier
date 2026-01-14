@@ -4,14 +4,16 @@
 
 import { useState, useEffect } from 'react';
 import { getHero, updateHero } from '../services/adminApi';
-import { Save, FileText } from 'lucide-react';
+import { Save, FileText, Upload } from 'lucide-react';
 import '../styles/Editor.css';
 
 function HeroEditor() {
     const [hero, setHero] = useState(null);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+    const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
+    const [imagePreview, setImagePreview] = useState(null);
 
     useEffect(() => {
         loadHero();
@@ -21,6 +23,9 @@ function HeroEditor() {
         try {
             const data = await getHero();
             setHero(data);
+            if (data.background_image_url) {
+                setImagePreview(`http://localhost:8000/storage/${data.background_image_url}`);
+            }
         } catch (error) {
             console.error('Error loading hero:', error);
             setMessage('Erro ao carregar hero');
@@ -31,6 +36,47 @@ function HeroEditor() {
 
     const handleChange = (field, value) => {
         setHero({ ...hero, [field]: value });
+    };
+
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        setUploading(true);
+        setMessage('');
+
+        try {
+            const formData = new FormData();
+            formData.append('background_image', file);
+
+            const token = localStorage.getItem('admin_token');
+
+            // Usando rota de upload de imagem de fundo do hero
+            const response = await fetch('http://localhost:8000/api/admin/hero/upload-background', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                setMessage('Imagem enviada com sucesso!');
+                setImagePreview(`http://localhost:8000${result.url}`);
+                // Atualiza o hero com o novo caminho da imagem
+                setHero({ ...hero, background_image_url: result.path });
+                setTimeout(() => setMessage(''), 3000);
+            } else {
+                setMessage('Erro ao enviar imagem');
+            }
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            setMessage('Erro ao enviar imagem');
+        } finally {
+            setUploading(false);
+        }
     };
 
     const handleSave = async () => {
@@ -58,10 +104,6 @@ function HeroEditor() {
                     <h1><FileText size={28} /> Editor de Hero</h1>
                     <p>Edite a seção principal do site</p>
                 </div>
-                <button onClick={handleSave} disabled={saving} className="btn-primary">
-                    <Save size={18} />
-                    {saving ? 'Salvando...' : 'Salvar Alterações'}
-                </button>
             </div>
 
             {message && (
@@ -101,14 +143,25 @@ function HeroEditor() {
                 </div>
 
                 <div className="form-field">
-                    <label>URL da Imagem de Fundo</label>
+                    <label>Imagem de Fundo</label>
+                    <label htmlFor="background-upload" className="upload-label">
+                        <Upload size={20} />
+                        {uploading ? 'Enviando...' : 'Escolher Imagem de Fundo'}
+                    </label>
                     <input
-                        type="url"
-                        value={hero?.background_image_url || ''}
-                        onChange={(e) => handleChange('background_image_url', e.target.value)}
-                        placeholder="https://exemplo.com/imagem.jpg"
+                        id="background-upload"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        disabled={uploading}
+                        style={{ display: 'none' }}
                     />
-                    <small>Cole a URL de uma imagem externa (Unsplash, etc)</small>
+                    <small>Formatos aceitos: JPG, PNG, GIF (máx: 5MB)</small>
+                    {imagePreview && (
+                        <div className="logo-preview">
+                            <img src={imagePreview} alt="Background Preview" style={{ maxHeight: '200px', marginTop: '10px' }} />
+                        </div>
+                    )}
                 </div>
 
                 <div className="form-field">
@@ -129,6 +182,14 @@ function HeroEditor() {
                         onChange={(e) => handleChange('cta_button_href', e.target.value)}
                         placeholder="Ex: #contact"
                     />
+                </div>
+
+                {/* Botão Salvar */}
+                <div className="form-actions remove-border">
+                    <button onClick={handleSave} disabled={saving} className="btn-primary btn-large">
+                        <Save size={18} />
+                        {saving ? 'Salvando...' : 'Salvar Alterações'}
+                    </button>
                 </div>
             </div>
         </div>

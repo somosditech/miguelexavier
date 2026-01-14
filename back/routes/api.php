@@ -59,10 +59,12 @@ Route::middleware('auth:api')->prefix('admin')->group(function () {
     // Hero
     Route::get('/hero', [App\Http\Controllers\Admin\HeroController::class, 'show']);
     Route::put('/hero', [App\Http\Controllers\Admin\HeroController::class, 'update']);
+    Route::post('/hero/upload-background', [App\Http\Controllers\Admin\HeroController::class, 'uploadBackground']);
 
     // About
     Route::get('/about', [App\Http\Controllers\Admin\AboutController::class, 'show']);
     Route::put('/about', [App\Http\Controllers\Admin\AboutController::class, 'update']);
+    Route::post('/about/upload-image', [App\Http\Controllers\Admin\AboutController::class, 'uploadImage']);
 
     // Services (CRUD completo)
     Route::apiResource('services', App\Http\Controllers\Admin\ServiceController::class);

@@ -27,13 +27,17 @@
     font-size: 14px;
 }
 
-.btn-primary {
+/* Botões do Admin - Especificidade maior para sobrescrever estilos globais */
+.admin-layout .btn-primary,
+.editor-page .btn-primary,
+button.btn-primary {
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 12px 24px;
-    background: #771220;
-    color: white;
+    background: #475569 !important;
+    background-image: none !important;
+    color: white !important;
     border: none;
     border-radius: 8px;
     font-size: 15px;
@@ -42,9 +46,13 @@
     transition: all 0.2s;
 }
 
-.btn-primary:hover:not(:disabled) {
-    background: #5a0e18;
+.admin-layout .btn-primary:hover:not(:disabled),
+.editor-page .btn-primary:hover:not(:disabled),
+button.btn-primary:hover:not(:disabled) {
+    background: #334155 !important;
+    background-image: none !important;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(71, 85, 105, 0.3) !important;
 }
 
 .btn-primary:disabled {
@@ -124,7 +132,7 @@
 
 .color-input-group input:focus {
     outline: none;
-    border-color: #771220;
+    border-color: #64748b;
 }
 
 /* Form Fields */
@@ -153,7 +161,7 @@
 .form-field input:focus,
 .form-field textarea:focus {
     outline: none;
-    border-color: #771220;
+    border-color: #64748b;
 }
 
 .form-field textarea {
@@ -171,22 +179,27 @@
 
 /* Upload Button */
 .upload-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: #771220;
-    color: white;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 12px 24px !important;
+    background: #64748b !important;
+    color: white !important;
+    border-radius: 8px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
 }
 
 .upload-label:hover {
-    background: #5a0e18;
+    background: #475569;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(100, 116, 139, 0.3);
+}
+
+.remove-border {
+    border: none !important;
 }
 
 /* Logo Preview */
@@ -219,4 +232,18 @@
     font-size: 18px;
     color: #2d2416;
     margin-bottom: 20px;
+}
+
+/* Form Actions */
+.form-actions {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 2px solid #e5e5e5;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-large {
+    padding: 14px 32px;
+    font-size: 16px;
 }

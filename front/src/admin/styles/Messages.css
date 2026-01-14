@@ -53,7 +53,7 @@
 
 .message-item.active {
     background: #f5f1eb;
-    border-left-color: #771220;
+    border-left-color: #3b82f6;
 }
 
 .message-item.unread {
@@ -73,7 +73,7 @@
 }
 
 .unread-badge {
-    background: #771220;
+    background: #3b82f6;
     color: white;
     padding: 2px 8px;
     border-radius: 12px;
@@ -163,7 +163,7 @@
 }
 
 .info-row a {
-    color: #771220;
+    color: #3b82f6;
     text-decoration: none;
 }
 

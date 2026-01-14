@@ -26,7 +26,7 @@
     top: 0;
     width: 260px;
     height: 100vh;
-    background: linear-gradient(180deg, #771220 0%, #2d2416 100%);
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
     color: white;
     overflow-y: auto;
 }
@@ -67,8 +67,8 @@
 }
 
 .nav-item.active {
-    background: rgba(207, 167, 80, 0.2);
-    border-left-color: #cfa750;
+    background: rgba(59, 130, 246, 0.2);
+    border-left-color: #3b82f6;
     color: white;
 }
 
@@ -112,7 +112,7 @@
     align-items: center;
     gap: 8px;
     padding: 8px 16px;
-    background: #771220;
+    background: #64748b;
     color: white;
     border: none;
     border-radius: 8px;
@@ -122,7 +122,7 @@
 }
 
 .logout-btn:hover {
-    background: #5a0e18;
+    background: #475569;
 }
 
 /* Loading */
@@ -139,7 +139,7 @@
     width: 40px;
     height: 40px;
     border: 4px solid #e5e5e5;
-    border-top-color: #771220;
+    border-top-color: #3b82f6;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }

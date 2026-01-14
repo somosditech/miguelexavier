@@ -105,10 +105,6 @@ function ThemeEditor() {
                     <h1><Palette size={28} /> Editor de Tema</h1>
                     <p>Personalize as cores e logo do site</p>
                 </div>
-                <button onClick={handleSave} disabled={saving} className="btn-primary">
-                    <Save size={18} />
-                    {saving ? 'Salvando...' : 'Salvar Alterações'}
-                </button>
             </div>
 
             {message && (
@@ -144,7 +140,7 @@ function ThemeEditor() {
                 </div>
 
                 {/* Colors Section */}
-                <div className="form-section">
+                <div className="form-section remove-border">
                     <h3>Cores do Tema</h3>
                     <div className="color-grid">
                         <div className="color-field">
@@ -243,6 +239,14 @@ function ThemeEditor() {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                {/* Botão Salvar */}
+                <div className="form-actions remove-border">
+                    <button onClick={handleSave} disabled={saving} className="btn-primary btn-large">
+                        <Save size={18} />
+                        {saving ? 'Salvando...' : 'Salvar Alterações'}
+                    </button>
                 </div>
             </div>
         </div>
