@@ -13,6 +13,7 @@ function HeroEditor() {
     const [saving, setSaving] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
+    const [imageError, setImageError] = useState(''); // Mensagem de erro específica para imagem
     const [imagePreview, setImagePreview] = useState(null);
 
     useEffect(() => {
@@ -42,8 +43,27 @@ function HeroEditor() {
         const file = e.target.files[0];
         if (!file) return;
 
-        setUploading(true);
+        // Limpar mensagens anteriores
+        setImageError('');
         setMessage('');
+
+        // Validar formato do arquivo
+        const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+        if (!allowedFormats.includes(file.type)) {
+            setImageError('Formato não permitido. Use JPG, PNG ou GIF.');
+            e.target.value = ''; // Limpar input
+            return;
+        }
+
+        // Validar tamanho do arquivo (5MB = 5 * 1024 * 1024 bytes)
+        const maxSize = 5 * 1024 * 1024;
+        if (file.size > maxSize) {
+            setImageError('Arquivo muito grande. Tamanho máximo: 5MB.');
+            e.target.value = ''; // Limpar input
+            return;
+        }
+
+        setUploading(true);
 
         try {
             const formData = new FormData();
@@ -69,11 +89,11 @@ function HeroEditor() {
                 setHero({ ...hero, background_image_url: result.path });
                 setTimeout(() => setMessage(''), 3000);
             } else {
-                setMessage('Erro ao enviar imagem');
+                setImageError('Erro ao enviar imagem');
             }
         } catch (error) {
             console.error('Error uploading image:', error);
-            setMessage('Erro ao enviar imagem');
+            setImageError('Erro ao enviar imagem');
         } finally {
             setUploading(false);
         }
@@ -159,6 +179,14 @@ function HeroEditor() {
                         style={{ display: 'none' }}
                     />
                     <small>Formatos aceitos: JPG, PNG, GIF (máx: 5MB)</small>
+
+                    {/* Mensagem de erro específica para imagem */}
+                    {imageError && (
+                        <div className="error-message" style={{ marginTop: '10px', color: '#dc2626', fontSize: '14px', fontWeight: '500' }}>
+                            ⚠️ {imageError}
+                        </div>
+                    )}
+
                     {imagePreview && (
                         <div className="logo-preview">
                             <img src={imagePreview} alt="Background Preview" style={{ maxHeight: '200px', marginTop: '10px' }} />

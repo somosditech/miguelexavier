@@ -13,6 +13,7 @@ function ThemeEditor() {
     const [saving, setSaving] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
+    const [logoError, setLogoError] = useState(''); // Mensagem de erro específica para logo
     const [logoPreview, setLogoPreview] = useState(null);
 
     useEffect(() => {
@@ -42,8 +43,27 @@ function ThemeEditor() {
         const file = e.target.files[0];
         if (!file) return;
 
-        setUploading(true);
+        // Limpar mensagens anteriores
+        setLogoError('');
         setMessage('');
+
+        // Validar formato do arquivo
+        const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/svg+xml'];
+        if (!allowedFormats.includes(file.type)) {
+            setLogoError('Formato não permitido. Use JPG, PNG, GIF ou SVG.');
+            e.target.value = ''; // Limpar input
+            return;
+        }
+
+        // Validar tamanho do arquivo (2MB = 2 * 1024 * 1024 bytes)
+        const maxSize = 2 * 1024 * 1024;
+        if (file.size > maxSize) {
+            setLogoError('Arquivo muito grande. Tamanho máximo: 2MB.');
+            e.target.value = ''; // Limpar input
+            return;
+        }
+
+        setUploading(true);
 
         try {
             const formData = new FormData();
@@ -70,11 +90,11 @@ function ThemeEditor() {
                 await loadTheme();
                 setTimeout(() => setMessage(''), 3000);
             } else {
-                setMessage('Erro ao enviar logo');
+                setLogoError('Erro ao enviar logo');
             }
         } catch (error) {
             console.error('Error uploading logo:', error);
-            setMessage('Erro ao enviar logo');
+            setLogoError('Erro ao enviar logo');
         } finally {
             setUploading(false);
         }
@@ -135,6 +155,13 @@ function ThemeEditor() {
                             style={{ display: 'none' }}
                         />
                         <small>Formatos aceitos: JPG, PNG, GIF, SVG (máx: 2MB)</small>
+
+                        {/* Mensagem de erro específica para logo */}
+                        {logoError && (
+                            <div className="error-message" style={{ marginTop: '10px', color: '#dc2626', fontSize: '14px', fontWeight: '500' }}>
+                                ⚠️ {logoError}
+                            </div>
+                        )}
                     </div>
                     {logoPreview && (
                         <div className="logo-preview">
