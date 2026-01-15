@@ -1,12 +1,9 @@
-/**
- * DASHBOARD ADMIN
- */
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getServices, getTeamMembers, getTestimonials, getContactMessages } from '../services/adminApi';
-import { Users, Briefcase, MessageSquare, Star, Settings, FileText } from 'lucide-react';
+import { Users, LayersPlus, MessageSquare, Star } from 'lucide-react';
+import RecentMessages from '../components/RecentMessages';
 import '../styles/Dashboard.css';
 
 function Dashboard() {
@@ -17,12 +14,15 @@ function Dashboard() {
         testimonials: 0,
         messages: 0
     });
+    const [recentMessages, setRecentMessages] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        loadStats();
+        loadDashboardData();
     }, []);
 
-    const loadStats = async () => {
+
+    const loadDashboardData = async () => {
         try {
             const [services, team, testimonials, messages] = await Promise.all([
                 getServices(),
@@ -37,24 +37,24 @@ function Dashboard() {
                 testimonials: testimonials?.length || 0,
                 messages: messages?.length || 0
             });
+
+            // Mostrar todas as mensagens (não apenas não lidas)
+            setRecentMessages(messages || []);
         } catch (error) {
-            console.error('Error loading stats:', error);
+            console.error('Error loading dashboard data:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
     const cards = [
-        { title: 'Serviços', value: stats.services, icon: Briefcase, link: '/admin/services', color: '#771220' },
+        { title: 'Serviços', value: stats.services, icon: LayersPlus, link: '/admin/services', color: '#771220' },
         { title: 'Equipe', value: stats.team, icon: Users, link: '/admin/team', color: '#cfa750' },
         { title: 'Depoimentos', value: stats.testimonials, icon: Star, link: '/admin/testimonials', color: '#38a169' },
         { title: 'Mensagens', value: stats.messages, icon: MessageSquare, link: '/admin/messages', color: '#3b82f6' }
     ];
 
-    const quickLinks = [
-        { title: 'Editar Tema', icon: Settings, link: '/admin/theme' },
-        { title: 'Editar Hero', icon: FileText, link: '/admin/hero' },
-        { title: 'Editar About', icon: FileText, link: '/admin/about' },
-        { title: 'Editar Footer', icon: FileText, link: '/admin/footer' }
-    ];
+
 
     return (
         <div className="dashboard">
@@ -81,20 +81,10 @@ function Dashboard() {
                 })}
             </div>
 
-            {/* Links Rápidos */}
-            <div className="quick-links-section">
-                <h2>Edição Rápida</h2>
-                <div className="quick-links-grid">
-                    {quickLinks.map((link) => {
-                        const Icon = link.icon;
-                        return (
-                            <Link to={link.link} key={link.title} className="quick-link">
-                                <Icon size={24} />
-                                <span>{link.title}</span>
-                            </Link>
-                        );
-                    })}
-                </div>
+            {/* Analytics Dashboard */}
+            <div className="analytics-section">
+                {/* Mensagens Recentes */}
+                <RecentMessages messages={recentMessages} maxItems={5} />
             </div>
         </div>
     );

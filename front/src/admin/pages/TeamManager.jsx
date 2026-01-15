@@ -2,9 +2,9 @@
  * GERENCIADOR DE EQUIPE (CRUD)
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getTeamMembers, createTeamMember, updateTeamMember, deleteTeamMember } from '../services/adminApi';
-import { Plus, Edit, Trash2, Save } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, Upload } from 'lucide-react';
 import '../styles/Manager.css';
 
 function TeamManager() {
@@ -23,10 +23,22 @@ function TeamManager() {
         order: 0
     });
     const [message, setMessage] = useState('');
+    const messageRef = useRef(null);
+    const [uploading, setUploading] = useState(false);
+    const [imagePreview, setImagePreview] = useState(null);
 
     useEffect(() => {
         loadMembers();
     }, []);
+
+    // Rola para a mensagem quando ela aparecer
+    useEffect(() => {
+        if (message && messageRef.current) {
+            setTimeout(() => {
+                messageRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    }, [message]);
 
     const loadMembers = async () => {
         try {
@@ -52,6 +64,15 @@ function TeamManager() {
             email: member.email,
             order: member.order
         });
+
+        // Carregar preview da imagem existente
+        if (member.image_url) {
+            setImagePreview(`http://localhost:8000/storage/${member.image_url}`);
+        } else {
+            setImagePreview(null);
+        }
+
+        setMessage(''); // Limpa mensagem ao abrir modal
     };
 
     const handleNew = () => {
@@ -67,11 +88,51 @@ function TeamManager() {
             email: '',
             order: members.length + 1
         });
+        setImagePreview(null);
+        setMessage(''); // Limpa mensagem ao abrir modal
     };
 
     const handleCancel = () => {
         setEditing(null);
         setFormData({ name: '', role: '', specialization: '', oab: '', description: '', image_url: '', linkedin_url: '', email: '', order: 0 });
+        setImagePreview(null);
+    };
+
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        setUploading(true);
+        setMessage('');
+
+        try {
+            const formDataUpload = new FormData();
+            formDataUpload.append('photo', file);
+            if (editing !== 'new') {
+                formDataUpload.append('member_id', editing);
+            }
+
+            const response = await fetch('http://localhost:8000/api/upload-team-photo', {
+                method: 'POST',
+                body: formDataUpload
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                setFormData({ ...formData, image_url: result.path });
+                setImagePreview(`http://localhost:8000${result.url}`);
+                setMessage('Foto enviada com sucesso!');
+                setTimeout(() => setMessage(''), 3000);
+            } else {
+                setMessage('Erro ao enviar foto');
+            }
+        } catch (error) {
+            console.error('Error uploading photo:', error);
+            setMessage('Erro ao enviar foto');
+        } finally {
+            setUploading(false);
+        }
     };
 
     const handleSave = async () => {
@@ -88,7 +149,38 @@ function TeamManager() {
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
             console.error('Error saving member:', error);
-            setMessage('Erro ao salvar membro');
+
+            // Extrai mensagem de erro do backend
+            let errorMessage = 'Erro ao salvar membro';
+
+            if (error.response?.data?.errors) {
+                // Se houver erros de validação, mostra todos os erros
+                const errors = error.response.data.errors;
+                const errorMessages = [];
+
+                // Itera sobre todos os campos com erro
+                Object.keys(errors).forEach(fieldName => {
+                    const fieldErrors = errors[fieldName];
+
+                    // Cada campo pode ter múltiplos erros (array)
+                    if (Array.isArray(fieldErrors)) {
+                        fieldErrors.forEach(errorText => {
+                            errorMessages.push(errorText);
+                        });
+                    } else {
+                        errorMessages.push(fieldErrors);
+                    }
+                });
+
+                // Junta todos os erros com quebra de linha
+                errorMessage = errorMessages.join('\n');
+            } else if (error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            } else if (error.message) {
+                errorMessage = error.message;
+            }
+
+            setMessage(errorMessage);
         }
     };
 
@@ -121,11 +213,6 @@ function TeamManager() {
                 </button>
             </div>
 
-            {message && (
-                <div className={`message ${message.includes('sucesso') ? 'success' : 'error'}`}>
-                    {message}
-                </div>
-            )}
 
             {editing && (
                 <div className="edit-modal">
@@ -181,15 +268,40 @@ function TeamManager() {
                             />
                         </div>
 
+
                         <div className="form-field">
-                            <label>URL da Foto</label>
+                            <label htmlFor="photo-upload">Foto do Membro</label>
+                            <label htmlFor="photo-upload" className="upload-label">
+                                <Upload size={20} />
+                                {uploading ? 'Enviando...' : 'Escolher Foto'}
+                            </label>
                             <input
-                                type="url"
-                                value={formData.image_url}
-                                onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                                placeholder="https://exemplo.com/foto.jpg"
+                                id="photo-upload"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                                disabled={uploading}
+                                style={{ display: 'none' }}
                             />
+                            <small>Formatos aceitos: JPG, PNG, GIF (máx: 2MB)</small>
                         </div>
+
+                        {imagePreview && (
+                            <div className="image-preview">
+                                <img
+                                    src={imagePreview}
+                                    alt="Preview"
+                                    style={{
+                                        maxHeight: '200px',
+                                        width: '100%',
+                                        objectFit: 'cover',
+                                        borderRadius: '8px',
+                                        marginTop: '10px'
+                                    }}
+                                />
+                            </div>
+                        )}
+
 
                         <div className="form-field">
                             <label>LinkedIn</label>
@@ -220,6 +332,12 @@ function TeamManager() {
                             />
                         </div>
 
+                        {message && (
+                            <div ref={messageRef} className={`message ${message.includes('sucesso') ? 'success' : 'error'}`}>
+                                {message}
+                            </div>
+                        )}
+
                         <div className="modal-actions">
                             <button onClick={handleCancel} className="btn-secondary">Cancelar</button>
                             <button onClick={handleSave} className="btn-primary">
@@ -234,6 +352,19 @@ function TeamManager() {
             <div className="items-grid">
                 {members.map(member => (
                     <div key={member.id} className="item-card">
+                        {member.image_url && (
+                            <img
+                                src={`http://localhost:8000/storage/${member.image_url}`}
+                                alt={member.name}
+                                style={{
+                                    width: '100%',
+                                    height: '200px',
+                                    objectFit: 'cover',
+                                    borderRadius: '8px',
+                                    marginBottom: '12px'
+                                }}
+                            />
+                        )}
                         <h3>{member.name}</h3>
                         <p><strong>{member.role}</strong></p>
                         <p>{member.specialization}</p>

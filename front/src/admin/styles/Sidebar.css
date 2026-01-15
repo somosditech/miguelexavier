@@ -39,3 +39,21 @@
 .admin-layout ::-webkit-scrollbar-thumb:hover {
     background: #94a3b8 !important;
 }
+
+/* Badge de notificação */
+.nav-item .badge {
+    margin-left: auto;
+    background: #ef4444;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    min-width: 20px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.nav-item.active .badge {
+    background: #dc2626;
+}

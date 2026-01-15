@@ -84,6 +84,8 @@ function AboutEditor() {
         try {
             await updateAbout(about);
             setMessage('About salvo com sucesso!');
+            // Scroll suave para o topo para mostrar a mensagem de sucesso
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
             console.error('Error saving about:', error);

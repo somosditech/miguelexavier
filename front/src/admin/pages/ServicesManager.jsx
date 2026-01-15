@@ -92,42 +92,29 @@ function ServicesManager() {
             // Extrai mensagem de erro do backend
             let errorMessage = 'Erro ao salvar serviço';
 
-            if (error.response?.data?.message) {
-                errorMessage = error.response.data.message;
-            } else if (error.response?.data?.errors) {
-                // Se houver erros de validação, mostra campo e mensagem
+            if (error.response?.data?.errors) {
+                // Se houver erros de validação, mostra todos os erros
                 const errors = error.response.data.errors;
-                const fieldName = Object.keys(errors)[0];
-                const fieldError = errors[fieldName];
-                let errorText = Array.isArray(fieldError) ? fieldError[0] : fieldError;
+                const errorMessages = [];
 
-                // Traduz nome do campo para português
-                const fieldTranslations = {
-                    'icon': 'Ícone',
-                    'title': 'Título',
-                    'description': 'Descrição',
-                    'features': 'Features',
-                    'order': 'Ordem'
-                };
+                // Itera sobre todos os campos com erro
+                Object.keys(errors).forEach(fieldName => {
+                    const fieldErrors = errors[fieldName];
 
-                // Traduz mensagens de validação comuns do Laravel
-                const validationTranslations = {
-                    'validation.required': 'Este campo é obrigatório',
-                    'validation.string': 'Este campo deve ser um texto',
-                    'validation.max.string': 'Este campo é muito longo',
-                    'validation.min.string': 'Este campo é muito curto',
-                    'validation.numeric': 'Este campo deve ser um número',
-                    'validation.integer': 'Este campo deve ser um número inteiro',
-                    'validation.array': 'Este campo deve ser uma lista'
-                };
+                    // Cada campo pode ter múltiplos erros (array)
+                    if (Array.isArray(fieldErrors)) {
+                        fieldErrors.forEach(errorText => {
+                            errorMessages.push(errorText);
+                        });
+                    } else {
+                        errorMessages.push(fieldErrors);
+                    }
+                });
 
-                // Se a mensagem for uma chave de validação, traduz
-                if (errorText.startsWith('validation.')) {
-                    errorText = validationTranslations[errorText] || errorText;
-                }
-
-                const translatedField = fieldTranslations[fieldName] || fieldName;
-                errorMessage = `${translatedField}: ${errorText}`;
+                // Junta todos os erros com quebra de linha
+                errorMessage = errorMessages.join('\n');
+            } else if (error.response?.data?.message) {
+                errorMessage = error.response.data.message;
             } else if (error.message) {
                 errorMessage = error.message;
             }

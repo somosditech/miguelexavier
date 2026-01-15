@@ -12,8 +12,9 @@ import { LogIn, Mail, Lock, AlertCircle } from 'lucide-react';
 import '../styles/Login.css';
 
 function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    // Credenciais pré-preenchidas para facilitar desenvolvimento (remover em produção)
+    const [email, setEmail] = useState('admin@miguelxavier.adv.br');
+    const [password, setPassword] = useState('password123');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const { login } = useAuth();
@@ -115,12 +116,7 @@ function Login() {
                         </button>
                     </form>
 
-                    {/* Credenciais padrão (apenas para desenvolvimento) */}
-                    <div className="login-hint">
-                        <p>Credenciais padrão:</p>
-                        <p><strong>Email:</strong> admin@miguelxavier.adv.br</p>
-                        <p><strong>Senha:</strong> password123</p>
-                    </div>
+
                 </motion.div>
             </div>
         </div>

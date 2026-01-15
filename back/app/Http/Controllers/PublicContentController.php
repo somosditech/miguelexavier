@@ -206,6 +206,12 @@ class PublicContentController extends Controller
      */
     private function mapTeamMember($member)
     {
+        // Se image_url não começa com http, é um caminho local do storage
+        $imageUrl = $member->image_url;
+        if ($imageUrl && !str_starts_with($imageUrl, 'http')) {
+            $imageUrl = asset('storage/' . $imageUrl);
+        }
+
         return [
             'id' => $member->id,
             'name' => $member->name,
@@ -213,7 +219,7 @@ class PublicContentController extends Controller
             'specialization' => $member->specialization,
             'oab' => $member->oab,
             'description' => $member->description,
-            'imageUrl' => $member->image_url,
+            'image' => $imageUrl,  // Mudado de imageUrl para image para compatibilidade com o frontend
             'social' => [
                 'linkedin' => $member->linkedin_url,
                 'email' => $member->email,

@@ -12,6 +12,7 @@ function FooterEditor() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [message, setMessage] = useState('');
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         loadFooter();
@@ -36,14 +37,27 @@ function FooterEditor() {
     const handleSave = async () => {
         setSaving(true);
         setMessage('');
+        setErrors({});
 
         try {
             await updateFooter(footer);
             setMessage('Footer salvo com sucesso!');
+            // Scroll suave para o topo para mostrar a mensagem de sucesso
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
             console.error('Error saving footer:', error);
-            setMessage('Erro ao salvar footer');
+
+            // Tratamento de erros de validação do backend
+            if (error.response?.data?.errors) {
+                setErrors(error.response.data.errors);
+                // Scroll para o topo para mostrar os erros
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (error.response?.data?.message) {
+                setMessage(error.response.data.message);
+            } else {
+                setMessage('Erro ao salvar footer');
+            }
         } finally {
             setSaving(false);
         }
@@ -58,10 +72,6 @@ function FooterEditor() {
                     <h1><Settings size={28} /> Editor de Footer</h1>
                     <p>Edite o rodapé do site</p>
                 </div>
-                <button onClick={handleSave} disabled={saving} className="btn-primary">
-                    <Save size={18} />
-                    {saving ? 'Salvando...' : 'Salvar Alterações'}
-                </button>
             </div>
 
             {message && (
@@ -69,8 +79,8 @@ function FooterEditor() {
                     {message}
                 </div>
             )}
-
             <div className="editor-content">
+
                 <h3>Seção Sobre</h3>
 
                 <div className="form-field">
@@ -147,16 +157,23 @@ function FooterEditor() {
                     />
                 </div>
 
-                <hr style={{ margin: '32px 0', border: 'none', borderTop: '2px solid #e5e5e5' }} />
+                {/* Exibir erros de validação */}
+                {Object.keys(errors).length > 0 && (
+                    <div className="error-list">
+                        {Object.entries(errors).map(([field, messages]) => (
+                            <div key={field} className="error-item">
+                                {messages[0]}
+                            </div>
+                        ))}
+                    </div>
+                )}
 
-                <div className="form-field">
-                    <label>Texto de Copyright</label>
-                    <input
-                        type="text"
-                        value={footer?.copyright_text || ''}
-                        onChange={(e) => handleChange('copyright_text', e.target.value)}
-                        placeholder="© 2024 Miguel & Xavier. Todos os direitos reservados."
-                    />
+                {/* Botão Salvar */}
+                <div className="form-actions remove-border">
+                    <button onClick={handleSave} disabled={saving} className="btn-primary btn-large">
+                        <Save size={18} />
+                        {saving ? 'Salvando...' : 'Salvar Alterações'}
+                    </button>
                 </div>
             </div>
         </div>

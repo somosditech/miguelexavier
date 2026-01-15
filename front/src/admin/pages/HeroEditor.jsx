@@ -86,6 +86,8 @@ function HeroEditor() {
         try {
             await updateHero(hero);
             setMessage('Hero salvo com sucesso!');
+            // Scroll suave para o topo para mostrar a mensagem de sucesso
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
             console.error('Error saving hero:', error);

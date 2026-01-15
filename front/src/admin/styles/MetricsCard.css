@@ -1,0 +1,102 @@
+/* ESTILOS DO METRICS CARD */
+
+.metrics-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--card-color, #3b82f6);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.metrics-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.metrics-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--card-color), var(--card-color));
+    opacity: 0.1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.metrics-icon svg {
+    color: var(--card-color);
+    position: absolute;
+    opacity: 1;
+}
+
+.metrics-content {
+    flex: 1;
+}
+
+.metrics-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 4px 0;
+    line-height: 1;
+}
+
+.metrics-label {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0 0 8px 0;
+    font-weight: 500;
+}
+
+.metrics-trend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.metrics-trend.up {
+    color: #10b981;
+}
+
+.metrics-trend.down {
+    color: #ef4444;
+}
+
+.metrics-trend.neutral {
+    color: #64748b;
+}
+
+.metrics-trend svg {
+    flex-shrink: 0;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .metrics-card {
+        padding: 20px;
+    }
+
+    .metrics-value {
+        font-size: 28px;
+    }
+
+    .metrics-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .metrics-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+}

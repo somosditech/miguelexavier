@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Footer\UpdateFooterRequest;
 use App\Http\Controllers\Controller;
 use App\Models\FooterContent;
 use Illuminate\Http\Request;
@@ -31,21 +32,9 @@ class FooterController extends Controller
     /**
      * Atualizar footer
      */
-    public function update(Request $request)
+    public function update(UpdateFooterRequest $request)
     {
-        $validated = $request->validate([
-            'about_title' => 'sometimes|string|max:255',
-            'about_description' => 'sometimes|string',
-            'contact_title' => 'sometimes|string|max:255',
-            'contact_address' => 'sometimes|string|max:500',
-            'contact_phone' => 'sometimes|string|max:20',
-            'contact_email' => 'sometimes|email|max:255',
-            'contact_hours' => 'sometimes|string|max:255',
-            'social_links' => 'sometimes|array',
-            'legal_links' => 'sometimes|array',
-            'copyright_text' => 'sometimes|string|max:255',
-        ]);
-        
+        $validated = $request->validated();
         $footer = FooterContent::first();
         
         if (!$footer) {

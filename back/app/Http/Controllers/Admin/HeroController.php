@@ -54,6 +54,9 @@ class HeroController extends Controller
         
         $hero->update($validated);
         
+        // Registrar atividade
+        logActivity('hero_updated', 'Hero atualizado');
+        
         return response()->json([
             'success' => true,
             'message' => 'Hero section atualizada com sucesso',

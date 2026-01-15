@@ -228,4 +228,23 @@ export const markMessageAsRead = async (id) => {
     return response.data;
 };
 
+export const getUnreadMessagesCount = async () => {
+    const response = await adminApi.get('/admin/contact-messages/count-unread');
+    return response.data.data;
+};
+
+// ============================================
+// DASHBOARD
+// ============================================
+
+export const getDashboardActivities = async () => {
+    const response = await adminApi.get('/admin/dashboard/activities');
+    return response.data;
+};
+
+export const getDashboardStats = async () => {
+    const response = await adminApi.get('/admin/dashboard/stats');
+    return response.data;
+};
+
 export default adminApi;

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Item\StoreItemRequest;
+use App\Http\Requests\Item\UpdateItemRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
-use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
@@ -24,15 +25,9 @@ class ServiceController extends Controller
     /**
      * Criar novo serviço
      */
-    public function store(Request $request)
+    public function store(StoreItemRequest $request)
     {
-        $validated = $request->validate([
-            'icon' => 'required|string|max:50',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'features' => 'required|array',
-            'order' => 'required|integer',
-        ]);
+        $validated = $request->validated();
 
         $service = Service::create($validated);
 
@@ -66,7 +61,7 @@ class ServiceController extends Controller
     /**
      * Atualizar serviço
      */
-    public function update(Request $request, $id)
+    public function update(UpdateItemRequest $request, $id)
     {
         $service = Service::find($id);
 
@@ -77,13 +72,7 @@ class ServiceController extends Controller
             ], 404);
         }
 
-        $validated = $request->validate([
-            'icon' => 'sometimes|string|max:50',
-            'title' => 'sometimes|string|max:255',
-            'description' => 'sometimes|string',
-            'features' => 'sometimes|array',
-            'order' => 'sometimes|integer',
-        ]);
+        $validated = $request->validated();
 
         $service->update($validated);
 

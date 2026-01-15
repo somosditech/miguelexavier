@@ -91,7 +91,9 @@ function Footer() {
 
                 {/* Rodapé inferior */}
                 <div className="footer-bottom">
-                    <p className="footer-copyright">{content.copyright}</p>
+                    <p className="footer-copyright">
+                        © {new Date().getFullYear()} Miguel & Xavier. Todos os direitos reservados.
+                    </p>
                     <div className="footer-links">
                         {content.legalLinks && content.legalLinks.map((link, index) => (
                             <a key={index} href={link.url} className="footer-link">

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+
+use App\Http\Requests\Testimonial\StoreTestimonialRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Testimonial\UpdateTestimonialRequest;
 use App\Models\Testimonial;
-use Illuminate\Http\Request;
 
 class TestimonialController extends Controller
 {
@@ -24,14 +26,9 @@ class TestimonialController extends Controller
     /**
      * Criar novo depoimento
      */
-    public function store(Request $request)
+    public function store(StoreTestimonialRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'role' => 'required|string|max:255',
-            'text' => 'required|string',
-            'order' => 'required|integer',
-        ]);
+        $validated = $request->validated();
 
         $testimonial = Testimonial::create($validated);
 
@@ -65,7 +62,7 @@ class TestimonialController extends Controller
     /**
      * Atualizar depoimento
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTestimonialRequest $request, $id)
     {
         $testimonial = Testimonial::find($id);
 
@@ -76,12 +73,7 @@ class TestimonialController extends Controller
             ], 404);
         }
 
-        $validated = $request->validate([
-            'name' => 'sometimes|string|max:255',
-            'role' => 'sometimes|string|max:255',
-            'text' => 'sometimes|string',
-            'order' => 'sometimes|integer',
-        ]);
+        $validated = $request->validated();
 
         $testimonial->update($validated);
 

@@ -42,6 +42,19 @@ class ContactMessageController extends Controller
     }
 
     /**
+     * Buscar quantidade de mensagens não lidas
+     */
+    public function countUnread()
+    {
+        $message = ContactMessage::where('read_at', null)->count();
+
+        return response()->json([
+            'success' => true,
+            'data' => $message
+        ]);
+    }
+
+    /**
      * Marcar mensagem como lida
      */
     public function markAsRead($id)

@@ -33,6 +33,8 @@ function Messages() {
             setMessages(messages.map(msg =>
                 msg.id === id ? { ...msg, read_at: new Date().toISOString() } : msg
             ));
+            // Disparar evento para atualizar contador na sidebar
+            window.dispatchEvent(new CustomEvent('messageRead'));
         } catch (error) {
             console.error('Error marking as read:', error);
         }

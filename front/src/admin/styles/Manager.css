@@ -152,6 +152,8 @@ button.btn-secondary:hover {
     border-radius: 6px;
     margin-bottom: 20px;
     font-size: 14px;
+    white-space: pre-line;
+    /* Permite quebras de linha */
 }
 
 .edit-modal-content .message.success {

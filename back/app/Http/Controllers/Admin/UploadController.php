@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class UploadController extends Controller
 {
@@ -71,6 +71,59 @@ class UploadController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Erro ao enviar logo: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Upload de foto de membro da equipe
+     */
+    public function uploadTeamPhoto(Request $request)
+    {
+        Log::info('Upload de foto de membro iniciado');
+        
+        try {
+            Log::info('Validando arquivo');
+            $request->validate([
+                'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'member_id' => 'nullable|integer|exists:team_members,id'
+            ]);
+            
+            Log::info('Arquivo validado com sucesso');
+
+            // Se member_id for fornecido, deletar foto anterior
+            if ($request->member_id) {
+                $member = \App\Models\TeamMember::find($request->member_id);
+                if ($member && $member->image_url && Storage::disk('public')->exists($member->image_url)) {
+                    Storage::disk('public')->delete($member->image_url);
+                    Log::info('Foto anterior deletada: ' . $member->image_url);
+                }
+            }
+
+            // Salva nova foto
+            Log::info('Salvando nova foto');
+            $path = $request->file('photo')->store('team_photos', 'public');
+            Log::info('Foto salva em: ' . $path);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Foto enviada com sucesso',
+                'url' => Storage::url($path),
+                'path' => $path
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Erro de validação: ' . json_encode($e->errors()));
+            return response()->json([
+                'success' => false,
+                'message' => 'Arquivo inválido',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            Log::error('Erro ao enviar foto: ' . $e->getMessage());
+            Log::error('Stack trace: ' . $e->getTraceAsString());
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao enviar foto: ' . $e->getMessage()
             ], 500);
         }
     }

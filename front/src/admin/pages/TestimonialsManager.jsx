@@ -2,7 +2,7 @@
  * GERENCIADOR DE DEPOIMENTOS (CRUD)
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getTestimonials, createTestimonial, updateTestimonial, deleteTestimonial } from '../services/adminApi';
 import { Plus, Edit, Trash2, Save } from 'lucide-react';
 import '../styles/Manager.css';
@@ -18,10 +18,20 @@ function TestimonialsManager() {
         order: 0
     });
     const [message, setMessage] = useState('');
+    const messageRef = useRef(null);
 
     useEffect(() => {
         loadTestimonials();
     }, []);
+
+    // Rola para a mensagem quando ela aparecer
+    useEffect(() => {
+        if (message && messageRef.current) {
+            setTimeout(() => {
+                messageRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    }, [message]);
 
     const loadTestimonials = async () => {
         try {
@@ -42,6 +52,7 @@ function TestimonialsManager() {
             text: testimonial.text,
             order: testimonial.order
         });
+        setMessage(''); // Limpa mensagem ao abrir modal
     };
 
     const handleNew = () => {
@@ -52,6 +63,7 @@ function TestimonialsManager() {
             text: '',
             order: testimonials.length + 1
         });
+        setMessage(''); // Limpa mensagem ao abrir modal
     };
 
     const handleCancel = () => {
@@ -73,7 +85,38 @@ function TestimonialsManager() {
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
             console.error('Error saving testimonial:', error);
-            setMessage('Erro ao salvar depoimento');
+
+            // Extrai mensagem de erro do backend
+            let errorMessage = 'Erro ao salvar depoimento';
+
+            if (error.response?.data?.errors) {
+                // Se houver erros de validação, mostra todos os erros
+                const errors = error.response.data.errors;
+                const errorMessages = [];
+
+                // Itera sobre todos os campos com erro
+                Object.keys(errors).forEach(fieldName => {
+                    const fieldErrors = errors[fieldName];
+
+                    // Cada campo pode ter múltiplos erros (array)
+                    if (Array.isArray(fieldErrors)) {
+                        fieldErrors.forEach(errorText => {
+                            errorMessages.push(errorText);
+                        });
+                    } else {
+                        errorMessages.push(fieldErrors);
+                    }
+                });
+
+                // Junta todos os erros com quebra de linha
+                errorMessage = errorMessages.join('\n');
+            } else if (error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            } else if (error.message) {
+                errorMessage = error.message;
+            }
+
+            setMessage(errorMessage);
         }
     };
 
@@ -105,12 +148,6 @@ function TestimonialsManager() {
                     Novo Depoimento
                 </button>
             </div>
-
-            {message && (
-                <div className={`message ${message.includes('sucesso') ? 'success' : 'error'}`}>
-                    {message}
-                </div>
-            )}
 
             {editing && (
                 <div className="edit-modal">
@@ -155,6 +192,12 @@ function TestimonialsManager() {
                                 onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
                             />
                         </div>
+
+                        {message && (
+                            <div ref={messageRef} className={`message ${message.includes('sucesso') ? 'success' : 'error'}`}>
+                                {message}
+                            </div>
+                        )}
 
                         <div className="modal-actions">
                             <button onClick={handleCancel} className="btn-secondary">Cancelar</button>

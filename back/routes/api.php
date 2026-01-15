@@ -32,6 +32,7 @@ Route::post('/contact', [ContactController::class, 'store']);
 
 // TESTE: Upload sem autenticação (REMOVER DEPOIS)
 Route::post('/test-upload', [App\Http\Controllers\Admin\UploadController::class, 'uploadLogo']);
+Route::post('/upload-team-photo', [App\Http\Controllers\Admin\UploadController::class, 'uploadTeamPhoto']);
 
 // ============================================
 // ROTAS DE AUTENTICAÇÃO
@@ -79,11 +80,15 @@ Route::middleware('auth:api')->prefix('admin')->group(function () {
     Route::get('/footer', [App\Http\Controllers\Admin\FooterController::class, 'show']);
     Route::put('/footer', [App\Http\Controllers\Admin\FooterController::class, 'update']);
 
-
-    // Contact Messages (read-only)
+    // Contact Messages
     Route::get('/contact-messages', [App\Http\Controllers\Admin\ContactMessageController::class, 'index']);
+    Route::get('/contact-messages/count-unread', [App\Http\Controllers\Admin\ContactMessageController::class, 'countUnread']);
     Route::get('/contact-messages/{id}', [App\Http\Controllers\Admin\ContactMessageController::class, 'show']);
     Route::put('/contact-messages/{id}/mark-read', [App\Http\Controllers\Admin\ContactMessageController::class, 'markAsRead']);
+
+    // Dashboard
+    Route::get('/dashboard/activities', [App\Http\Controllers\Admin\DashboardController::class, 'activities']);
+    Route::get('/dashboard/stats', [App\Http\Controllers\Admin\DashboardController::class, 'stats']);
 
     // Image Upload
     Route::post('/upload/image', [App\Http\Controllers\Admin\ImageUploadController::class, 'upload']);

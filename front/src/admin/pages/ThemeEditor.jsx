@@ -87,10 +87,14 @@ function ThemeEditor() {
         try {
             await updateTheme(theme);
             setMessage('Tema salvo com sucesso!');
+            // Scroll para o topo para ver a mensagem de sucesso
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
             console.error('Error saving theme:', error);
             setMessage('Erro ao salvar tema');
+            // Scroll para o topo para ver a mensagem de erro
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         } finally {
             setSaving(false);
         }

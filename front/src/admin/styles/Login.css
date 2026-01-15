@@ -111,6 +111,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 20px;
 }
 
 .login-button:hover:not(:disabled) {
