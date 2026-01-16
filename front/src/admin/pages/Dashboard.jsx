@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { getServices, getTeamMembers, getTestimonials, getContactMessages } from '../services/adminApi';
 import { Users, LayersPlus, MessageSquare, Star } from 'lucide-react';
 import RecentMessages from '../components/RecentMessages';
+import MessagesChart from '../components/MessagesChart';
 import '../styles/Dashboard.css';
 
 function Dashboard() {
@@ -83,8 +84,13 @@ function Dashboard() {
 
             {/* Analytics Dashboard */}
             <div className="analytics-section">
-                {/* Mensagens Recentes */}
-                <RecentMessages messages={recentMessages} maxItems={5} />
+                <div className="dashboard-grid">
+                    {/* Mensagens Recentes */}
+                    <RecentMessages messages={recentMessages} maxItems={3} />
+
+                    {/* Gráfico de Mensagens */}
+                    <MessagesChart />
+                </div>
             </div>
         </div>
     );

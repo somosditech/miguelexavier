@@ -1,0 +1,54 @@
+/**
+ * ESTILOS DO COMPONENTE: MessagesChart
+ */
+
+.messages-chart {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+}
+
+.chart-loading {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.chart-section {
+    margin-bottom: 32px;
+}
+
+.chart-section:last-child {
+    margin-bottom: 0;
+}
+
+.chart-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    color: #2d2416;
+}
+
+.chart-header svg {
+    color: #771220;
+}
+
+.chart-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .messages-chart {
+        padding: 16px;
+    }
+
+    .chart-header h3 {
+        font-size: 16px;
+    }
+}

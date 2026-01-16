@@ -24,11 +24,6 @@ function Header() {
                 </div>
 
                 <div className="header-right">
-                    <div className="user-info">
-                        <User size={20} />
-                        <span>{user?.name || 'Admin'}</span>
-                    </div>
-
                     <button onClick={handleLogout} className="logout-btn">
                         <LogOut size={18} />
                         Sair

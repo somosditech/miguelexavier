@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ContactMessageController extends Controller
 {
@@ -76,6 +77,45 @@ class ContactMessageController extends Controller
             'success' => true,
             'message' => 'Mensagem marcada como lida',
             'data' => $message
+        ]);
+    }
+
+    /**
+     * Buscar estatísticas de mensagens
+     */
+    public function getStats()
+    {
+        // Mensagens dos últimos 7 dias
+        $last7Days = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $date = now()->subDays($i)->format('Y-m-d');
+            $count = ContactMessage::whereDate('created_at', $date)->count();
+            $last7Days[] = [
+                'date' => $date,
+                'count' => $count,
+                'label' => now()->subDays($i)->format('d/m')
+            ];
+        }
+
+        // Mensagens por área de interesse
+        $byArea = ContactMessage::select('area_interesse', DB::raw('count(*) as total'))
+            ->whereNotNull('area_interesse')
+            ->where('area_interesse', '!=', '')
+            ->groupBy('area_interesse')
+            ->get()
+            ->map(function($item) {
+                return [
+                    'area_of_interest' => $item->area_interesse,
+                    'total' => $item->total
+                ];
+            });
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'last7Days' => $last7Days,
+                'byArea' => $byArea
+            ]
         ]);
     }
 }

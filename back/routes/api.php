@@ -83,12 +83,9 @@ Route::middleware('auth:api')->prefix('admin')->group(function () {
     // Contact Messages
     Route::get('/contact-messages', [App\Http\Controllers\Admin\ContactMessageController::class, 'index']);
     Route::get('/contact-messages/count-unread', [App\Http\Controllers\Admin\ContactMessageController::class, 'countUnread']);
+    Route::get('/contact-messages/stats', [App\Http\Controllers\Admin\ContactMessageController::class, 'getStats']);
     Route::get('/contact-messages/{id}', [App\Http\Controllers\Admin\ContactMessageController::class, 'show']);
     Route::put('/contact-messages/{id}/mark-read', [App\Http\Controllers\Admin\ContactMessageController::class, 'markAsRead']);
-
-    // Dashboard
-    Route::get('/dashboard/activities', [App\Http\Controllers\Admin\DashboardController::class, 'activities']);
-    Route::get('/dashboard/stats', [App\Http\Controllers\Admin\DashboardController::class, 'stats']);
 
     // Image Upload
     Route::post('/upload/image', [App\Http\Controllers\Admin\ImageUploadController::class, 'upload']);
