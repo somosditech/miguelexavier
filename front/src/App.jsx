@@ -28,6 +28,7 @@ import LoadingSkeleton from './components/LoadingSkeleton';
 import SEO from './components/SEO';
 import SchemaMarkup from './components/SchemaMarkup';
 import SkipLink from './components/SkipLink';
+import CookieBanner from './components/CookieBanner';
 
 function App() {
     // Carrega o tema (cores) da API
@@ -83,6 +84,9 @@ function App() {
 
             {/* Botão flutuante do WhatsApp */}
             <WhatsAppButton />
+
+            {/* Banner de Cookies LGPD */}
+            <CookieBanner />
         </div>
     );
 }

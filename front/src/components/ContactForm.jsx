@@ -31,15 +31,49 @@ function ContactForm() {
     const [statusMessage, setStatusMessage] = useState({ type: '', text: '' });
 
     /**
+     * Função para formatar telefone brasileiro
+     * Formatos: (XX) XXXXX-XXXX ou (XX) XXXX-XXXX
+     */
+    const formatPhone = (value) => {
+        // Remove tudo que não é número
+        const numbers = value.replace(/\D/g, '');
+
+        // Limita a 11 dígitos
+        const limited = numbers.substring(0, 11);
+
+        // Aplica a máscara
+        if (limited.length <= 10) {
+            // Formato: (XX) XXXX-XXXX
+            return limited
+                .replace(/(\d{2})(\d)/, '($1) $2')
+                .replace(/(\d{4})(\d)/, '$1-$2');
+        } else {
+            // Formato: (XX) XXXXX-XXXX
+            return limited
+                .replace(/(\d{2})(\d)/, '($1) $2')
+                .replace(/(\d{5})(\d)/, '$1-$2');
+        }
+    };
+
+    /**
      * Função chamada quando o usuário digita em um campo
      * Atualiza o estado do formulário
      */
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
+
+        // Aplica máscara de telefone
+        if (name === 'phone') {
+            setFormData(prev => ({
+                ...prev,
+                [name]: formatPhone(value)
+            }));
+        } else {
+            setFormData(prev => ({
+                ...prev,
+                [name]: value
+            }));
+        }
     };
 
     /**

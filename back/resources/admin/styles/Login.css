@@ -1,5 +1,11 @@
 /* ESTILOS DO LOGIN ADMIN */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .login-page {
     min-height: 100vh;
     display: flex;
@@ -7,6 +13,7 @@
     justify-content: center;
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
     padding: 20px;
+    margin: 0;
 }
 
 .login-container {
@@ -74,6 +81,7 @@
     border-radius: 8px;
     font-size: 15px;
     transition: all 0.3s;
+    box-sizing: border-box;
 }
 
 .form-group input:focus {

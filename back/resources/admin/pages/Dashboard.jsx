@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getServices, getTeamMembers, getTestimonials, getContactMessages } from '../services/adminApi';
-import { Users, LayersPlus, MessageSquare, Star } from 'lucide-react';
+import { Users, Layers, MessageSquare, Star } from 'lucide-react';
 import RecentMessages from '../components/RecentMessages';
 import MessagesChart from '../components/MessagesChart';
 import '../styles/Dashboard.css';
@@ -49,7 +49,7 @@ function Dashboard() {
     };
 
     const cards = [
-        { title: 'Serviços', value: stats.services, icon: LayersPlus, link: '/admin/services', color: '#771220' },
+        { title: 'Serviços', value: stats.services, icon: Layers, link: '/admin/services', color: '#771220' },
         { title: 'Equipe', value: stats.team, icon: Users, link: '/admin/team', color: '#cfa750' },
         { title: 'Depoimentos', value: stats.testimonials, icon: Star, link: '/admin/testimonials', color: '#38a169' },
         { title: 'Mensagens', value: stats.messages, icon: MessageSquare, link: '/admin/messages', color: '#3b82f6' }

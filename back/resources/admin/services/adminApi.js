@@ -8,7 +8,7 @@ import axios from 'axios';
 
 // Configuração do axios para admin
 const adminApi = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'https://miguelexavier-api.onrender.com/api',
+    baseURL: import.meta.env.VITE_API_URL || '/api',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json'

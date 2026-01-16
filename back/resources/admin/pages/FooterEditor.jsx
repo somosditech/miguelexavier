@@ -69,7 +69,7 @@ function FooterEditor() {
         <div className="editor-page">
             <div className="editor-header">
                 <div>
-                    <h1><Settings size={28} /> Editor de Footer</h1>
+                    <h1>Editor do Rodapé</h1>
                     <p>Edite o rodapé do site</p>
                 </div>
             </div>
