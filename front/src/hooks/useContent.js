@@ -22,8 +22,7 @@ import {
     fetchServices,
     fetchTeam,
     fetchTestimonials,
-    fetchFooter,
-    fetchAIChat as fetchAIChatConfig
+    fetchFooter
 } from '../services/api';
 
 // Mapeamento de seções para suas respectivas funções de busca
@@ -34,8 +33,7 @@ const contentFetchers = {
     services: fetchServices,
     team: fetchTeam,
     testimonials: fetchTestimonials,
-    footer: fetchFooter,
-    aiChat: fetchAIChatConfig
+    footer: fetchFooter
 };
 
 /**

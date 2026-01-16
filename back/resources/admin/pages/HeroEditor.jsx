@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from 'react';
 import { getHero, updateHero } from '../services/adminApi';
-import { Save, FileText, Upload } from 'lucide-react';
+import { Save, Wallpaper, Upload } from 'lucide-react';
 import '../styles/Editor.css';
 
 function HeroEditor() {
@@ -123,7 +123,7 @@ function HeroEditor() {
         <div className="editor-page">
             <div className="editor-header">
                 <div>
-                    <h1><FileText size={28} /> Editor de Hero</h1>
+                    <h1><Wallpaper size={28} /> Editor de Hero</h1>
                     <p>Edite a seção principal do site</p>
                 </div>
             </div>

@@ -268,22 +268,3 @@ export const mockFooter = {
         ]
     }
 };
-
-// ============================================
-// CONFIGURAÇÕES DO CHAT IA
-// ============================================
-export const mockAIChat = {
-    title: 'Análise Preliminar com IA',
-    subtitle: 'Descreva seu caso e receba uma análise inicial',
-    placeholder: 'Descreva brevemente sua situação jurídica...',
-    disclaimer: 'Esta é uma análise preliminar automatizada. Para uma avaliação completa, agende uma consulta com nossos advogados.',
-
-    // Respostas simuladas da IA (futuramente será uma API real de IA)
-    responses: {
-        default: 'Obrigado por compartilhar sua situação. Com base nas informações fornecidas, recomendo que você agende uma consulta com nossa equipe para uma análise detalhada. Este tipo de caso geralmente requer documentação específica e uma estratégia personalizada.',
-        trabalhista: 'Sua questão parece estar relacionada ao Direito Trabalhista. Nosso especialista Dr. Carlos Mendes poderá ajudá-lo. Recomendo reunir documentos como contrato de trabalho, holerites e comunicações com o empregador.',
-        familia: 'Este caso parece envolver Direito de Família. A Dra. Ana Xavier é nossa especialista nesta área. Para uma consulta mais precisa, será importante trazer documentos como certidões e comprovantes relevantes.',
-        empresarial: 'Questões empresariais requerem análise cuidadosa. O Dr. Miguel Santos, nosso especialista em Direito Empresarial, poderá orientá-lo melhor. Recomendo preparar contratos e documentos societários para a consulta.',
-        penal: 'Casos criminais exigem atenção imediata. A Dra. Juliana Costa, nossa criminalista, está disponível para atendê-lo. É importante agendar uma consulta urgente para discutir a melhor estratégia de defesa.'
-    }
-};

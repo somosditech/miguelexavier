@@ -101,25 +101,9 @@
 
 /* Botão CTA no header */
 .cta-button {
-    padding: 0.625rem 1.25rem;
+    /* Usa o estilo global .btn-primary */
     font-size: 0.8125rem;
     white-space: nowrap;
-    background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
-    /* Gradiente dourado */
-    color: var(--color-primary) !important;
-    /* Texto vermelho escuro sempre */
-    border: none;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.cta-button:hover {
-    background: linear-gradient(135deg, var(--color-accent), var(--color-gold-6));
-    /* Gradiente dourado mais claro no hover */
-    color: var(--color-primary) !important;
-    /* Texto vermelho escuro sempre */
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-gold);
 }
 
 /* ============================================

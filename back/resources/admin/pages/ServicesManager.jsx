@@ -4,7 +4,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { getServices, createService, updateService, deleteService } from '../services/adminApi';
-import { Plus, Edit, Trash2, Save, X } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, X, Layers } from 'lucide-react';
 import '../styles/Manager.css';
 
 function ServicesManager() {
@@ -158,7 +158,7 @@ function ServicesManager() {
         <div className="manager-page">
             <div className="manager-header">
                 <div>
-                    <h1>Gerenciador de Serviços</h1>
+                    <h1><Layers size={28} /> Gerenciador de Serviços</h1>
                     <p>{services.length} serviço(s) cadastrado(s)</p>
                 </div>
                 <button onClick={handleNew} className="btn-primary">

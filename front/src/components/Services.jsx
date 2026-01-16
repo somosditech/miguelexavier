@@ -8,9 +8,19 @@
  */
 
 import { useContent } from '../hooks/useContent';
-import * as LucideIcons from 'lucide-react'; // Importa todos os ícones do Lucide
+import { Briefcase, Heart, Building2, Home, Scale, Shield } from 'lucide-react'; // Apenas os ícones necessários
 import { motion } from 'framer-motion'; // Biblioteca de animações
 import './Services.css';
+
+// Mapeamento de ícones disponíveis
+const iconMap = {
+    Briefcase,
+    Heart,
+    Building2,
+    Home,
+    Scale,
+    Shield
+};
 
 function Services() {
     // Busca o conteúdo da seção services da API
@@ -44,14 +54,14 @@ function Services() {
                 {/* Grid de serviços */}
                 <div className="services-grid">
                     {services.map((service, index) => {
-                        // Pega o componente de ícone dinamicamente pelo nome
-                        const IconComponent = LucideIcons[service.icon];
+                        // Pega o ícone do mapeamento
+                        const IconComponent = iconMap[service.icon];
 
                         // Se o ícone não for encontrado, usa Briefcase como fallback e avisa no console
                         if (!IconComponent) {
                             console.warn(`Ícone "${service.icon}" não encontrado. Usando Briefcase como fallback.`);
                         }
-                        const FinalIcon = IconComponent || LucideIcons.Briefcase;
+                        const FinalIcon = IconComponent || Briefcase;
 
                         return (
                             <motion.div

@@ -8,7 +8,6 @@
  */
 
 import { useContent } from '../hooks/useContent';
-import * as LucideIcons from 'lucide-react'; // Importa todos os ícones do Lucide
 import { motion } from 'framer-motion'; // Biblioteca de animações
 import LazyImage from './LazyImage';
 import './About.css';
@@ -58,33 +57,6 @@ function About() {
                         <p className="section-subtitle">{content.subtitle}</p>
                         <h2 className="section-title">{content.title}</h2>
                         <p className="about-description">{content.description}</p>
-
-                        {/* Grid de destaques (estatísticas) */}
-                        {/* <div className="highlights-grid">
-                            {content.highlights.map((highlight, index) => {
-                                // Pega o componente de ícone dinamicamente pelo nome
-                                const IconComponent = LucideIcons[highlight.icon];
-
-                                return (
-                                    <motion.div
-                                        key={highlight.id}
-                                        className="highlight-card"
-                                        initial={{ opacity: 0, y: 30 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.5, delay: index * 0.1 }} // Delay escalonado
-                                        whileHover={{ scale: 1.05 }} // Aumenta ao passar o mouse
-                                    >
-                                        <div className="highlight-icon"> */}
-                        {/* Renderiza o ícone Lucide React */}
-                        {/* {IconComponent && <IconComponent size={48} strokeWidth={1.5} />}
-                                        </div>
-                                        <h3 className="highlight-title">{highlight.title}</h3>
-                                        <p className="highlight-description">{highlight.description}</p>
-                                    </motion.div>
-                                );
-                            })}
-                        </div> */}
                     </motion.div>
                 </div>
             </div>

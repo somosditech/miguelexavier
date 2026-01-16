@@ -4,7 +4,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { getTeamMembers, createTeamMember, updateTeamMember, deleteTeamMember } from '../services/adminApi';
-import { Plus, Edit, Trash2, Save, Upload } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, Upload, Users } from 'lucide-react';
 import '../styles/Manager.css';
 
 function TeamManager() {
@@ -204,7 +204,7 @@ function TeamManager() {
         <div className="manager-page">
             <div className="manager-header">
                 <div>
-                    <h1>Gerenciador de Equipe</h1>
+                    <h1><Users size={28} /> Gerenciador de Equipe</h1>
                     <p>{members.length} membro(s) cadastrado(s)</p>
                 </div>
                 <button onClick={handleNew} className="btn-primary">

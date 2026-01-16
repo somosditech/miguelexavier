@@ -4,7 +4,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { getTestimonials, createTestimonial, updateTestimonial, deleteTestimonial } from '../services/adminApi';
-import { Plus, Edit, Trash2, Save } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, Star } from 'lucide-react';
 import '../styles/Manager.css';
 
 function TestimonialsManager() {
@@ -140,7 +140,7 @@ function TestimonialsManager() {
         <div className="manager-page">
             <div className="manager-header">
                 <div>
-                    <h1>Gerenciador de Depoimentos</h1>
+                    <h1><Star size={28} />Gerenciador de Depoimentos</h1>
                     <p>{testimonials.length} depoimento(s) cadastrado(s)</p>
                 </div>
                 <button onClick={handleNew} className="btn-primary">

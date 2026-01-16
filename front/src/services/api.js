@@ -14,8 +14,7 @@ import {
     mockServices,
     mockTeam,
     mockTestimonials,
-    mockFooter,
-    mockAIChat
+    mockFooter
 } from './mockData';
 
 // ============================================
@@ -159,14 +158,7 @@ export const fetchFooter = async () => {
     }
 };
 
-export const fetchAIChat = async () => {
-    try {
-        return mockAIChat;
-    } catch (error) {
-        console.error('Error fetching AI chat:', error);
-        return mockAIChat;
-    }
-};
+
 
 // ============================================
 // FUNÇÕES PARA ENVIAR DADOS
@@ -195,6 +187,5 @@ export default {
     fetchTeam,
     fetchTestimonials,
     fetchFooter,
-    fetchAIChat,
     submitContactForm
 };

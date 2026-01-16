@@ -6,8 +6,33 @@
  */
 
 import { useState, useEffect } from 'react';
-import { X, Cookie, Settings } from 'lucide-react';
 import './CookieBanner.css';
+
+// Ícones SVG inline (sem dependências externas)
+const CookieIcon = () => (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5" />
+        <path d="M8.5 8.5v.01" />
+        <path d="M16 15.5v.01" />
+        <path d="M12 12v.01" />
+        <path d="M11 17v.01" />
+        <path d="M7 14v.01" />
+    </svg>
+);
+
+const XIcon = ({ size = 24 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+);
+
+const SettingsIcon = ({ size = 18 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 1v6m0 6v6M5.6 5.6l4.2 4.2m4.2 4.2l4.2 4.2M1 12h6m6 0h6M5.6 18.4l4.2-4.2m4.2-4.2l4.2-4.2" />
+    </svg>
+);
 
 function CookieBanner() {
     const [showBanner, setShowBanner] = useState(false);
@@ -96,7 +121,7 @@ function CookieBanner() {
             <div className="cookie-banner">
                 <div className="cookie-banner-content">
                     <div className="cookie-icon">
-                        <Cookie size={32} />
+                        <CookieIcon />
                     </div>
 
                     <div className="cookie-text">
@@ -114,7 +139,7 @@ function CookieBanner() {
                             className="btn-settings"
                             title="Configurar cookies"
                         >
-                            <Settings size={18} />
+                            <SettingsIcon size={18} />
                             Configurar
                         </button>
                         <button
@@ -144,7 +169,7 @@ function CookieBanner() {
                                 className="btn-close"
                                 aria-label="Fechar"
                             >
-                                <X size={24} />
+                                <XIcon size={24} />
                             </button>
                         </div>
 

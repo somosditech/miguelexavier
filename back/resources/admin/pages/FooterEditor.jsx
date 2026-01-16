@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from 'react';
 import { getFooter, updateFooter } from '../services/adminApi';
-import { Save, Settings } from 'lucide-react';
+import { Save, PanelBottomClose } from 'lucide-react';
 import '../styles/Editor.css';
 
 function FooterEditor() {
@@ -69,7 +69,7 @@ function FooterEditor() {
         <div className="editor-page">
             <div className="editor-header">
                 <div>
-                    <h1>Editor do Rodapé</h1>
+                    <h1><PanelBottomClose size={28} /> Editor do Rodapé</h1>
                     <p>Edite o rodapé do site</p>
                 </div>
             </div>

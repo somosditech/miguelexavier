@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miguel & Xavier - Painel Administrativo</title>
-    <link rel="stylesheet" href="/admin-assets/assets/main-B2uL8hBY.css">
+    @if($cssPath = vite_css('main.jsx'))
+        <link rel="stylesheet" href="{{ $cssPath }}">
+    @endif
 </head>
 <body>
     <div id="root"></div>
-    <script type="module" src="/admin-assets/assets/main-DzBtLt8r.js"></script>
+    @if($jsPath = vite_js('main.jsx'))
+        <script type="module" src="{{ $jsPath }}"></script>
+    @endif
 </body>
 </html>
