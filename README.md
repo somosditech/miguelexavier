@@ -24,9 +24,7 @@ O projeto está centralizado na pasta `miguelexavier/` e opera como uma aplicaç
 - **Lucide React**: Ícones modernos.
 - **React Router**: Navegação interna (agora usada com Modals para páginas legais).
 
-## 📁 Estrutura de Diretórios Atualizada
-
-A estrutura antiga (`front/` e `back/`) foi **descontinuada**. A nova organização é:
+## 📁 Estrutura de Diretórios
 
 ```
 miguelexavier/
