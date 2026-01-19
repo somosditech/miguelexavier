@@ -1,4 +1,4 @@
-# Miguel & Xavier Advocacia - Solução Web Completa
+# Miguel & Xavier Advocacia
 
 Este repositório contém a solução digital completa para o escritório **Miguel & Xavier Advocacia**. O projeto mudou de uma arquitetura separada (front/back) para um sistema unificado robusto, combinando a segurança e estabilidade do **Laravel** no backend com a interatividade do **React** no frontend.
 
