@@ -1,149 +1,133 @@
-# Miguel & Xavier Advocacia
+# Miguel & Xavier Advocacia - Solução Web Completa
 
-Site institucional moderno para o escritório de advocacia Miguel & Xavier, desenvolvido com React e Vite.
+Este repositório contém a solução digital completa para o escritório **Miguel & Xavier Advocacia**. O projeto mudou de uma arquitetura separada (front/back) para um sistema unificado robusto, combinando a segurança e estabilidade do **Laravel** no backend com a interatividade do **React** no frontend.
 
-## 🚀 Tecnologias
+## 🚀 Visão Geral da Arquitetura
 
-- **React 18** - Biblioteca para construção de interfaces
-- **Vite** - Build tool rápida e moderna
-- **Framer Motion** - Animações suaves e profissionais
-- **Lucide React** - Ícones vetoriais
-- **Axios** - Cliente HTTP para integração com API
+O projeto está centralizado na pasta `miguelexavier/` e opera como uma aplicação monolítica moderna:
 
-## 📁 Estrutura de Pastas
+- **Backend (API)**: Laravel 10+. Gerencia banco de dados, autenticação, uploads e regras de negócio.
+- **Frontend Público**: Uma SPA (Single Page Application) em React, renderizada dentro de uma view Laravel. Focada em SEO, performance e design premium.
+- **Painel Administrativo**: Uma SPA React separada (`/p_admin`), protegida por autenticação, permitindo gerenciamento total do conteúdo do site (textos, imagens, equipe, serviços, rodapé).
+
+## �️ Tecnologias
+
+### Backend
+- **Laravel**: Framework PHP robusto.
+- **MySQL**: Banco de dados relacional.
+- **Sanctum**: Autenticação via API/Tokens.
+
+### Frontend (Público & Admin)
+- **React 18**: Biblioteca de UI.
+- **Vite**: Build tool de alta performance (configurações separadas para admin e público).
+- **Framer Motion**: Animações fluidas.
+- **Lucide React**: Ícones modernos.
+- **React Router**: Navegação interna (agora usada com Modals para páginas legais).
+
+## 📁 Estrutura de Diretórios Atualizada
+
+A estrutura antiga (`front/` e `back/`) foi **descontinuada**. A nova organização é:
 
 ```
 miguelexavier/
-├── front/          # Aplicação React (front-end)
-│   ├── src/
-│   ├── public/
-│   └── ...
-└── back/           # API Laravel (back-end)
-    ├── app/
-    ├── database/
-    └── ...
+├── app/                    # Lógica do Backend (Controllers, Models)
+├── database/               # Migrations e Seeds
+├── public/                 # Assets compilados e uploads (storage link)
+├── resources/
+│   ├── admin/              # Código fonte do Painel Administrativo (React)
+│   ├── public-site/        # Código fonte do Site Público (React)
+│   └── views/              # Blade templates (pontos de entrada)
+├── routes/                 # Rotas da API e Web
+├── vite.admin.config.js    # Configuração de build do Admin
+├── vite.public.config.js   # Configuração de build do Site Público
+└── ...
 ```
 
-## 🚀 Deploy
-
-### Desenvolvimento Local
-
-Veja instruções detalhadas em:
-- [Front-end README](front/README.md)
-- [Back-end README](back/README.md)
-
-### Produção (Locaweb)
-
-**Guia Completo:** [DEPLOY-LOCAWEB.md](DEPLOY-LOCAWEB.md)  
-**Guia Rápido:** [DEPLOY-QUICK.md](DEPLOY-QUICK.md)
-
-**Resumo:**
-```bash
-# 1. Build do front-end
-cd front
-npm run build
-
-# 2. Upload via FTP
-# front/dist/* → public_html/
-# back/* → public_html/api/
-
-# 3. Configurar no servidor
-ssh servidor
-cd public_html/api
-composer install --no-dev
-php artisan key:generate
-php artisan migrate --force
-```
-
-## 🎨 Características
-
-- ✅ Design moderno e responsivo (mobile-first)
-- ✅ Animações suaves com Framer Motion
-- ✅ Ícones profissionais com Lucide React
-- ✅ Scroll suave entre seções
-- ✅ Botão flutuante do WhatsApp
-- ✅ Formulário de contato validado
-- ✅ Preparado para integração com API
-- ✅ Código 100% comentado em português
-
-## 🛠️ Instalação e Execução
+## ⚡ Guia de Instalação e Execução
 
 ### Pré-requisitos
+- PHP 8.1+
+- Composer
+- Node.js & NPM
+- Servidor MySQL
 
-- Node.js 16+ instalado
-- npm ou yarn
-
-### Passos
-
-1. Clone o repositório:
+### 1. Configuração do Backend
+Entre na pasta do projeto:
 ```bash
-git clone https://github.com/diogogomesmiguel/miguelexavier.git
 cd miguelexavier
 ```
 
-2. Instale as dependências do front-end:
+Instale as dependências do PHP:
 ```bash
-cd front
+composer install
+```
+
+Configure o ambiente:
+```bash
+cp .env.example .env
+# Edite o .env com suas credenciais de banco de dados (DB_DATABASE, DB_USERNAME, etc)
+php artisan key:generate
+```
+
+Prepare o banco de dados:
+```bash
+php artisan migrate --seed
+# Isso criará as tabelas e o usuário administrador padrão
+```
+
+Configure o armazenamento (Importante para imagens):
+```bash
+php artisan storage:link
+```
+
+### 2. Configuração do Frontend
+Instale as dependências (Node):
+```bash
 npm install
 ```
 
-3. Execute o servidor de desenvolvimento:
+Compile os assets (Gera os arquivos finais em public/):
 ```bash
-npm run dev
-```
-
-4. Acesse no navegador:
-```
-http://localhost:5173
-```
-
-## 📝 Customização
-
-### Alterar Conteúdo
-
-Todo o conteúdo (textos, imagens, cores) está centralizado em:
-```
-front/src/services/mockData.js
-```
-
-### Configurar WhatsApp
-
-Edite o número do WhatsApp em:
-```javascript
-// front/src/components/WhatsAppButton.jsx
-const phoneNumber = '5511999999999'; // Altere aqui
-```
-
-### Alterar Cores
-
-As cores do tema estão em `mockData.js`:
-```javascript
-export const mockTheme = {
-  primary: '#1a365d',    // Azul escuro
-  secondary: '#c49b63',  // Dourado
-  // ...
-}
-```
-
-## 🚀 Build para Produção
-
-```bash
-cd front
 npm run build
+# Ou individualmente:
+# npm run site:build
+# npm run admin:build
 ```
 
-Os arquivos otimizados estarão em `front/dist/`
+### 3. Executando o Projeto
+Inicie o servidor local do Laravel:
+```bash
+php artisan serve
+```
+O site estará disponível em: `http://127.0.0.1:8000`
 
-## 📚 Documentação
+## 🖥️ Funcionalidades Principais
 
-- [Front-end README](front/README.md) - Documentação completa do front-end
-- [API Spec](back/api-spec.md) - Especificação da API futura
-- [Back-end README](back/README.md) - Guia para desenvolvimento da API
+### Site Público
+- **Design Premium**: Identidade visual dourada e vinho, fontes serifadas (Trajan).
+- **Modais Legais**: "Política de Privacidade" e "Termos de Uso" abrem em modais elegantes sem recarregar a página.
+- **Responsivo**: Totalmente adaptado para mobile e desktop.
+- **Uploads Dinâmicos**: Imagens da equipe, serviços e banners carregados via painel.
 
-## 🤝 Contribuindo
+### Painel Administrativo (`/p_admin`)
+- **Login Seguro**: Área restrita para administradores.
+- **Gerenciamento de Conteúdo**:
+  - **Equipe**: Adicionar/Editar advogados com fotos e redes sociais.
+  - **Serviços**: Gerenciar áreas de atuação.
+  - **Depoimentos**: Moderar avaliações de clientes.
+  - **Rodapé**: Editar links sociais e textos legais (Editor rico).
+  - **Tema**: Ajustar cores globais do site.
 
-Este é um projeto privado do escritório Miguel & Xavier Advocacia.
+## 📝 Comandos Úteis
+
+| Comando | Descrição |
+|---------|-----------|
+| `php artisan serve` | Inicia o servidor de desenvolvimento |
+| `npm run build` | Compila Admin e Site Público para produção |
+| `npm run site:dev` | Inicia servidor Vite apenas para o site público (HMR) |
+| `npm run admin:dev` | Inicia servidor Vite apenas para o admin (HMR) |
+| `php artisan migrate:fresh --seed` | Reseta o banco de dados com dados iniciais |
 
 ## 📄 Licença
 
-Todos os direitos reservados © 2026 Miguel & Xavier Advocacia
+Desenvolvido exclusivamente para **Miguel & Xavier Advocacia**. Todos os direitos reservados.
