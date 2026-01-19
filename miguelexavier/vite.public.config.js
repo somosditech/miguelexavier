@@ -1,0 +1,29 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+    plugins: [react()],
+    root: 'resources/public-site',
+    base: '/site-assets/',
+    build: {
+        outDir: '../../public/site-assets',
+        emptyOutDir: true,
+        manifest: true,
+        rollupOptions: {
+            input: 'resources/public-site/main.jsx'
+        }
+    },
+    server: {
+        port: 5173,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8000',
+                changeOrigin: true
+            },
+            '/storage': {
+                target: 'http://localhost:8000',
+                changeOrigin: true
+            }
+        }
+    }
+});

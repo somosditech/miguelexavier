@@ -1,0 +1,32 @@
+{
+    "$schema": "https://www.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "concurrently -c \"#93c5fd,#c4b5fd\" \"npm run site:dev\" \"npm run admin:dev\" --names=site,admin",
+        "build": "npm run site:build && npm run admin:build",
+        "site:dev": "vite --config vite.public.config.js",
+        "site:build": "vite build --config vite.public.config.js",
+        "admin:dev": "vite --config vite.admin.config.js",
+        "admin:build": "vite build --config vite.admin.config.js"
+    },
+    "dependencies": {
+        "framer-motion": "^12.26.2",
+        "lucide-react": "^0.344.0",
+        "prop-types": "^15.8.1",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-helmet-async": "^2.0.5",
+        "react-router-dom": "^6.22.0",
+        "recharts": "^2.12.0"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.0.0",
+        "@vitejs/plugin-react": "^4.2.1",
+        "axios": "^1.11.0",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^2.0.0",
+        "tailwindcss": "^4.0.0",
+        "vite": "^7.0.7"
+    }
+}
