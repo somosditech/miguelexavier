@@ -5,3 +5,41 @@
     top: 0;
     z-index: 100;
 }
+
+.header-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.profile-btn,
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.profile-btn {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.profile-btn:hover {
+    background-color: #e5e7eb;
+}
+
+.logout-btn {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+.logout-btn:hover {
+    background-color: #fecaca;
+}

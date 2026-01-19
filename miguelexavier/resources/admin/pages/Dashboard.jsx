@@ -55,13 +55,11 @@ function Dashboard() {
         { title: 'Mensagens', value: stats.messages, icon: MessageSquare, link: '/messages', color: '#3b82f6' }
     ];
 
-
-
     return (
         <div className="dashboard">
             <div className="dashboard-header">
                 <h1>Bem-vindo, {user?.name || 'Admin'}!</h1>
-                <p>Gerencie o conteúdo do site Miguel & Xavier</p>
+                <p>Gerencie o conteúdo do site <a href="/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>Miguel & Xavier</a></p>
             </div>
 
             {/* Cards de Estatísticas */}

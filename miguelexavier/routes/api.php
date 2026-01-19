@@ -43,6 +43,10 @@ Route::prefix('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
     Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api');
     Route::get('/me', [AuthController::class, 'me'])->middleware('auth:api');
+    
+    // Recuperação de senha
+    Route::post('/password/email', [App\Http\Controllers\Admin\PasswordResetController::class, 'sendResetLink']);
+    Route::post('/password/reset', [App\Http\Controllers\Admin\PasswordResetController::class, 'reset']);
 });
 
 // ============================================
@@ -91,4 +95,10 @@ Route::middleware('auth:api')->prefix('admin')->group(function () {
     Route::post('/upload/image', [App\Http\Controllers\Admin\ImageUploadController::class, 'upload']);
     Route::delete('/upload/image', [App\Http\Controllers\Admin\ImageUploadController::class, 'delete']);
     Route::get('/upload/images', [App\Http\Controllers\Admin\ImageUploadController::class, 'list']);
+
+    // Profile Management
+    Route::get('/profile', [App\Http\Controllers\Admin\ProfileController::class, 'show']);
+    Route::put('/profile', [App\Http\Controllers\Admin\ProfileController::class, 'update']);
+    Route::post('/profile/upload-photo', [App\Http\Controllers\Admin\ProfileController::class, 'uploadPhoto']);
+    Route::post('/profile/verify-update', [App\Http\Controllers\Admin\ProfileController::class, 'verifyAndUpdate']);
 });

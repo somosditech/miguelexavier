@@ -67,6 +67,25 @@ export const getMe = async () => {
 };
 
 // ============================================
+// RECUPERAÇÃO DE SENHA
+// ============================================
+
+export const sendPasswordResetLink = async (email) => {
+    const response = await adminApi.post('/auth/password/email', { email });
+    return response.data;
+};
+
+export const resetPassword = async (token, email, password, password_confirmation) => {
+    const response = await adminApi.post('/auth/password/reset', {
+        token,
+        email,
+        password,
+        password_confirmation
+    });
+    return response.data;
+};
+
+// ============================================
 // THEME
 // ============================================
 
@@ -247,4 +266,37 @@ export const getDashboardStats = async () => {
     return response.data;
 };
 
+// ============================================
+// PROFILE MANAGEMENT
+// ============================================
+
+export const getProfile = async () => {
+    const response = await adminApi.get('/admin/profile');
+    return response.data.data;
+};
+
+export const updateProfile = async (data) => {
+    const response = await adminApi.put('/admin/profile', data);
+    return response.data;
+};
+
+export const uploadProfilePhoto = async (file) => {
+    const formData = new FormData();
+    formData.append('photo', file);
+
+    const response = await adminApi.post('/admin/profile/upload-photo', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+    return response.data;
+};
+
+export const verifyAndUpdateProfile = async (data) => {
+    const response = await adminApi.post('/admin/profile/verify-update', data);
+    return response.data;
+};
+
 export default adminApi;
+
+

@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
 
         try {
             const response = await getMe();
-            setUser(response.data);
+            setUser(response.user);
             setIsAuthenticated(true);
         } catch (error) {
             console.error('Auth check failed:', error);
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const response = await apiLogin(email, password);
 
-            if (response.success) {
+            if (response && response.success) {
                 localStorage.setItem('admin_token', response.access_token);
                 localStorage.setItem('admin_user', JSON.stringify(response.user));
                 setUser(response.user);
@@ -60,13 +60,25 @@ export const AuthProvider = ({ children }) => {
                 return { success: true };
             }
 
-            return { success: false, message: 'Login failed' };
-        } catch (error) {
-            console.error('Login error:', error);
             return {
                 success: false,
-                message: error.response?.data?.message || 'Erro ao fazer login'
+                message: response?.message || 'Credenciais inválidas'
             };
+        } catch (error) {
+            console.error('Login error:', error);
+
+            // Trata diferentes tipos de erro
+            if (error.response) {
+                // Erro de resposta do servidor
+                const message = error.response.data?.message || 'Credenciais inválidas';
+                return { success: false, message };
+            } else if (error.request) {
+                // Erro de rede
+                return { success: false, message: 'Erro de conexão. Verifique sua internet.' };
+            } else {
+                // Outro tipo de erro
+                return { success: false, message: 'Erro ao fazer login. Tente novamente.' };
+            }
         }
     };
 

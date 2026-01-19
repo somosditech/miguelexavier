@@ -24,6 +24,10 @@ function Header() {
                 </div>
 
                 <div className="header-right">
+                    <button onClick={() => navigate('/profile')} className="profile-btn">
+                        <User size={18} />
+                        Perfil
+                    </button>
                     <button onClick={handleLogout} className="logout-btn">
                         <LogOut size={18} />
                         Sair
