@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ContactMessage;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\ContactMessage;
 
 class ContactMessageController extends Controller
 {
@@ -14,7 +13,7 @@ class ContactMessageController extends Controller
      */
     public function index()
     {
-        $messages = ContactMessage::orderBy('created_at', 'desc')->get();
+        $messages = ContactMessage::orderBy('created_at', 'desc')->where('excluded', false)->get();
         
         return response()->json([
             'success' => true,
@@ -116,6 +115,32 @@ class ContactMessageController extends Controller
                 'last7Days' => $last7Days,
                 'byArea' => $byArea
             ]
+        ]);
+    }
+
+    /**
+     * Excluir mensagem
+     */
+    public function delete($id)
+    {
+        $message = ContactMessage::find($id);
+
+        if (!$message) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Mensagem não encontrada'
+            ], 404);
+        }
+
+        $message->update([
+            'excluded' => true,
+            'read_at' => now()
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Mensagem excluída',
+            'data' => $message
         ]);
     }
 }

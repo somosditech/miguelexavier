@@ -242,6 +242,11 @@ export const getContactMessage = async (id) => {
     return response.data.data;
 };
 
+export const deleteMessage = async (id) => {
+    const response = await adminApi.delete(`/admin/contact-messages/${id}`);
+    return response.data;
+};
+
 export const markMessageAsRead = async (id) => {
     const response = await adminApi.put(`/admin/contact-messages/${id}/mark-read`);
     return response.data;

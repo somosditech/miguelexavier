@@ -22,6 +22,8 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
 
+        $validated['excluded'] = false;
+
         // Salva mensagem no banco
         $contactMessage = ContactMessage::create($validated);
 

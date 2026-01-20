@@ -90,6 +90,7 @@ Route::middleware('auth:api')->prefix('admin')->group(function () {
     Route::get('/contact-messages/stats', [App\Http\Controllers\Admin\ContactMessageController::class, 'getStats']);
     Route::get('/contact-messages/{id}', [App\Http\Controllers\Admin\ContactMessageController::class, 'show']);
     Route::put('/contact-messages/{id}/mark-read', [App\Http\Controllers\Admin\ContactMessageController::class, 'markAsRead']);
+    Route::delete('/contact-messages/{id}', [App\Http\Controllers\Admin\ContactMessageController::class, 'delete']);
 
     // Image Upload
     Route::post('/upload/image', [App\Http\Controllers\Admin\ImageUploadController::class, 'upload']);
