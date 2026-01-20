@@ -188,7 +188,6 @@ function ProfileEditor() {
         }
     };
 
-
     if (loading) {
         return (
             <div className="editor-container">
@@ -241,7 +240,7 @@ function ProfileEditor() {
 
             {/* Mensagem de erro da foto */}
             {photoMessage && (
-                <div className="message error" style={{ marginTop: '16px' }}>
+                <div className={`message ${photoError ? 'error' : 'success'}`} style={{ marginTop: '16px' }}>
                     {photoMessage}
                 </div>
             )}
