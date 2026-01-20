@@ -1,0 +1,164 @@
+/**
+ * ESTILOS: NotFound (Página 404)
+ * 
+ * Estilos para a página 404, seguindo o padrão visual do projeto
+ * com cores vermelho vinho e dourado.
+ */
+
+.not-found {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-background-dark) 0%, #5a0f1a 100%);
+    padding: var(--spacing-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de fundo sutil */
+.not-found::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(207, 167, 80, 0.1) 0%, transparent 70%);
+    animation: float 20s ease-in-out infinite;
+}
+
+.not-found::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(230, 184, 77, 0.08) 0%, transparent 70%);
+    animation: float 25s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(30px, 30px);
+    }
+}
+
+.not-found-content {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+}
+
+.not-found-number {
+    font-family: 'Trajan', serif;
+    font-size: clamp(6rem, 15vw, 12rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: var(--spacing-md);
+    text-shadow: 0 0 40px rgba(207, 167, 80, 0.3);
+    animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 20px rgba(207, 167, 80, 0.4));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 40px rgba(230, 184, 77, 0.6));
+    }
+}
+
+.not-found-title {
+    font-family: 'Trajan', serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+}
+
+.not-found-description {
+    font-size: var(--font-lg);
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.6;
+}
+
+.not-found-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent) 100%);
+    color: var(--color-text-dark);
+    font-size: var(--font-base);
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 20px rgba(207, 167, 80, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.not-found-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.not-found-button:hover::before {
+    left: 100%;
+}
+
+.not-found-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 30px rgba(230, 184, 77, 0.5);
+    color: var(--color-text-dark);
+}
+
+.not-found-button:active {
+    transform: translateY(-1px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .not-found {
+        padding: var(--spacing-md);
+    }
+
+    .not-found-number {
+        font-size: clamp(4rem, 20vw, 8rem);
+    }
+
+    .not-found-title {
+        font-size: clamp(1.25rem, 5vw, 2rem);
+    }
+
+    .not-found-description {
+        font-size: var(--font-base);
+    }
+
+    .not-found-button {
+        padding: 0.875rem 2rem;
+        font-size: var(--font-sm);
+    }
+}

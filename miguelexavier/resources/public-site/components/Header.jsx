@@ -9,6 +9,7 @@
  */
 
 import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useContent } from '../hooks/useContent';
 import { fetchTheme } from '../services/api';
 import './Header.css';
@@ -16,6 +17,10 @@ import './Header.css';
 function Header() {
     // Busca o conteúdo do header da API
     const { content, loading } = useContent('header');
+
+    // Hooks do React Router para navegação
+    const location = useLocation();
+    const navigate = useNavigate();
 
     // Estado para controlar se o menu mobile está aberto ou fechado
     const [menuOpen, setMenuOpen] = useState(false);
@@ -42,7 +47,30 @@ function Header() {
     };
 
     /**
-     * Função para fechar o menu e fazer scroll suave até a seção
+     * Função para lidar com clique na logo
+     * Sempre redireciona para a home e faz scroll para o topo
+     */
+    const handleLogoClick = (e) => {
+        e.preventDefault();
+
+        const isHomePage = location.pathname === '/';
+
+        if (isHomePage) {
+            // Já estamos na home: apenas faz scroll para o topo
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        } else {
+            // Estamos em outra página: redireciona para a home
+            navigate('/');
+        }
+    };
+
+    /**
+     * Função inteligente para navegação:
+     * - Se estiver na home: faz scroll suave até a seção
+     * - Se estiver em outra página: redireciona para home com a âncora
      * @param {Event} e - Evento de clique
      * @param {string} href - ID da seção (ex: #about)
      */
@@ -52,21 +80,46 @@ function Header() {
         // Fecha o menu mobile
         setMenuOpen(false);
 
-        // Remove o # do href para pegar o ID
-        const targetId = href.replace('#', '');
-        const targetElement = document.getElementById(targetId);
+        // Verifica se estamos na home
+        const isHomePage = location.pathname === '/';
 
-        if (targetElement) {
-            // Calcula a posição considerando a altura do header fixo (70px + margem)
-            const headerOffset = 80;
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        if (isHomePage) {
+            // Estamos na home: faz scroll suave
+            const targetId = href.replace('#', '');
+            const targetElement = document.getElementById(targetId);
 
-            // Faz o scroll suave até a seção
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            if (targetElement) {
+                // Calcula a posição considerando a altura do header fixo (70px + margem)
+                const headerOffset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                // Faz o scroll suave até a seção
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        } else {
+            // Estamos em outra página: redireciona para home com âncora
+            navigate('/' + href);
+
+            // Após navegar, aguarda um momento e faz scroll
+            setTimeout(() => {
+                const targetId = href.replace('#', '');
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    const headerOffset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100);
         }
     };
 
@@ -88,7 +141,7 @@ function Header() {
             <div className="container">
                 <div className="header-content">
                     {/* Logo do escritório */}
-                    <div className="logo">
+                    <a href="/" className="logo" onClick={handleLogoClick}>
                         {theme?.logoUrl ? (
                             <img
                                 src={`/storage/${theme.logoUrl}`}
@@ -98,7 +151,7 @@ function Header() {
                         ) : (
                             <span className="logo-text">Miguel & Xavier</span>
                         )}
-                    </div>
+                    </a>
 
                     {/* Botão hambúrguer para mobile */}
                     <button

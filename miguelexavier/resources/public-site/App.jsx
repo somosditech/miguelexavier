@@ -19,6 +19,7 @@ import { useTheme } from './hooks/useTheme';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
+import NotFound from './components/NotFound';
 import WhatsAppButton from './components/WhatsAppButton';
 import LoadingSkeleton from './components/LoadingSkeleton';
 import SEO from './components/SEO';
@@ -56,6 +57,7 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
 
             {/* Rodapé */}
