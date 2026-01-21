@@ -1,1 +1,0 @@
-import{c as e}from"./main-DP56UA6Q.js";const a=e("PlaySquare",[["rect",{width:"18",height:"18",x:"3",y:"3",rx:"2",key:"afitv7"}],["path",{d:"m9 8 6 4-6 4Z",key:"f1r3lt"}]]);export{a as default};
