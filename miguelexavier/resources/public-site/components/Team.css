@@ -8,34 +8,19 @@
     margin-bottom: var(--spacing-4xl);
 }
 
-.ed-subtitle {
-    display: block;
-    color: var(--color-primary);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.ed-title {
-    font-size: var(--font-3xl);
-    color: var(--color-text-primary);
-    margin-bottom: 1.5rem;
-}
-
 .ed-line {
-    width: 60px;
-    height: 2px;
+    width: 100px;
+    height: 3px;
     background: var(--color-primary);
     margin: 0 auto;
+    margin-bottom: var(--spacing-xl);
 }
 
-/* Lista e Linhas */
+/* Lista de Membros */
 .members-list {
     display: flex;
     flex-direction: column;
-    gap: 100px;
+    gap: 120px;
 }
 
 .member-row {
@@ -48,154 +33,135 @@
     flex-direction: row-reverse;
 }
 
-/* Moldura das Imagens - Melhorada */
+/* Moldura e Imagem */
 .member-image-side {
     flex: 0 0 380px;
-    /* Largura fixa para manter proporção editorial */
+    position: relative;
 }
 
 .img-border-outer {
-    padding: 12px;
-    border: 1px solid rgba(207, 167, 80, 0.3);
-    /* Cor primária com transparência */
-    transition: border-color 0.4s ease;
+    padding: 10px;
+    border: 1px solid rgba(207, 167, 80, 0.4);
+    border-radius: 0px 50px 0px 50px;
+    transition: all 0.5s ease;
+    background: transparent;
 }
 
 .member-row:hover .img-border-outer {
     border-color: var(--color-primary);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .img-frame {
     position: relative;
     aspect-ratio: 4 / 5;
     overflow: hidden;
-    background: var(--color-background-card);
+    background: #111;
+    border-radius: 0px 40px 0px 40px;
 }
 
 .member-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%);
-    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    filter: grayscale(100%) contrast(1.1);
+    transition: all 0.9s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .member-row:hover .member-img {
-    filter: grayscale(0%);
-    transform: scale(1.08);
+    filter: grayscale(0%) contrast(1);
+    transform: scale(1.05);
 }
 
-/* Social Hover */
-.member-social-overlay {
+/* Novos Ícones Sociais (Vibrantes) */
+.member-social-float {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
-    padding: 20px;
+    bottom: 20px;
+    right: 20px;
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    transform: translateY(100%);
-    transition: transform 0.4s ease;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 10;
 }
 
-.member-row:hover .member-social-overlay {
+/* Inverter posição dos ícones quando a linha for invertida */
+.member-row:nth-child(even) .member-social-float {
+    right: auto;
+    left: 20px;
+}
+
+.social-icon-circle {
+    width: 45px;
+    height: 45px;
+    background: var(--color-primary);
+    color: #000 !important;
+    /* Contraste alto para não ficar apagado */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.member-row:hover .social-icon-circle {
+    opacity: 1;
     transform: translateY(0);
 }
 
-.member-social-overlay a {
-    color: var(--color-primary);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-decoration: none;
+/* Delay para os ícones aparecerem um após o outro */
+.social-icon-circle:nth-child(2) {
+    transition-delay: 0.1s;
 }
 
-/* Conteúdo */
+.social-icon-circle:hover {
+    background: #fff;
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 20px var(--color-primary);
+}
+
+/* Conteúdo de Texto */
 .member-content-side {
     flex: 1;
 }
 
 .member-oab {
     color: var(--color-primary);
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 700;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
 }
 
 .member-name {
-    font-size: var(--font-2xl);
+    font-size: 2.5rem;
     color: var(--color-text-primary);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    font-weight: 400;
 }
 
 .member-role {
-    font-size: var(--font-base);
+    font-size: 1.1rem;
     color: var(--color-secondary);
-    margin-bottom: 25px;
-    font-weight: 600;
+    margin-bottom: 30px;
 }
 
 .member-role .sep {
     color: var(--color-primary);
-    opacity: 0.5;
-    margin: 0 8px;
+    margin: 0 10px;
+    font-weight: 300;
 }
 
 .member-bio {
     font-size: var(--font-base);
-    line-height: 1.7;
+    line-height: 1.8;
     color: var(--color-text-secondary);
-    margin-bottom: 25px;
-}
-
-.member-contact-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-}
-
-.member-contact-link span {
-    transition: transform 0.3s ease;
-}
-
-.member-contact-link:hover span {
-    transform: translateX(5px);
-}
-
-/* Skeleton */
-.skel-frame {
-    width: 100%;
-    aspect-ratio: 4/5;
-    background: #222;
-}
-
-.skel-line {
-    background: #222;
-    margin-bottom: 12px;
-}
-
-.skel-line.title {
-    height: 30px;
-    width: 60%;
-}
-
-.skel-line.role {
-    height: 18px;
-    width: 30%;
-}
-
-.skel-line.text {
-    height: 80px;
-    width: 100%;
 }
 
 /* Responsividade */
@@ -210,11 +176,36 @@
 
     .member-image-side {
         width: 100%;
-        max-width: 400px;
-        flex: none;
+        max-width: 380px;
+        margin-bottom: var(--spacing-xl);
     }
 
-    .member-bio {
-        margin: 0 auto 25px;
+    /* Remove o filtro preto e branco no mobile */
+    .member-img {
+        filter: grayscale(0%) contrast(1);
+    }
+
+    .social-icon-circle {
+        opacity: 1;
+        transform: translateY(0);
+        width: 50px;
+        height: 50px;
+    }
+
+    /* Ajusta os botões sociais para ficarem dentro do card */
+    .member-social-float {
+        flex-direction: row;
+        bottom: 15px;
+        right: 0;
+        left: 0;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    /* Centraliza os ícones sociais em todas as linhas no mobile */
+    .member-row:nth-child(even) .member-social-float {
+        left: 0;
+        right: 0;
+        justify-content: center;
     }
 }

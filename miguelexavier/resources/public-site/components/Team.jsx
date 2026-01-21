@@ -5,12 +5,9 @@ import './Team.css';
 
 const TeamSkeleton = () => (
     <div className="member-row skeleton">
-        <div className="member-image-side">
-            <div className="skel-frame"></div>
-        </div>
+        <div className="member-image-side"><div className="skel-frame"></div></div>
         <div className="member-content-side">
             <div className="skel-line title"></div>
-            <div className="skel-line role"></div>
             <div className="skel-line text"></div>
         </div>
     </div>
@@ -34,11 +31,11 @@ function Team() {
     const subtitle = content.subtitle || 'Excelência Jurídica';
 
     return (
-        <section id="team" className="team-editorial">
+        <section id="team" className="team-editorial section">
             <div className="container">
                 <header className="editorial-header">
-                    <span className="ed-subtitle">{subtitle}</span>
-                    <h2 className="ed-title">{title}</h2>
+                    <p className="section-subtitle">{subtitle}</p>
+                    <h2 className="section-title">{title}</h2>
                     <div className="ed-line"></div>
                 </header>
 
@@ -60,12 +57,17 @@ function Team() {
                                             alt={member.name}
                                             className="member-img"
                                         />
-                                        <div className="member-social-overlay">
+                                        {/* Redes Sociais reposicionadas e melhoradas */}
+                                        <div className="member-social-float">
                                             {member.social.linkedin && (
-                                                <a href={member.social.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+                                                <a href={member.social.linkedin} target="_blank" rel="noreferrer" className="social-icon-circle" aria-label="LinkedIn">
+                                                    <span>in</span>
+                                                </a>
                                             )}
                                             {member.social.email && (
-                                                <a href={`mailto:${member.social.email}`}>E-mail</a>
+                                                <a href={`mailto:${member.social.email}`} className="social-icon-circle" aria-label="Email">
+                                                    <span>✉</span>
+                                                </a>
                                             )}
                                         </div>
                                     </div>
@@ -77,21 +79,13 @@ function Team() {
                                     <span className="member-oab">{member.oab}</span>
                                     <h3 className="member-name">{member.name}</h3>
                                     <p className="member-role">
-                                        {member.role} <span className="sep">|</span> {member.specialization}
+                                        {member.role} <span className="sep">|</span> <strong>{member.specialization}</strong>
                                     </p>
                                 </div>
 
                                 <div className="member-bio">
                                     <p>{member.description}</p>
                                 </div>
-
-                                <motion.a
-                                    href="#contato"
-                                    className="member-contact-link"
-                                    whileHover={{ x: 8 }}
-                                >
-                                    Falar com este especialista <span>→</span>
-                                </motion.a>
                             </div>
                         </motion.div>
                     ))}

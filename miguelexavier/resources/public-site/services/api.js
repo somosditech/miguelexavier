@@ -13,7 +13,7 @@ import {
     mockAbout,
     mockServices,
     mockTeam,
-    mockTestimonials,
+    // mockTestimonials,
     mockFooter
 } from './mockData';
 
@@ -138,15 +138,15 @@ export const fetchTeam = async () => {
     }
 };
 
-export const fetchTestimonials = async () => {
-    try {
-        const content = await fetchAllContent();
-        return content?.testimonials || mockTestimonials;
-    } catch (error) {
-        console.error('Error fetching testimonials:', error);
-        return mockTestimonials;
-    }
-};
+// export const fetchTestimonials = async () => {
+//     try {
+//         const content = await fetchAllContent();
+//         return content?.testimonials || mockTestimonials;
+//     } catch (error) {
+//         console.error('Error fetching testimonials:', error);
+//         return mockTestimonials;
+//     }
+// };
 
 export const fetchFooter = async () => {
     try {
@@ -157,8 +157,6 @@ export const fetchFooter = async () => {
         return mockFooter;
     }
 };
-
-
 
 // ============================================
 // FUNÇÕES PARA ENVIAR DADOS
@@ -185,7 +183,7 @@ export default {
     fetchAbout,
     fetchServices,
     fetchTeam,
-    fetchTestimonials,
+    // fetchTestimonials,
     fetchFooter,
     submitContactForm
 };

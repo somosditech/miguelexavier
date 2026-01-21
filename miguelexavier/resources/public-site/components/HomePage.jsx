@@ -8,7 +8,7 @@ import Hero from './Hero';
 import About from './About';
 import Services from './Services';
 import Team from './Team';
-import Testimonials from './Testimonials';
+// import Testimonials from './Testimonials';
 import ContactForm from './ContactForm';
 
 function HomePage() {
@@ -27,7 +27,7 @@ function HomePage() {
             <Team />
 
             {/* Seção Depoimentos */}
-            <Testimonials />
+            {/* <Testimonials /> */}
 
             {/* Seção Formulário de Contato */}
             <ContactForm />

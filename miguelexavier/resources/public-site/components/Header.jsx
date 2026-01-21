@@ -46,6 +46,20 @@ function Header() {
         setMenuOpen(!menuOpen);
     };
 
+    // Previne scroll do body quando o menu está aberto
+    useEffect(() => {
+        if (menuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        // Cleanup: restaura o scroll quando o componente desmonta
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [menuOpen]);
+
     /**
      * Função para lidar com clique na logo
      * Sempre redireciona para a home e faz scroll para o topo
@@ -166,6 +180,24 @@ function Header() {
 
                     {/* Menu de navegação */}
                     <nav className={`nav ${menuOpen ? 'active' : ''}`}>
+                        {/* Cabeçalho do menu mobile com botão de fechar */}
+                        <div className="nav-header">
+                            <span className="nav-title">Menu</span>
+                            <button
+                                className="nav-close"
+                                onClick={toggleMenu}
+                                aria-label="Fechar menu"
+                            >
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+
+                        {/* Overlay para fechar o menu ao clicar fora */}
+                        <div className="nav-overlay" onClick={toggleMenu}></div>
+
                         <ul className="nav-list">
                             {content.navigation.map((item) => (
                                 <li key={item.id} className="nav-item">
@@ -186,7 +218,8 @@ function Header() {
                             className="btn-primary cta-button"
                             onClick={(e) => handleNavClick(e, content.ctaButton.href)}
                         >
-                            {content.ctaButton.text}
+                            {/* {content.ctaButton.text} */}
+                            Fale conosco
                         </a>
                     </nav>
                 </div>

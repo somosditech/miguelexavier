@@ -197,36 +197,36 @@ export const mockTeam = {
 };
 
 // Seção Depoimentos
-export const mockTestimonials = {
-    title: 'O Que Nossos Clientes Dizem',
-    subtitle: 'Depoimentos',
-    testimonials: [
-        {
-            id: 1,
-            text: 'Excelente atendimento! O Dr. Miguel conduziu meu caso empresarial com muita competência e profissionalismo. Conseguimos um acordo muito favorável.',
-            name: 'Carlos Eduardo Silva',
-            role: 'Empresário',
-        },
-        {
-            id: 2,
-            text: 'A Dra. Ariane foi fundamental no meu processo de divórcio. Sua sensibilidade e experiência tornaram um momento difícil muito mais tranquilo. Recomendo!',
-            name: 'Marina Santos',
-            role: 'Arquiteta',
-        },
-        {
-            id: 3,
-            text: 'Profissionais extremamente competentes e atenciosos. Resolveram minha questão trabalhista de forma rápida e eficiente. Muito satisfeito com o resultado!',
-            name: 'Roberto Oliveira',
-            role: 'Engenheiro',
-        },
-        {
-            id: 4,
-            text: 'O escritório Miguel & Xavier superou minhas expectativas. A análise preliminar com IA foi muito útil e a consulta presencial foi excelente.',
-            name: 'Juliana Costa',
-            role: 'Médica',
-        }
-    ]
-};
+// export const mockTestimonials = {
+//     title: 'O Que Nossos Clientes Dizem',
+//     subtitle: 'Depoimentos',
+//     testimonials: [
+//         {
+//             id: 1,
+//             text: 'Excelente atendimento! O Dr. Miguel conduziu meu caso empresarial com muita competência e profissionalismo. Conseguimos um acordo muito favorável.',
+//             name: 'Carlos Eduardo Silva',
+//             role: 'Empresário',
+//         },
+//         {
+//             id: 2,
+//             text: 'A Dra. Ariane foi fundamental no meu processo de divórcio. Sua sensibilidade e experiência tornaram um momento difícil muito mais tranquilo. Recomendo!',
+//             name: 'Marina Santos',
+//             role: 'Arquiteta',
+//         },
+//         {
+//             id: 3,
+//             text: 'Profissionais extremamente competentes e atenciosos. Resolveram minha questão trabalhista de forma rápida e eficiente. Muito satisfeito com o resultado!',
+//             name: 'Roberto Oliveira',
+//             role: 'Engenheiro',
+//         },
+//         {
+//             id: 4,
+//             text: 'O escritório Miguel & Xavier superou minhas expectativas. A análise preliminar com IA foi muito útil e a consulta presencial foi excelente.',
+//             name: 'Juliana Costa',
+//             role: 'Médica',
+//         }
+//     ]
+// };
 
 // Áreas de interesse para o formulário de contato
 export const mockAreasDeInteresse = [

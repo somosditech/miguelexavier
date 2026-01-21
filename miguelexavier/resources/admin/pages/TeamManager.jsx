@@ -213,7 +213,6 @@ function TeamManager() {
                 </button>
             </div>
 
-
             {editing && (
                 <div className="edit-modal">
                     <div className="edit-modal-content">
@@ -268,9 +267,8 @@ function TeamManager() {
                             />
                         </div>
 
-
                         <div className="form-field">
-                            <label htmlFor="photo-upload">Foto do Membro</label>
+                            <label htmlFor="photo-upload">Foto</label>
                             <label htmlFor="photo-upload" className="upload-label">
                                 <Upload size={20} />
                                 {uploading ? 'Enviando...' : 'Escolher Foto'}
@@ -284,6 +282,7 @@ function TeamManager() {
                                 style={{ display: 'none' }}
                             />
                             <small>Formatos aceitos: JPG, PNG, GIF (máx: 2MB)</small>
+                            <small>Altura recomendada: 450px</small>
                         </div>
 
                         {imagePreview && (
@@ -292,7 +291,7 @@ function TeamManager() {
                                     src={imagePreview}
                                     alt="Preview"
                                     style={{
-                                        maxHeight: '200px',
+                                        maxHeight: '450px',
                                         width: '100%',
                                         objectFit: 'cover',
                                         borderRadius: '8px',
@@ -301,7 +300,6 @@ function TeamManager() {
                                 />
                             </div>
                         )}
-
 
                         <div className="form-field">
                             <label>LinkedIn</label>
@@ -358,7 +356,7 @@ function TeamManager() {
                                 alt={member.name}
                                 style={{
                                     width: '100%',
-                                    height: '200px',
+                                    height: '400px',
                                     objectFit: 'cover',
                                     borderRadius: '8px',
                                     marginBottom: '12px'
