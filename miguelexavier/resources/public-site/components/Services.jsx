@@ -8,18 +8,34 @@
  */
 
 import { useContent } from '../hooks/useContent';
-import { Briefcase, Heart, Building2, Home, Scale, Shield } from 'lucide-react'; // Apenas os ícones necessários
-import { motion } from 'framer-motion'; // Biblioteca de animações
+import dynamicIconImports from 'lucide-react/dynamicIconImports'; // Importação dinâmica
+import { motion } from 'framer-motion';
+import { lazy, Suspense, useMemo } from 'react';
 import './Services.css';
 
-// Mapeamento de ícones disponíveis
-const iconMap = {
-    Briefcase,
-    Heart,
-    Building2,
-    Home,
-    Scale,
-    Shield
+// Componente para renderizar ícone de forma dinâmica
+const DynamicIcon = ({ name, ...props }) => {
+    const LucideIcon = useMemo(() => {
+        // Converte PascalCase para kebab-case (ex: Briefcase -> briefcase, Building2 -> building-2)
+        const iconName = name
+            .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+            .toLowerCase();
+
+        const dynamicIcon = dynamicIconImports[iconName];
+
+        if (!dynamicIcon) {
+            console.warn(`Ícone "${name}" (convertido para "${iconName}") não encontrado em lucide-react.`);
+            return lazy(dynamicIconImports['briefcase']); // Fallback
+        }
+
+        return lazy(dynamicIcon);
+    }, [name]);
+
+    return (
+        <Suspense fallback={<div style={{ width: 56, height: 56, background: '#f0f0f0', borderRadius: '50%' }} />}>
+            <LucideIcon {...props} />
+        </Suspense>
+    );
 };
 
 function Services() {
@@ -54,15 +70,6 @@ function Services() {
                 {/* Grid de serviços */}
                 <div className="services-grid">
                     {services.map((service, index) => {
-                        // Pega o ícone do mapeamento
-                        const IconComponent = iconMap[service.icon];
-
-                        // Se o ícone não for encontrado, usa Briefcase como fallback e avisa no console
-                        if (!IconComponent) {
-                            console.warn(`Ícone "${service.icon}" não encontrado. Usando Briefcase como fallback.`);
-                        }
-                        const FinalIcon = IconComponent || Briefcase;
-
                         return (
                             <motion.div
                                 key={service.id}
@@ -79,8 +86,8 @@ function Services() {
                                     whileHover={{ scale: 1.1, rotate: 5 }} // Animação do ícone
                                     transition={{ duration: 0.3 }}
                                 >
-                                    {/* Renderiza o ícone Lucide React ou fallback */}
-                                    <FinalIcon size={56} strokeWidth={1.5} />
+                                    {/* Renderiza o ícone via componente dinâmico */}
+                                    <DynamicIcon name={service.icon} size={56} strokeWidth={1.5} />
                                 </motion.div>
 
                                 {/* Título do serviço */}
