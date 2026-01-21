@@ -45,7 +45,7 @@ function Sidebar() {
         { path: '/about', icon: FileText, label: 'Sobre' },
         { path: '/services', icon: Layers, label: 'Serviços' },
         { path: '/team', icon: Users, label: 'Equipe' },
-        { path: '/testimonials', icon: Star, label: 'Depoimentos' },
+        // { path: '/testimonials', icon: Star, label: 'Depoimentos' },
         { path: '/footer', icon: PanelBottomClose, label: 'Rodapé' },
         { path: '/messages', icon: MessageSquare, label: 'Mensagens', badge: unreadCount }
     ];

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { getServices, getTeamMembers, getTestimonials, getContactMessages } from '../services/adminApi';
+import { getServices, getTeamMembers, /*getTestimonials,*/ getContactMessages } from '../services/adminApi';
 import { Users, Layers, MessageSquare, Star } from 'lucide-react';
 import RecentMessages from '../components/RecentMessages';
 import MessagesChart from '../components/MessagesChart';
@@ -12,7 +12,7 @@ function Dashboard() {
     const [stats, setStats] = useState({
         services: 0,
         team: 0,
-        testimonials: 0,
+        // testimonials: 0,
         messages: 0
     });
     const [recentMessages, setRecentMessages] = useState([]);
@@ -25,17 +25,17 @@ function Dashboard() {
 
     const loadDashboardData = async () => {
         try {
-            const [services, team, testimonials, messages] = await Promise.all([
+            const [services, team, /*testimonials,*/ messages] = await Promise.all([
                 getServices(),
                 getTeamMembers(),
-                getTestimonials(),
+                /*getTestimonials(),*/
                 getContactMessages()
             ]);
 
             setStats({
                 services: services?.length || 0,
                 team: team?.length || 0,
-                testimonials: testimonials?.length || 0,
+                // testimonials: testimonials?.length || 0,
                 messages: messages?.length || 0
             });
 
@@ -51,7 +51,7 @@ function Dashboard() {
     const cards = [
         { title: 'Serviços', value: stats.services, icon: Layers, link: '/services', color: '#771220' },
         { title: 'Equipe', value: stats.team, icon: Users, link: '/team', color: '#cfa750' },
-        { title: 'Depoimentos', value: stats.testimonials, icon: Star, link: '/testimonials', color: '#38a169' },
+        // { title: 'Depoimentos', value: stats.testimonials, icon: Star, link: '/testimonials', color: '#38a169' },
         { title: 'Mensagens', value: stats.messages, icon: MessageSquare, link: '/messages', color: '#3b82f6' }
     ];
 

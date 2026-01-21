@@ -9,7 +9,7 @@ import HeroEditor from './pages/HeroEditor';
 import AboutEditor from './pages/AboutEditor';
 import ServicesManager from './pages/ServicesManager';
 import TeamManager from './pages/TeamManager';
-import TestimonialsManager from './pages/TestimonialsManager';
+// import TestimonialsManager from './pages/TestimonialsManager';
 import FooterEditor from './pages/FooterEditor';
 import ThemeEditor from './pages/ThemeEditor';
 import Messages from './pages/Messages';
@@ -29,7 +29,7 @@ function App() {
                     <Route path="about" element={<AboutEditor />} />
                     <Route path="services" element={<ServicesManager />} />
                     <Route path="team" element={<TeamManager />} />
-                    <Route path="testimonials" element={<TestimonialsManager />} />
+                    {/* <Route path="testimonials" element={<TestimonialsManager />} /> */}
                     <Route path="footer" element={<FooterEditor />} />
                     <Route path="theme" element={<ThemeEditor />} />
                     <Route path="messages" element={<Messages />} />

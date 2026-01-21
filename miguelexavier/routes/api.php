@@ -23,7 +23,7 @@ Route::prefix('content')->group(function () {
     Route::get('/about', [PublicContentController::class, 'getAbout']);
     Route::get('/services', [PublicContentController::class, 'getServices']);
     Route::get('/team', [PublicContentController::class, 'getTeam']);
-    Route::get('/testimonials', [PublicContentController::class, 'getTestimonials']);
+    // Route::get('/testimonials', [PublicContentController::class, 'getTestimonials']);
     Route::get('/footer', [PublicContentController::class, 'getFooter']);
 });
 
@@ -78,7 +78,7 @@ Route::middleware('auth:api')->prefix('admin')->group(function () {
     Route::apiResource('team', App\Http\Controllers\Admin\TeamMemberController::class);
 
     // Testimonials (CRUD completo)
-    Route::apiResource('testimonials', App\Http\Controllers\Admin\TestimonialController::class);
+    // Route::apiResource('testimonials', App\Http\Controllers\Admin\TestimonialController::class);
 
     // Footer
     Route::get('/footer', [App\Http\Controllers\Admin\FooterController::class, 'show']);

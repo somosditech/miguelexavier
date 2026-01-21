@@ -189,30 +189,30 @@ export const deleteTeamMember = async (id) => {
 // TESTIMONIALS
 // ============================================
 
-export const getTestimonials = async () => {
-    const response = await adminApi.get('/admin/testimonials');
-    return response.data.data;
-};
+// export const getTestimonials = async () => {
+//     const response = await adminApi.get('/admin/testimonials');
+//     return response.data.data;
+// };
 
-export const getTestimonial = async (id) => {
-    const response = await adminApi.get(`/admin/testimonials/${id}`);
-    return response.data.data;
-};
+// export const getTestimonial = async (id) => {
+//     const response = await adminApi.get(`/admin/testimonials/${id}`);
+//     return response.data.data;
+// };
 
-export const createTestimonial = async (data) => {
-    const response = await adminApi.post('/admin/testimonials', data);
-    return response.data;
-};
+// export const createTestimonial = async (data) => {
+//     const response = await adminApi.post('/admin/testimonials', data);
+//     return response.data;
+// };
 
-export const updateTestimonial = async (id, data) => {
-    const response = await adminApi.put(`/admin/testimonials/${id}`, data);
-    return response.data;
-};
+// export const updateTestimonial = async (id, data) => {
+//     const response = await adminApi.put(`/admin/testimonials/${id}`, data);
+//     return response.data;
+// };
 
-export const deleteTestimonial = async (id) => {
-    const response = await adminApi.delete(`/admin/testimonials/${id}`);
-    return response.data;
-};
+// export const deleteTestimonial = async (id) => {
+//     const response = await adminApi.delete(`/admin/testimonials/${id}`);
+//     return response.data;
+// };
 
 // ============================================
 // FOOTER
