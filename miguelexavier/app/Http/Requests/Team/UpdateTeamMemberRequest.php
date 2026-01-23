@@ -28,7 +28,7 @@ class UpdateTeamMemberRequest extends FormRequest
             'oab' => 'sometimes|string|max:50',
             'description' => 'sometimes|string',
             'image_url' => 'nullable|string|max:500',
-            'linkedin_url' => 'nullable|string|max:255',
+            'lattes_url' => 'nullable|string|max:255',
             'email' => 'sometimes|email|max:255',
             'order' => 'sometimes|integer',
         ];
@@ -53,7 +53,7 @@ class UpdateTeamMemberRequest extends FormRequest
             'oab'            => 'OAB',
             'description'    => 'Descrição',
             'image_url'      => 'URL da foto',
-            'linkedin_url'   => 'LinkedIn',
+            'lattes_url'     => 'Lattes',
             'email'          => 'Email',
             'order'          => 'Ordem',
         ];

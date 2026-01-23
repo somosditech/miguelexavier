@@ -18,7 +18,7 @@ function TeamManager() {
         oab: '',
         description: '',
         image_url: '',
-        linkedin_url: '',
+        lattes_url: '',
         email: '',
         order: 0
     });
@@ -60,7 +60,7 @@ function TeamManager() {
             oab: member.oab,
             description: member.description,
             image_url: member.image_url,
-            linkedin_url: member.linkedin_url,
+            lattes_url: member.lattes_url,
             email: member.email,
             order: member.order
         });
@@ -84,7 +84,7 @@ function TeamManager() {
             oab: '',
             description: '',
             image_url: '',
-            linkedin_url: '',
+            lattes_url: '',
             email: '',
             order: members.length + 1
         });
@@ -94,7 +94,7 @@ function TeamManager() {
 
     const handleCancel = () => {
         setEditing(null);
-        setFormData({ name: '', role: '', specialization: '', oab: '', description: '', image_url: '', linkedin_url: '', email: '', order: 0 });
+        setFormData({ name: '', role: '', specialization: '', oab: '', description: '', image_url: '', lattes_url: '', email: '', order: 0 });
         setImagePreview(null);
     };
 
@@ -302,12 +302,12 @@ function TeamManager() {
                         )}
 
                         <div className="form-field">
-                            <label>LinkedIn</label>
+                            <label>Lattes</label>
                             <input
                                 type="url"
-                                value={formData.linkedin_url}
-                                onChange={(e) => setFormData({ ...formData, linkedin_url: e.target.value })}
-                                placeholder="https://linkedin.com/in/..."
+                                value={formData.lattes_url}
+                                onChange={(e) => setFormData({ ...formData, lattes_url: e.target.value })}
+                                placeholder="https://lattes.cnpq.br/..."
                             />
                         </div>
 

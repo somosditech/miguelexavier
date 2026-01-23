@@ -219,9 +219,9 @@ class PublicContentController extends Controller
             'specialization' => $member->specialization,
             'oab' => $member->oab,
             'description' => $member->description,
-            'image' => $imageUrl,  // Mudado de imageUrl para image para compatibilidade com o frontend
+            'image' => $imageUrl,
             'social' => [
-                'linkedin' => $member->linkedin_url,
+                'lattes' => $member->lattes_url,
                 'email' => $member->email,
             ]
         ];

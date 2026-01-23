@@ -13,7 +13,7 @@ class TeamMember extends Model
         'oab',
         'description',
         'image_url',
-        'linkedin_url',
+        'lattes_url',
         'email',
         'order',
     ];

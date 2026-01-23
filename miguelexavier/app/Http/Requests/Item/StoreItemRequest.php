@@ -31,7 +31,7 @@ class StoreItemRequest extends FormRequest
             'specialization' => 'required|string|max:255',
             'oab' => 'required|string|max:50',
             'image_url' => 'nullable|string|max:500',
-            'linkedin_url' => 'nullable|string|max:255',
+            'lattes_url' => 'nullable|string|max:255',
             'email' => 'required|email|max:255',
         ];
     }
@@ -60,7 +60,7 @@ class StoreItemRequest extends FormRequest
             'specialization' => 'Especialização',
             'oab'         => 'OAB',
             'image_url'   => 'URL da foto',
-            'linkedin_url' => 'LinkedIn',
+            'lattes_url' => 'Lattes',
             'email'       => 'Email',
         ];
     }

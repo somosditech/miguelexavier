@@ -176,7 +176,7 @@ export const mockTeam = {
             description: 'Mais de 10 anos de experiência em direito empresarial, com especialização em contratos e recuperação judicial.',
             image: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=400&q=80',
             social: {
-                linkedin: '#',
+                lattes: '#',
                 email: 'miguel@miguelxavier.adv.br'
             }
         },
@@ -189,7 +189,7 @@ export const mockTeam = {
             description: 'Especialista em direito de família com mais de 12 anos de experiência, reconhecida pela sensibilidade e discrição.',
             image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80',
             social: {
-                linkedin: '#',
+                lattes: '#',
                 email: 'ariane@miguelxavier.adv.br'
             }
         }
@@ -255,7 +255,7 @@ export const mockFooter = {
     social: {
         title: 'Redes Sociais',
         links: [
-            { platform: 'LinkedIn', url: '#', icon: 'linkedin' },
+            { platform: 'Lattes', url: '#', icon: 'lattes' },
             { platform: 'Instagram', url: '#', icon: 'instagram' },
             { platform: 'Facebook', url: '#', icon: 'facebook' }
         ]

@@ -61,7 +61,7 @@ function SchemaMarkup() {
         "url": "https://miguelexavier.vercel.app",
         "logo": "https://miguelexavier.vercel.app/logo.png",
         "sameAs": [
-            "https://www.linkedin.com/company/miguelxavier",
+            "https://www.lattes.cnpq.br/miguelxavier",
             "https://www.instagram.com/miguelxavier",
             "https://www.facebook.com/miguelxavier"
         ],

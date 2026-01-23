@@ -22,9 +22,9 @@ class FooterContentSeeder extends Seeder
             'contact_hours' => 'Segunda a Sexta: 9h às 18h',
             'social_links' => [
                 [
-                    'name' => 'LinkedIn',
-                    'url' => 'https://linkedin.com/company/miguelxavier',
-                    'icon' => 'Linkedin'
+                    'name' => 'Lattes',
+                    'url' => 'https://lattes.cnpq.br/miguelxavier',
+                    'icon' => 'Lattes'
                 ],
                 [
                     'name' => 'Instagram',

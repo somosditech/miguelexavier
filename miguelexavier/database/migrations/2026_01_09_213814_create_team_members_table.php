@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('oab')->nullable();
             $table->text('description');
             $table->string('image_url')->nullable();
-            $table->string('linkedin_url')->nullable();
+            $table->string('lattes_url')->nullable();
             $table->string('email')->nullable();
             $table->integer('order')->default(0);
             $table->timestamps();

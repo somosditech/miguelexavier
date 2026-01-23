@@ -57,15 +57,14 @@ function Team() {
                                             alt={member.name}
                                             className="member-img"
                                         />
-                                        {/* Redes Sociais reposicionadas e melhoradas */}
                                         <div className="member-social-float">
-                                            {member.social.linkedin && (
-                                                <a href={member.social.linkedin} target="_blank" rel="noreferrer" className="social-icon-circle" aria-label="LinkedIn">
-                                                    <span>in</span>
+                                            {member.social.lattes && (
+                                                <a href={member.social.lattes} target="_blank" rel="noreferrer" className="social-icon-circle lattes" aria-label="Lattes">
+                                                    <span>LA</span>
                                                 </a>
                                             )}
                                             {member.social.email && (
-                                                <a href={`mailto:${member.social.email}`} className="social-icon-circle" aria-label="Email">
+                                                <a href={`mailto:${member.social.email}`} className="social-icon-circle email" aria-label="Email">
                                                     <span>✉</span>
                                                 </a>
                                             )}

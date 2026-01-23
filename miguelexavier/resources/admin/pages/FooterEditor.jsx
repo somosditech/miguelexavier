@@ -17,7 +17,7 @@ function FooterEditor() {
     // Estados para redes sociais
     const [facebookUrl, setFacebookUrl] = useState('');
     const [instagramUrl, setInstagramUrl] = useState('');
-    const [linkedinUrl, setLinkedinUrl] = useState('');
+    const [lattesUrl, setLattesUrl] = useState('');
 
     // Estados para conteúdo legal (Texto)
     const [privacyContent, setPrivacyContent] = useState('');
@@ -37,7 +37,7 @@ function FooterEditor() {
                 data.social_links.forEach(link => {
                     if (link.name === 'Facebook') setFacebookUrl(link.url);
                     if (link.name === 'Instagram') setInstagramUrl(link.url);
-                    if (link.name === 'LinkedIn') setLinkedinUrl(link.url);
+                    if (link.name === 'Lattes') setLattesUrl(link.url);
                 });
             }
 
@@ -66,7 +66,7 @@ function FooterEditor() {
             const socialLinks = [];
             if (facebookUrl) socialLinks.push({ name: 'Facebook', url: facebookUrl });
             if (instagramUrl) socialLinks.push({ name: 'Instagram', url: instagramUrl });
-            if (linkedinUrl) socialLinks.push({ name: 'LinkedIn', url: linkedinUrl });
+            if (lattesUrl) socialLinks.push({ name: 'Lattes', url: lattesUrl });
 
             const dataToUpdate = {
                 ...footer,
@@ -198,6 +198,7 @@ function FooterEditor() {
 
                 <div className="form-field">
                     <label>Facebook (URL)</label>
+                    <label style={{ fontSize: '12px', color: '#666' }}>Deixe em branco para não exibir</label>
                     <input
                         type="url"
                         value={facebookUrl}
@@ -208,6 +209,7 @@ function FooterEditor() {
 
                 <div className="form-field">
                     <label>Instagram (URL)</label>
+                    <label style={{ fontSize: '12px', color: '#666' }}>Deixe em branco para não exibir</label>
                     <input
                         type="url"
                         value={instagramUrl}
@@ -217,12 +219,13 @@ function FooterEditor() {
                 </div>
 
                 <div className="form-field">
-                    <label>LinkedIn (URL)</label>
+                    <label>Lattes (URL)</label>
+                    <label style={{ fontSize: '12px', color: '#666' }}>Deixe em branco para não exibir</label>
                     <input
                         type="url"
-                        value={linkedinUrl}
-                        onChange={(e) => setLinkedinUrl(e.target.value)}
-                        placeholder="https://linkedin.com/in/seu-perfil"
+                        value={lattesUrl}
+                        onChange={(e) => setLattesUrl(e.target.value)}
+                        placeholder="https://lattes.cnpq.br/seu-perfil"
                     />
                 </div>
 
