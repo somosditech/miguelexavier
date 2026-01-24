@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Theme;
 use App\Models\HeroSection;
 use App\Models\AboutSection;
 use App\Models\Service;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
+use App\Models\WhatsAppSetting;
 use App\Models\FooterContent;
 
 class PublicContentController extends Controller
@@ -28,6 +28,7 @@ class PublicContentController extends Controller
                 'team' => TeamMember::orderBy('order')->get()->map(fn($t) => $this->mapTeamMember($t)),
                 'testimonials' => Testimonial::orderBy('order')->get()->map(fn($t) => $this->mapTestimonial($t)),
                 'footer' => $this->mapFooter(FooterContent::first()),
+                'whatsapp' => $this->mapWhatsApp(WhatsAppSetting::first()),
             ]
         ]);
     }
@@ -106,6 +107,17 @@ class PublicContentController extends Controller
         return response()->json([
             'success' => true,
             'data' => $this->mapFooter(FooterContent::first())
+        ]);
+    }
+
+    /**
+     * Retorna conteúdo do WhatsApp
+     */
+    public function getWhatsApp()
+    {
+        return response()->json([
+            'success' => true,
+            'data' => $this->mapWhatsApp(WhatsAppSetting::first())
         ]);
     }
 
@@ -265,6 +277,20 @@ class PublicContentController extends Controller
             'copyright' => $footer->copyright_text,
             'privacy_policy_content' => $footer->privacy_policy_content,
             'terms_of_use_content' => $footer->terms_of_use_content,
+        ];
+    }
+
+    /**
+     * Mapeia WhatsAppSetting para camelCase
+     */
+    private function mapWhatsApp($whatsapp)
+    {
+        if (!$whatsapp)
+            return null;
+
+        return [
+            'phoneNumber' => $whatsapp->phone_number,
+            'predefinedMessage' => $whatsapp->predefined_message,
         ];
     }
 }

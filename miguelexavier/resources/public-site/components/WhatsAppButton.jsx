@@ -6,17 +6,19 @@
  */
 
 import { motion } from 'framer-motion';
+import { useContent } from '../hooks/useContent';
 import './WhatsAppButton.css';
 
 function WhatsAppButton() {
-    // Número do WhatsApp (formato internacional sem + e sem espaços)
-    // Exemplo: 5511999999999 (55 = Brasil, 11 = DDD, 999999999 = número)
-    const phoneNumber = '554184737511'; // ALTERE ESTE NÚMERO
+    const { content } = useContent('whatsapp');
+    // Valores padrão caso não venha da API
+    const defaultPhone = '554184737511';
+    const defaultMessage = 'Olá! Gostaria de agendar uma consulta jurídica.';
 
-    // Mensagem pré-definida que aparecerá no WhatsApp
-    const message = 'Olá! Gostaria de agendar uma consulta jurídica.';
+    // content já é o objeto whatsapp, pois fetchWhatsapp retorna content.whatsapp
+    const phoneNumber = content?.phoneNumber || defaultPhone;
+    const message = content?.predefinedMessage || defaultMessage;
 
-    // URL do WhatsApp com mensagem pré-preenchida
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
     return (

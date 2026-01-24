@@ -14,7 +14,8 @@ import {
     mockServices,
     mockTeam,
     // mockTestimonials,
-    mockFooter
+    mockFooter,
+    mockWhatsapp
 } from './mockData';
 
 // ============================================
@@ -62,7 +63,8 @@ const fetchAllContent = async () => {
                 services: apiData.data.services || mockServices,
                 team: apiData.data.team || mockTeam,
                 testimonials: apiData.data.testimonials || mockTestimonials,
-                footer: apiData.data.footer || mockFooter
+                footer: apiData.data.footer || mockFooter,
+                whatsapp: apiData.data.whatsapp || mockWhatsapp
             };
 
             return contentCache;
@@ -138,6 +140,16 @@ export const fetchTeam = async () => {
     }
 };
 
+export const fetchWhatsapp = async () => {
+    try {
+        const content = await fetchAllContent();
+        return content?.whatsapp || mockWhatsapp;
+    } catch (error) {
+        console.error('Error fetching whatsapp:', error);
+        return mockWhatsapp;
+    }
+};
+
 // export const fetchTestimonials = async () => {
 //     try {
 //         const content = await fetchAllContent();
@@ -185,5 +197,6 @@ export default {
     fetchTeam,
     // fetchTestimonials,
     fetchFooter,
-    submitContactForm
+    submitContactForm,
+    fetchWhatsapp
 };

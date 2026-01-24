@@ -7,6 +7,7 @@
 import Hero from './Hero';
 import About from './About';
 import Services from './Services';
+import LeadCapture from './LeadCapture';
 import Team from './Team';
 // import Testimonials from './Testimonials';
 import ContactForm from './ContactForm';
@@ -22,7 +23,8 @@ function HomePage() {
 
             {/* Seção Serviços */}
             <Services />
-
+            {/* Seção Captura de Leads */}
+            <LeadCapture />
             {/* Seção Equipe */}
             <Team />
 

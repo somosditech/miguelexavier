@@ -302,6 +302,36 @@ export const verifyAndUpdateProfile = async (data) => {
     return response.data;
 };
 
+// ============================================
+// WHATSAPP SETTINGS
+// ============================================
+
+export const getWhatsAppSettings = async () => {
+    const response = await adminApi.get('/admin/whatsapp');
+    return response.data;
+};
+
+export const updateWhatsAppSettings = async (data) => {
+    // Check if ID exists (update) or not (create)
+    // The backend uses POST for create (store) and PUT for update
+    // But since there's only one record, we can use PUT if it exists
+    // Ideally we fetch first to check existence, or just try.
+    // However, the backend controller update method expects to find a record.
+    // Let's assume frontend will fetch first. If data has ID or success=true from fetch, we use PUT.
+
+    // Actually, createService uses POST, updateService uses PUT.
+    // The controller has store (POST) and update (PUT).
+    // Let's just create separate methods or handle logic in component.
+    // For simplicity, let's expose create and update.
+    const response = await adminApi.put('/admin/whatsapp', data);
+    return response.data;
+};
+
+export const createWhatsAppSettings = async (data) => {
+    const response = await adminApi.post('/admin/whatsapp', data);
+    return response.data;
+}
+
 export default adminApi;
 
 

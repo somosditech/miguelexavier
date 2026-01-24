@@ -8,7 +8,7 @@
  */
 
 import { useContent } from '../hooks/useContent';
-import { motion } from 'framer-motion'; // Biblioteca de animações
+import { motion } from 'framer-motion';
 import LazyImage from './LazyImage';
 import './About.css';
 

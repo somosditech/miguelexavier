@@ -47,6 +47,7 @@ function Sidebar() {
         { path: '/team', icon: Users, label: 'Equipe' },
         // { path: '/testimonials', icon: Star, label: 'Depoimentos' },
         { path: '/footer', icon: PanelBottomClose, label: 'Rodapé' },
+        { path: '/whatsapp', icon: MessageSquare, label: 'WhatsApp' },
         { path: '/messages', icon: MessageSquare, label: 'Mensagens', badge: unreadCount }
     ];
 

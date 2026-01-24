@@ -25,6 +25,7 @@ Route::prefix('content')->group(function () {
     Route::get('/team', [PublicContentController::class, 'getTeam']);
     // Route::get('/testimonials', [PublicContentController::class, 'getTestimonials']);
     Route::get('/footer', [PublicContentController::class, 'getFooter']);
+    Route::get('/whatsapp', [PublicContentController::class, 'getWhatsapp']);
 });
 
 // Formulário de contato
@@ -102,4 +103,9 @@ Route::middleware('auth:api')->prefix('admin')->group(function () {
     Route::put('/profile', [App\Http\Controllers\Admin\ProfileController::class, 'update']);
     Route::post('/profile/upload-photo', [App\Http\Controllers\Admin\ProfileController::class, 'uploadPhoto']);
     Route::post('/profile/verify-update', [App\Http\Controllers\Admin\ProfileController::class, 'verifyAndUpdate']);
+
+    // WhatsApp Settings
+    Route::get('/whatsapp', [App\Http\Controllers\Admin\WhatsAppController::class, 'index']);
+    Route::post('/whatsapp', [App\Http\Controllers\Admin\WhatsAppController::class, 'store']);
+    Route::put('/whatsapp', [App\Http\Controllers\Admin\WhatsAppController::class, 'update']);
 });

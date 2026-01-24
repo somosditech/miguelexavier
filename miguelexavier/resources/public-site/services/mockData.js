@@ -268,3 +268,9 @@ export const mockFooter = {
         ]
     }
 };
+
+// Seção WhatsApp
+export const mockWhatsapp = {
+    phone: '554184737511',
+    message: 'Olá! Gostaria de agendar uma consulta jurídica.'
+};
