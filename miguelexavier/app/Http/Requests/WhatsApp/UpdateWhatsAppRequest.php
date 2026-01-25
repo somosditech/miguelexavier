@@ -20,8 +20,8 @@ class UpdateWhatsAppRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone_number' => 'required|string|max:20',
-            'predefined_message' => 'required|string|max:500',
+            'phone_number' => 'required|string|min:13|max:15|regex:/^\+?[1-9]\d{12,14}$/',
+            'predefined_message' => 'required|string|max:255',
         ];
     }
 
@@ -31,6 +31,8 @@ class UpdateWhatsAppRequest extends FormRequest
             'required' => 'O campo :attribute é obrigatório.',
             'string' => 'O campo :attribute deve ser uma string.',
             'max' => 'O campo :attribute não pode exceder :max caracteres.',
+            'min' => 'O campo :attribute deve ter pelo menos :min caracteres.',
+            'regex' => 'O campo :attribute deve ter um formato válido.',
         ];
     }
 

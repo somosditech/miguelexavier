@@ -39,7 +39,9 @@ function ServicesManager() {
             const data = await getServices();
             setServices(data);
         } catch (error) {
-            console.error('Error loading services:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error loading services:', error);
+            }
         } finally {
             setLoading(false);
         }
@@ -87,7 +89,9 @@ function ServicesManager() {
             handleCancel();
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
-            console.error('Error saving service:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error saving service:', error);
+            }
 
             // Extrai mensagem de erro do backend
             let errorMessage = 'Erro ao salvar serviço';
@@ -132,7 +136,9 @@ function ServicesManager() {
             loadServices();
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
-            console.error('Error deleting service:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error deleting service:', error);
+            }
             setMessage('Erro ao deletar serviço');
         }
     };
@@ -266,7 +272,7 @@ function ServicesManager() {
                 {services.map(service => (
                     <div key={service.id} className="item-card">
                         <h3>{service.title}</h3>
-                        <p>{service.description}</p>
+                        <p style={{ wordBreak: 'break-word' }}>{service.description}</p>
                         <div className="item-meta">
                             <span>Ícone: {service.icon}</span>
                             <span>Ordem: {service.order}</span>

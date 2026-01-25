@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Footer\UpdateFooterRequest;
 use App\Http\Controllers\Controller;
 use App\Models\FooterContent;
-use Illuminate\Http\Request;
 
 class FooterController extends Controller
 {

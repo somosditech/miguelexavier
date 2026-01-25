@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Item;
+namespace App\Http\Requests\Theme;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreItemRequest extends FormRequest
+class StoreThemeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,12 @@ class StoreItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'icon' => 'required|string|max:50',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'features' => 'required|array',
-            'order' => 'required|integer',
+            'primary_color' => 'required|string|max:255',
+            'secondary_color' => 'required|string|max:255',
+            'accent_color' => 'required|string|max:255',
+            'background_color' => 'required|string|max:255',
+            'background_image_url' => 'sometimes|string|max:500',
+            'logo_url' => 'required|string|max:255',
         ];
     }
 
@@ -36,19 +37,18 @@ class StoreItemRequest extends FormRequest
             'required' => 'O campo :attribute é obrigatório.',
             'string'   => 'O campo :attribute não pode ser vazio.',
             'max'      => 'O campo :attribute não pode passar de :max caracteres.',
-            'integer'  => 'O campo :attribute deve ser um número inteiro.',
-            'features.array' => 'Os recursos devem ser enviados como uma lista.',
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'icon'        => 'Ícone',
-            'title'       => 'Título',
-            'description' => 'Descrição',
-            'features'    => 'Features',
-            'order'       => 'Ordem',
+            'primary_color'                  => 'Cor Primária',
+            'secondary_color'                => 'Cor Secundária',
+            'accent_color'                   => 'Cor Acento',
+            'background_color'               => 'Cor de Fundo',
+            'background_image_url'           => 'Imagem de fundo',
+            'logo_url'                       => 'Logo',
         ];
     }
 }

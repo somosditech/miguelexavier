@@ -15,6 +15,7 @@ function WhatsAppEditor() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [message, setMessage] = useState('');
+    const [errors, setErrors] = useState({});
 
     const formatPhoneNumber = (value) => {
         if (!value) return '';
@@ -45,7 +46,6 @@ function WhatsAppEditor() {
                 });
             }
         } catch (error) {
-            console.error('Error loading WhatsApp settings:', error);
             if (error.response && error.response.status !== 404) {
                 setMessage('Erro ao carregar configurações');
             }
@@ -65,6 +65,7 @@ function WhatsAppEditor() {
     const handleSave = async () => {
         setSaving(true);
         setMessage('');
+        setErrors({});
 
         // Remove formatação para enviar ao backend
         // Mantém apenas números
@@ -81,21 +82,13 @@ function WhatsAppEditor() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
-            console.error('Error saving settings:', error);
-            if (error.response && error.response.status === 404) {
-                try {
-                    await createWhatsAppSettings(dataToSend);
-                    setMessage('Configurações criadas com sucesso!');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    setTimeout(() => setMessage(''), 3000);
-                } catch (createError) {
-                    console.error('Error creating settings:', createError);
-                    setMessage('Erro ao salvar configurações');
-                }
+            if (error.response?.data?.errors) {
+                setErrors(error.response.data.errors);
+            } else if (error.response?.data?.message) {
+                setMessage(error.response.data.message);
             } else {
                 setMessage('Erro ao salvar configurações');
             }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         } finally {
             setSaving(false);
         }
@@ -119,33 +112,41 @@ function WhatsAppEditor() {
             )}
 
             <div className="editor-content">
-                <div className="form-section remove-border">
-                    <div className="form-field">
-                        <label htmlFor="phone_number">Número do WhatsApp (com DDI e DDD, apenas números)</label>
-                        <input
-                            id="phone_number"
-                            type="text"
-                            value={settings.phone_number}
-                            onChange={(e) => handleChange('phone_number', e.target.value)}
-                            placeholder="Ex: 5541999999999"
-                        />
-                        <small>Utilize o formato internacional: 55 (Brasil) + DDD + Número. Ex: 5541999999999</small>
-                    </div>
-
-                    <div className="form-field">
-                        <label htmlFor="predefined_message">Mensagem Pré-definida</label>
-                        <textarea
-                            id="predefined_message"
-                            value={settings.predefined_message}
-                            onChange={(e) => handleChange('predefined_message', e.target.value)}
-                            placeholder="Ex: Olá! Gostaria de agendar uma consulta."
-                            rows={4}
-                        />
-                        <small>Esta mensagem aparecerá automaticamente no campo de texto do usuário ao clicar no botão.</small>
-                    </div>
+                <div className="form-field">
+                    <label htmlFor="phone_number">Número do WhatsApp (com DDI e DDD, apenas números)</label>
+                    <input
+                        id="phone_number"
+                        type="text"
+                        value={settings.phone_number}
+                        onChange={(e) => handleChange('phone_number', e.target.value)}
+                        placeholder="Ex: 5541999999999"
+                    />
+                    <small>Utilize o formato internacional: 55 (Brasil) + DDD + Número. Ex: 5541999999999</small>
                 </div>
 
-                <div className="form-actions remove-border">
+                <div className="form-field">
+                    <label htmlFor="predefined_message">Mensagem Pré-definida</label>
+                    <textarea
+                        id="predefined_message"
+                        value={settings.predefined_message}
+                        onChange={(e) => handleChange('predefined_message', e.target.value)}
+                        placeholder="Ex: Olá! Gostaria de agendar uma consulta."
+                        rows={4}
+                    />
+                    <small>Esta mensagem aparecerá automaticamente no campo de texto do usuário ao clicar no botão.</small>
+                </div>
+                {/* Exibir erros de validação */}
+                {Object.keys(errors).length > 0 && (
+                    <div className="error-list">
+                        {Object.entries(errors).map(([field, messages]) => (
+                            <div key={field} className="error-item">
+                                {messages[0]}
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                <div className="form-actions">
                     <button onClick={handleSave} disabled={saving} className="btn-primary btn-large">
                         <Save size={18} />
                         {saving ? 'Salvando...' : 'Salvar Alterações'}

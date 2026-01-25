@@ -14,6 +14,7 @@ function AboutEditor() {
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
     const [imagePreview, setImagePreview] = useState(null);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         loadAbout();
@@ -27,7 +28,6 @@ function AboutEditor() {
                 setImagePreview(`/storage/${data.image_url}`);
             }
         } catch (error) {
-            console.error('Error loading about:', error);
             setMessage('Erro ao carregar about');
         } finally {
             setLoading(false);
@@ -44,6 +44,7 @@ function AboutEditor() {
 
         setUploading(true);
         setMessage('');
+        setErrors({});
 
         try {
             const formData = new FormData();
@@ -67,11 +68,28 @@ function AboutEditor() {
                 setAbout({ ...about, image_url: result.path });
                 setTimeout(() => setMessage(''), 3000);
             } else {
-                setMessage('Erro ao enviar imagem');
+                if (error.response?.data?.errors) {
+                    setErrors(error.response.data.errors);
+                } else if (error.response?.data?.message) {
+                    setMessage(error.response.data.message);
+                } else {
+                    console.log(result);
+                    console.log(result.errors);
+                    console.log(result.message);
+                    setMessage('Erro ao salvar Foto');
+                }
             }
         } catch (error) {
-            console.error('Error uploading image:', error);
-            setMessage('Erro ao enviar imagem');
+            if (error.response?.data?.errors) {
+                setErrors(error.response.data.errors);
+            } else if (error.response?.data?.message) {
+                setMessage(error.response.data.message);
+            } else {
+                console.log(error);
+                console.log(error.errors);
+                console.log(error.message);
+                setMessage('Erro ao salvar Foto');
+            }
         } finally {
             setUploading(false);
         }
@@ -80,16 +98,21 @@ function AboutEditor() {
     const handleSave = async () => {
         setSaving(true);
         setMessage('');
+        setErrors({});
 
         try {
             await updateAbout(about);
             setMessage('About salvo com sucesso!');
-            // Scroll suave para o topo para mostrar a mensagem de sucesso
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
-            console.error('Error saving about:', error);
-            setMessage('Erro ao salvar about');
+            if (error.response?.data?.errors) {
+                setErrors(error.response.data.errors);
+            } else if (error.response?.data?.message) {
+                setMessage(error.response.data.message);
+            } else {
+                setMessage('Erro ao salvar About');
+            }
         } finally {
             setSaving(false);
         }
@@ -101,8 +124,8 @@ function AboutEditor() {
         <div className="editor-page">
             <div className="editor-header">
                 <div>
-                    <h1><FileText size={28} /> Editor de About</h1>
-                    <p>Edite a seção sobre o escritório</p>
+                    <h1><FileText size={28} /> Sobre</h1>
+                    <p>Edite a seção Sobre o escritório</p>
                 </div>
             </div>
 
@@ -165,8 +188,19 @@ function AboutEditor() {
                     )}
                 </div>
 
+                {/* Exibir erros de validação */}
+                {Object.keys(errors).length > 0 && (
+                    <div className="error-list">
+                        {Object.entries(errors).map(([field, messages]) => (
+                            <div key={field} className="error-item">
+                                {messages[0]}
+                            </div>
+                        ))}
+                    </div>
+                )}
+
                 {/* Botão Salvar */}
-                <div className="form-actions remove-border">
+                <div className="form-actions">
                     <button onClick={handleSave} disabled={saving} className="btn-primary btn-large">
                         <Save size={18} />
                         {saving ? 'Salvando...' : 'Salvar Alterações'}

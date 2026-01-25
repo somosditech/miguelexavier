@@ -31,8 +31,8 @@ class UpdateFooterRequest extends FormRequest
             'contact_hours' => 'sometimes|string|max:255',
             'social_links' => 'sometimes|array',
             'legal_links' => 'sometimes|array',
-            'privacy_policy_content' => 'sometimes|nullable|string',
-            'terms_of_use_content' => 'sometimes|nullable|string',
+            'privacy_policy_content' => 'sometimes|string',
+            'terms_of_use_content' => 'sometimes|string',
         ];
     }
 
@@ -58,6 +58,8 @@ class UpdateFooterRequest extends FormRequest
             'contact_hours'     => 'Horário de Atendimento',
             'social_links'      => 'Links Sociais',
             'legal_links'       => 'Links Legais',
+            'privacy_policy_content' => 'Política de Privacidade',
+            'terms_of_use_content' => 'Termos de Uso',
         ];
     }
 }

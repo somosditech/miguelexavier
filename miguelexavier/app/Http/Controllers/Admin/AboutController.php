@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\About\UpdateAboutRequest;
+use App\Http\Requests\About\UploadAboutRequest;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Models\AboutSection;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
@@ -32,7 +33,7 @@ class AboutController extends Controller
     /**
      * Atualizar about section
      */
-    public function update(Request $request)
+    public function update(UpdateAboutRequest $request)
     {
         $validated = $request->validate([
             'title' => 'sometimes|string|max:255',
@@ -62,12 +63,8 @@ class AboutController extends Controller
     /**
      * Upload de imagem do about
      */
-    public function uploadImage(Request $request)
+    public function uploadImage(UploadAboutRequest $request)
     {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB
-        ]);
-
         try {
             $about = AboutSection::first();
             

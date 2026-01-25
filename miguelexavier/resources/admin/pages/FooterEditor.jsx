@@ -45,7 +45,6 @@ function FooterEditor() {
             setPrivacyContent(data.privacy_policy_content || '');
             setTermsContent(data.terms_of_use_content || '');
         } catch (error) {
-            console.error('Error loading footer:', error);
             setMessage('Erro ao carregar footer');
         } finally {
             setLoading(false);
@@ -62,7 +61,6 @@ function FooterEditor() {
         setErrors({});
 
         try {
-            // Construir array de social_links
             const socialLinks = [];
             if (facebookUrl) socialLinks.push({ name: 'Facebook', url: facebookUrl });
             if (instagramUrl) socialLinks.push({ name: 'Instagram', url: instagramUrl });
@@ -77,17 +75,11 @@ function FooterEditor() {
 
             await updateFooter(dataToUpdate);
             setMessage('Footer salvo com sucesso!');
-            // Scroll suave para o topo para mostrar a mensagem de sucesso
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
-            console.error('Error saving footer:', error);
-
-            // Tratamento de erros de validação do backend
             if (error.response?.data?.errors) {
                 setErrors(error.response.data.errors);
-                // Scroll para o topo para mostrar os erros
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else if (error.response?.data?.message) {
                 setMessage(error.response.data.message);
             } else {
@@ -104,8 +96,8 @@ function FooterEditor() {
         <div className="editor-page">
             <div className="editor-header">
                 <div>
-                    <h1><PanelBottomClose size={28} /> Editor do Rodapé</h1>
-                    <p>Edite o rodapé do site</p>
+                    <h1><PanelBottomClose size={28} /> Rodapé</h1>
+                    <p>Edite o Rodapé do site</p>
                 </div>
             </div>
 
@@ -267,7 +259,7 @@ function FooterEditor() {
                 )}
 
                 {/* Botão Salvar */}
-                <div className="form-actions remove-border">
+                <div className="form-actions">
                     <button onClick={handleSave} disabled={saving} className="btn-primary btn-large">
                         <Save size={18} />
                         {saving ? 'Salvando...' : 'Salvar Alterações'}

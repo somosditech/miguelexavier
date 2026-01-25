@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Item;
+namespace App\Http\Requests\Hero;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreItemRequest extends FormRequest
+class StoreHeroRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,12 @@ class StoreItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'icon' => 'required|string|max:50',
             'title' => 'required|string|max:255',
+            'subtitle' => 'required|string|max:255',
             'description' => 'required|string',
-            'features' => 'required|array',
-            'order' => 'required|integer',
+            'background_image_url' => 'sometimes|string|max:500',
+            'cta_button_text' => 'sometimes|string|max:100',
+            'cta_button_href' => 'sometimes|string|max:255',
         ];
     }
 
@@ -36,19 +37,18 @@ class StoreItemRequest extends FormRequest
             'required' => 'O campo :attribute é obrigatório.',
             'string'   => 'O campo :attribute não pode ser vazio.',
             'max'      => 'O campo :attribute não pode passar de :max caracteres.',
-            'integer'  => 'O campo :attribute deve ser um número inteiro.',
-            'features.array' => 'Os recursos devem ser enviados como uma lista.',
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'icon'        => 'Ícone',
-            'title'       => 'Título',
-            'description' => 'Descrição',
-            'features'    => 'Features',
-            'order'       => 'Ordem',
+            'title'                  => 'Título',
+            'subtitle'               => 'Subtítulo',
+            'description'            => 'Descrição',
+            'background_image_url'   => 'Imagem de fundo',
+            'cta_button_text'        => 'Texto do botão',
+            'cta_button_href'        => 'Link do botão',
         ];
     }
 }

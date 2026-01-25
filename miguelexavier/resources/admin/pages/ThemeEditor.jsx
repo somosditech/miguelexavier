@@ -13,8 +13,9 @@ function ThemeEditor() {
     const [saving, setSaving] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
-    const [logoError, setLogoError] = useState(''); // Mensagem de erro específica para logo
+    const [logoError, setLogoError] = useState('');
     const [logoPreview, setLogoPreview] = useState(null);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         loadTheme();
@@ -28,7 +29,6 @@ function ThemeEditor() {
                 setLogoPreview(`/storage/${data.logo_url}`);
             }
         } catch (error) {
-            console.error('Error loading theme:', error);
             setMessage('Erro ao carregar tema');
         } finally {
             setLoading(false);
@@ -43,15 +43,13 @@ function ThemeEditor() {
         const file = e.target.files[0];
         if (!file) return;
 
-        // Limpar mensagens anteriores
         setLogoError('');
         setMessage('');
 
-        // Validar formato do arquivo
         const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/svg+xml'];
         if (!allowedFormats.includes(file.type)) {
             setLogoError('Formato não permitido. Use JPG, PNG, GIF ou SVG.');
-            e.target.value = ''; // Limpar input
+            e.target.value = '';
             return;
         }
 
@@ -59,7 +57,7 @@ function ThemeEditor() {
         const maxSize = 2 * 1024 * 1024;
         if (file.size > maxSize) {
             setLogoError('Arquivo muito grande. Tamanho máximo: 2MB.');
-            e.target.value = ''; // Limpar input
+            e.target.value = '';
             return;
         }
 
@@ -70,14 +68,12 @@ function ThemeEditor() {
             formData.append('logo', file);
 
             const token = localStorage.getItem('admin_token');
-            console.log('Token:', token ? 'exists' : 'missing'); // DEBUG
 
-            // TESTE: Usando rota sem autenticação
             const response = await fetch('/api/test-upload', {
                 method: 'POST',
-                // headers: {
-                //     'Authorization': `Bearer ${token}`
-                // },
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
                 body: formData
             });
 
@@ -103,18 +99,21 @@ function ThemeEditor() {
     const handleSave = async () => {
         setSaving(true);
         setMessage('');
+        setErrors({});
 
         try {
             await updateTheme(theme);
             setMessage('Tema salvo com sucesso!');
-            // Scroll para o topo para ver a mensagem de sucesso
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
-            console.error('Error saving theme:', error);
-            setMessage('Erro ao salvar tema');
-            // Scroll para o topo para ver a mensagem de erro
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (error.response?.data?.errors) {
+                setErrors(error.response.data.errors);
+            } else if (error.response?.data?.message) {
+                setMessage(error.response.data.message);
+            } else {
+                setMessage('Erro ao salvar Tema');
+            }
         } finally {
             setSaving(false);
         }
@@ -126,7 +125,7 @@ function ThemeEditor() {
         <div className="editor-page">
             <div className="editor-header">
                 <div>
-                    <h1><Palette size={28} /> Editor de Tema</h1>
+                    <h1><Palette size={28} /> Tema</h1>
                     <p>Personalize as cores e logo do site</p>
                 </div>
             </div>
@@ -272,8 +271,19 @@ function ThemeEditor() {
                     </div>
                 </div>
 
+                {/* Exibir erros de validação */}
+                {Object.keys(errors).length > 0 && (
+                    <div className="error-list">
+                        {Object.entries(errors).map(([field, messages]) => (
+                            <div key={field} className="error-item">
+                                {messages[0]}
+                            </div>
+                        ))}
+                    </div>
+                )}
+
                 {/* Botão Salvar */}
-                <div className="form-actions remove-border">
+                <div className="form-actions">
                     <button onClick={handleSave} disabled={saving} className="btn-primary btn-large">
                         <Save size={18} />
                         {saving ? 'Salvando...' : 'Salvar Alterações'}

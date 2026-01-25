@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\HeroSection;
-use Illuminate\Http\Request;
+use App\Http\Requests\Hero\UpdateHeroRequest;
 use Illuminate\Support\Facades\Storage;
-
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Hero\UploadHeroRequest;
+use App\Models\HeroSection;
 class HeroController extends Controller
 {
     /**
@@ -32,17 +32,8 @@ class HeroController extends Controller
     /**
      * Atualizar hero section
      */
-    public function update(Request $request)
+    public function update(UpdateHeroRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'sometimes|string|max:255',
-            'subtitle' => 'sometimes|string|max:255',
-            'description' => 'sometimes|string',
-            'background_image_url' => 'sometimes|string|max:500',
-            'cta_button_text' => 'sometimes|string|max:100',
-            'cta_button_href' => 'sometimes|string|max:255',
-        ]);
-        
         $hero = HeroSection::first();
         
         if (!$hero) {
@@ -52,7 +43,7 @@ class HeroController extends Controller
             ], 404);
         }
         
-        $hero->update($validated);
+        $hero->update($request->validated());
         
         // Registrar atividade
         logActivity('hero_updated', 'Hero atualizado');
@@ -67,12 +58,8 @@ class HeroController extends Controller
     /**
      * Upload de imagem de fundo do hero
      */
-    public function uploadBackground(Request $request)
+    public function uploadBackground(UploadHeroRequest $request)
     {
-        $request->validate([
-            'background_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB
-        ]);
-
         try {
             $hero = HeroSection::first();
             

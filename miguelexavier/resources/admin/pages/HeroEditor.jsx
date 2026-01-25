@@ -13,8 +13,9 @@ function HeroEditor() {
     const [saving, setSaving] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState('');
-    const [imageError, setImageError] = useState(''); // Mensagem de erro específica para imagem
+    const [imageError, setImageError] = useState('');
     const [imagePreview, setImagePreview] = useState(null);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         loadHero();
@@ -28,7 +29,6 @@ function HeroEditor() {
                 setImagePreview(`/storage/${data.background_image_url}`);
             }
         } catch (error) {
-            console.error('Error loading hero:', error);
             setMessage('Erro ao carregar hero');
         } finally {
             setLoading(false);
@@ -43,15 +43,13 @@ function HeroEditor() {
         const file = e.target.files[0];
         if (!file) return;
 
-        // Limpar mensagens anteriores
         setImageError('');
         setMessage('');
 
-        // Validar formato do arquivo
         const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
         if (!allowedFormats.includes(file.type)) {
             setImageError('Formato não permitido. Use JPG, PNG ou GIF.');
-            e.target.value = ''; // Limpar input
+            e.target.value = '';
             return;
         }
 
@@ -85,15 +83,19 @@ function HeroEditor() {
             if (result.success) {
                 setMessage('Imagem enviada com sucesso!');
                 setImagePreview(result.url);
-                // Atualiza o hero com o novo caminho da imagem
                 setHero({ ...hero, background_image_url: result.path });
                 setTimeout(() => setMessage(''), 3000);
             } else {
                 setImageError('Erro ao enviar imagem');
             }
         } catch (error) {
-            console.error('Error uploading image:', error);
-            setImageError('Erro ao enviar imagem');
+            if (error.response?.data?.errors) {
+                setErrors(error.response.data.errors);
+            } else if (error.response?.data?.message) {
+                setMessage(error.response.data.message);
+            } else {
+                setMessage('Erro ao enviar imagem');
+            }
         } finally {
             setUploading(false);
         }
@@ -102,16 +104,21 @@ function HeroEditor() {
     const handleSave = async () => {
         setSaving(true);
         setMessage('');
+        setErrors({});
 
         try {
             await updateHero(hero);
             setMessage('Hero salvo com sucesso!');
-            // Scroll suave para o topo para mostrar a mensagem de sucesso
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
-            console.error('Error saving hero:', error);
-            setMessage('Erro ao salvar hero');
+            if (error.response?.data?.errors) {
+                setErrors(error.response.data.errors);
+            } else if (error.response?.data?.message) {
+                setMessage(error.response.data.message);
+            } else {
+                setMessage('Erro ao salvar hero');
+            }
         } finally {
             setSaving(false);
         }
@@ -123,7 +130,7 @@ function HeroEditor() {
         <div className="editor-page">
             <div className="editor-header">
                 <div>
-                    <h1><Wallpaper size={28} /> Editor de Hero</h1>
+                    <h1><Wallpaper size={28} /> Hero</h1>
                     <p>Edite a seção principal do site</p>
                 </div>
             </div>
@@ -214,8 +221,19 @@ function HeroEditor() {
                     />
                 </div>
 
+                {/* Exibir erros de validação */}
+                {Object.keys(errors).length > 0 && (
+                    <div className="error-list">
+                        {Object.entries(errors).map(([field, messages]) => (
+                            <div key={field} className="error-item">
+                                {messages[0]}
+                            </div>
+                        ))}
+                    </div>
+                )}
+
                 {/* Botão Salvar */}
-                <div className="form-actions remove-border">
+                <div className="form-actions">
                     <button onClick={handleSave} disabled={saving} className="btn-primary btn-large">
                         <Save size={18} />
                         {saving ? 'Salvando...' : 'Salvar Alterações'}

@@ -262,7 +262,6 @@ button.btn-primary:hover:not(:disabled) {
     color: #991b1b;
     font-size: 14px;
     line-height: 1.6;
-    margin-bottom: 8px;
 }
 
 .error-item:last-child {
