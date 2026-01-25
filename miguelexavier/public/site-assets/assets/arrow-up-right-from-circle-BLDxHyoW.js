@@ -1,0 +1,1 @@
+import{c as r}from"./main-xELyMlEg.js";const e=r("ArrowUpRightFromCircle",[["path",{d:"M22 12A10 10 0 1 1 12 2",key:"1fm58d"}],["path",{d:"M22 2 12 12",key:"yg2myt"}],["path",{d:"M16 2h6v6",key:"zan5cs"}]]);export{e as default};

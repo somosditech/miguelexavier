@@ -28,9 +28,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg,
+    /* background: linear-gradient(135deg,
             rgba(26, 54, 93, 0.9) 0%,
-            rgba(44, 82, 130, 0.85) 100%);
+            rgba(44, 82, 130, 0.85) 100%); */
+    background: linear-gradient(183deg,
+            #faf7f291 0%,
+            #d8cfc4 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,7 +61,7 @@
 }
 
 .hero-title {
-    color: var(--color-text-light);
+    color: #565656;
     font-size: var(--font-5xl);
     font-weight: 700;
     line-height: 1.2;
@@ -67,7 +70,7 @@
 }
 
 .hero-description {
-    color: rgba(255, 255, 255, 0.9);
+    color: #666666;
     font-size: var(--font-xl);
     line-height: 1.6;
     margin-bottom: var(--spacing-xl);

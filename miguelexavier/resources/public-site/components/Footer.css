@@ -5,7 +5,7 @@
 .footer {
     background: linear-gradient(135deg, var(--color-background-dark), #1a2332);
     color: var(--color-text-light);
-    padding: var(--spacing-3xl) 0 var(--spacing-lg);
+    padding: var(--spacing-sm) 0 var(--spacing-sm);
 }
 
 /* ============================================
@@ -15,14 +15,14 @@
 .footer-content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-3xl);
-    margin-bottom: var(--spacing-2xl);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
 }
 
 .footer-column {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
+    /* gap: var(--spacing-md); */
 }
 
 .footer-title {
@@ -33,7 +33,7 @@
 
 .footer-text {
     color: rgba(255, 255, 255, 0.8);
-    line-height: 1.8;
+    line-height: 1.1;
     margin-bottom: var(--spacing-sm);
 }
 
@@ -82,7 +82,7 @@
 .footer-divider {
     height: 1px;
     background: rgba(255, 255, 255, 0.1);
-    margin: var(--spacing-xl) 0;
+    margin: var(--spacing-sm) 0;
 }
 
 .footer-bottom {

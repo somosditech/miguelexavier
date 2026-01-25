@@ -21,12 +21,12 @@ class UpdateThemeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'primary_color' => 'sometimes|string|max:255',
-            'secondary_color' => 'sometimes|string|max:255',
-            'accent_color' => 'sometimes|string|max:255',
-            'background_color' => 'sometimes|string|max:255',
+            'primary_color'        => 'sometimes|string|max:255',
+            'secondary_color'      => 'sometimes|string|max:255',
+            'accent_color'         => 'sometimes|string|max:255',
+            'background_color'     => 'sometimes|string|max:255',
             'background_image_url' => 'sometimes|string|max:255',
-            'logo_url' => 'sometimes|string|max:255',
+            'logo_url'             => 'sometimes|string|max:255',
         ];
     }
 
@@ -41,12 +41,12 @@ class UpdateThemeRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'primary_color'                  => 'Cor Primária',
-            'secondary_color'                => 'Cor Secundária',
-            'accent_color'                   => 'Cor Acento',
-            'background_color'               => 'Cor de Fundo',
-            'background_image_url'           => 'Imagem de fundo',
-            'logo_url'                       => 'Logo',
+            'primary_color'        => 'Cor Primária',
+            'secondary_color'      => 'Cor Secundária',
+            'accent_color'         => 'Cor Acento',
+            'background_color'     => 'Cor de Fundo',
+            'background_image_url' => 'Imagem de fundo',
+            'logo_url'             => 'Logo',
         ];
     }
 }
