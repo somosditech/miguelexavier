@@ -3,9 +3,11 @@
  */
 
 .footer {
-    background: linear-gradient(135deg, var(--color-background-dark), #1a2332);
+    background: linear-gradient(135deg, rgba(26, 35, 50, 0.95), rgba(26, 35, 50, 0.85)), url('/storage/footer.png');
+    background-size: contain;
     color: var(--color-text-light);
     padding: var(--spacing-sm) 0 var(--spacing-sm);
+    position: relative;
 }
 
 /* ============================================
