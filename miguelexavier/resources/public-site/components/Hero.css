@@ -111,6 +111,11 @@
     color: var(--color-primary);
 }
 
+.cta-sub-description {
+    font-size: var(--font-lg);
+    margin-top: var(--spacing-xs);
+}
+
 /* ============================================
    RESPONSIVIDADE
    ============================================ */

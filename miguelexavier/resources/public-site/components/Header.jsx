@@ -118,7 +118,6 @@ function Header() {
             // Estamos em outra página: redireciona para home com âncora
             navigate('/' + href);
 
-            // Após navegar, aguarda um momento e faz scroll
             setTimeout(() => {
                 const targetId = href.replace('#', '');
                 const targetElement = document.getElementById(targetId);

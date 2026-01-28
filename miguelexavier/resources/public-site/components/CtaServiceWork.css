@@ -1,0 +1,189 @@
+.cta-service-work {
+    background-color: var(--color-background);
+    padding: var(--spacing-3xl) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-work-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.service-work-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+/* Timeline */
+.timeline-container {
+    position: relative;
+    width: 100%;
+    padding-left: 60px;
+    /* Espaço para a linha e marcadores */
+    margin-bottom: var(--spacing-2xl);
+}
+
+.timeline-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    width: 2px;
+    background: linear-gradient(to bottom,
+            transparent,
+            var(--color-secondary) 10%,
+            var(--color-secondary) 90%,
+            transparent);
+    opacity: 0.4;
+}
+
+.timeline-step {
+    position: relative;
+    margin-bottom: var(--spacing-2xl);
+    display: flex;
+    align-items: flex-start;
+}
+
+.timeline-step:last-child {
+    margin-bottom: 0;
+}
+
+/* Marcador (Círculo com número) */
+.timeline-marker {
+    position: absolute;
+    left: -60px;
+    width: 42px;
+    height: 42px;
+    background-color: var(--color-background);
+    border: 2px solid var(--color-secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    transition: transform var(--transition-base);
+}
+
+.timeline-step:hover .timeline-marker {
+    transform: scale(1.1);
+    background-color: var(--color-secondary);
+}
+
+.timeline-step:hover .marker-number {
+    color: var(--color-primary);
+}
+
+.marker-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+    transition: color var(--transition-base);
+}
+
+/* Conteúdo do Passo */
+.timeline-content {
+    background: rgba(255, 255, 255, 0.5);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    border-left: 3px solid transparent;
+    transition: all var(--transition-base);
+    width: 100%;
+}
+
+.timeline-step:hover .timeline-content {
+    background: rgba(255, 255, 255, 0.8);
+    border-left-color: var(--color-secondary);
+    transform: translateX(10px);
+    box-shadow: var(--shadow-md);
+}
+
+.step-title {
+    letter-spacing: 0.02em;
+    font-family: Trajan, serif;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.step-description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--font-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+    padding: var(--spacing-xs) 0;
+}
+
+/* Rodapé e Botão */
+.service-work-footer {
+    padding-top: var(--spacing-lg);
+}
+
+.service-work-button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    padding: 1rem 3rem;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 15px rgba(119, 18, 32, 0.3);
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+/* Ícone de fundo */
+.bg-icon-overlay {
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 1;
+    color: var(--color-primary);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .timeline-container {
+        padding-left: 50px;
+    }
+
+    .timeline-line {
+        left: 15px;
+    }
+
+    .timeline-marker {
+        left: -50px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .marker-number {
+        font-size: 0.9rem;
+    }
+
+    .timeline-content {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .service-work-title {
+        font-size: 1.3rem;
+    }
+}

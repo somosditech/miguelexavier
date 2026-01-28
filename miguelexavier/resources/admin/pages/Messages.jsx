@@ -116,7 +116,6 @@ function Messages() {
                                     <strong>{message.name}</strong>
                                     {!message.read_at && <span className="unread-badge">Nova</span>}
                                 </div>
-                                <div className="message-item-subject">{message.subject}</div>
                                 <div className="message-item-meta">
                                     <Clock size={14} />
                                     {new Date(message.created_at).toLocaleDateString('pt-BR')}
@@ -130,7 +129,6 @@ function Messages() {
                     {selectedMessage ? (
                         <>
                             <div className="message-detail-header">
-                                <h2>{selectedMessage.subject}</h2>
                                 {selectedMessage.read_at ? (
                                     <span className="read-badge">
                                         <CheckCircle size={16} /> Lida

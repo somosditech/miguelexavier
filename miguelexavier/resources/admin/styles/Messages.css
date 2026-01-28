@@ -86,15 +86,6 @@
     font-weight: 600;
 }
 
-.message-item-subject {
-    color: #5a4a35;
-    font-size: 14px;
-    margin-bottom: 8px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 .message-item-meta {
     display: flex;
     align-items: center;

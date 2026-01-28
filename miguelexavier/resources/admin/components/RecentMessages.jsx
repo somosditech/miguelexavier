@@ -57,7 +57,6 @@ function RecentMessages({ messages = [], maxItems = 5 }) {
                             <span className="message-name">{message.name}</span>
                             {!message.read_at && <span className="unread-badge">Nova</span>}
                         </div>
-                        <p className="message-subject">{message.subject || message.message?.substring(0, 50) + '...'}</p>
                         <div className="message-footer">
                             <Clock size={14} />
                             <span>{formatTimeAgo(message.created_at)}</span>
@@ -78,7 +77,6 @@ RecentMessages.propTypes = {
         PropTypes.shape({
             id: PropTypes.number.isRequired,
             name: PropTypes.string.isRequired,
-            subject: PropTypes.string,
             message: PropTypes.string,
             created_at: PropTypes.string.isRequired,
             read_at: PropTypes.string

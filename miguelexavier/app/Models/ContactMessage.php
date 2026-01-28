@@ -10,8 +10,6 @@ class ContactMessage extends Model
         'name',
         'email',
         'phone',
-        'area_interesse',
-        'subject',
         'message',
         'read_at',
         'excluded', 

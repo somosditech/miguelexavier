@@ -91,13 +91,21 @@ function Hero() {
                                     key={index}
                                     href={button.href}
                                     className={button.primary ? 'btn-primary' : 'btn-secondary'}
-                                    whileHover={{ scale: 1.05 }} // Aumenta ao passar o mouse
-                                    whileTap={{ scale: 0.95 }}   // Diminui ao clicar
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
                                 >
                                     {button.text}
                                 </motion.a>
                             ))}
                         </motion.div>
+                        <motion.p
+                            className="cta-sub-description"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                        >
+                            Atendimento on-line - Sigilo absoluto
+                        </motion.p>
                     </motion.div>
                 </div>
             </div>

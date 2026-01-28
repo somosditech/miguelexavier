@@ -19,7 +19,7 @@
    ============================================ */
 
 .contact-form {
-    max-width: 800px;
+    max-width: 700px;
     margin: 0 auto;
     background: var(--color-background);
     padding: var(--spacing-2xl);
@@ -54,7 +54,6 @@
 }
 
 .form-input,
-.form-select,
 .form-textarea {
     padding: 8px 14px;
     /* Reduzido padding vertical de 10px para 8px - inputs mais finos */
@@ -67,17 +66,7 @@
     color: var(--color-text-primary);
 }
 
-.form-select {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23771220' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right var(--spacing-md) center;
-    padding-right: var(--spacing-2xl);
-}
-
 .form-input:focus,
-.form-select:focus,
 .form-textarea:focus {
     outline: none;
     border-color: var(--color-secondary);
@@ -86,7 +75,6 @@
 }
 
 .form-input:hover,
-.form-select:hover,
 .form-textarea:hover {
     border-color: var(--color-secondary);
 }

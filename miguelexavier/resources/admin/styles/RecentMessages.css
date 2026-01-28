@@ -77,7 +77,7 @@
     font-weight: 600;
 }
 
-.recent-messages .message-subject {
+.recent-messages {
     color: #64748b;
     font-size: 13px;
     margin: 0 0 6px 0;

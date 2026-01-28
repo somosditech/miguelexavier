@@ -19,8 +19,6 @@ function ContactForm() {
         name: '',
         email: '',
         phone: '',
-        areaInteresse: '',
-        subject: '',
         message: ''
     });
 
@@ -119,8 +117,6 @@ function ContactForm() {
                 name: '',
                 email: '',
                 phone: '',
-                areaInteresse: '',
-                subject: '',
                 message: ''
             });
         } catch (error) {
@@ -155,93 +151,53 @@ function ContactForm() {
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <div className="form-grid">
-                        {/* Nome */}
-                        <div className="form-group">
-                            <label htmlFor="name" className="form-label">
-                                Nome Completo *
-                            </label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                className="form-input"
-                                placeholder="Seu nome completo"
-                                required
-                            />
-                        </div>
-
-                        {/* Email */}
-                        <div className="form-group">
-                            <label htmlFor="email" className="form-label">
-                                Email *
-                            </label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                className="form-input"
-                                placeholder="seu@email.com"
-                                required
-                            />
-                        </div>
-
-                        {/* Telefone */}
-                        <div className="form-group">
-                            <label htmlFor="phone" className="form-label">
-                                Telefone
-                            </label>
-                            <input
-                                type="tel"
-                                id="phone"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleChange}
-                                className="form-input"
-                                placeholder="(11) 99999-9999"
-                            />
-                        </div>
-
-                        {/* Área de Interesse */}
-                        <div className="form-group">
-                            <label htmlFor="areaInteresse" className="form-label">
-                                Área de Interesse *
-                            </label>
-                            <select
-                                id="areaInteresse"
-                                name="areaInteresse"
-                                value={formData.areaInteresse}
-                                onChange={handleChange}
-                                className="form-select"
-                                required
-                            >
-                                <option value="">Selecione uma área</option>
-                                {mockAreasDeInteresse.map((area) => (
-                                    <option key={area.id} value={area.id}>
-                                        {area.label}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
-
-                    {/* Assunto - Largura Total */}
+                    {/* Nome */}
                     <div className="form-group">
-                        <label htmlFor="subject" className="form-label">
-                            Assunto
+                        <label htmlFor="name" className="form-label">
+                            Nome Completo *
                         </label>
                         <input
                             type="text"
-                            id="subject"
-                            name="subject"
-                            value={formData.subject}
+                            id="name"
+                            name="name"
+                            value={formData.name}
                             onChange={handleChange}
                             className="form-input"
-                            placeholder="Assunto da mensagem"
+                            placeholder="Seu nome completo"
+                            required
+                        />
+                    </div>
+
+                    {/* Email */}
+                    <div className="form-group">
+                        <label htmlFor="email" className="form-label">
+                            Email *
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="form-input"
+                            placeholder="seu@email.com"
+                            required
+                        />
+                    </div>
+
+                    {/* Telefone */}
+                    <div className="form-group">
+                        <label htmlFor="phone" className="form-label">
+                            Telefone
+                        </label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            className="form-input"
+                            placeholder="(11) 99999-9999"
                         />
                     </div>
 

@@ -3,7 +3,7 @@
  */
 
 .about {
-    background: var(--color-background);
+    background: linear-gradient(180deg, #f7fafc 0%, #edf2f7 100%);
 }
 
 .about-grid {

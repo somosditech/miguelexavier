@@ -55,8 +55,8 @@ export const mockHeader = {
     },
     navigation: [
         { id: 'inicio', label: 'Início', href: '#hero' },
-        { id: 'sobre', label: 'Sobre', href: '#about' },
         { id: 'servicos', label: 'Serviços', href: '#services' },
+        { id: 'sobre', label: 'Sobre', href: '#about' },
         { id: 'equipe', label: 'Equipe', href: '#team' },
         { id: 'contato', label: 'Contato', href: '#contact' }
     ],

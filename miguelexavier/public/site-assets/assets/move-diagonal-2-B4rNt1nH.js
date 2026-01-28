@@ -1,1 +1,0 @@
-import{c as e}from"./main-CeEiNw5O.js";const n=e("MoveDiagonal2",[["polyline",{points:"5 11 5 5 11 5",key:"ncfzxk"}],["polyline",{points:"19 13 19 19 13 19",key:"1mk7hk"}],["line",{x1:"5",x2:"19",y1:"5",y2:"19",key:"mcyte3"}]]);export{n as default};

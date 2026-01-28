@@ -17,14 +17,11 @@ class ContactController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:20',
-            'area_interesse' => 'nullable|string|max:255',
-            'subject' => 'nullable|string|max:255',
             'message' => 'required|string',
         ]);
 
         $validated['excluded'] = false;
 
-        // Salva mensagem no banco
         $contactMessage = ContactMessage::create($validated);
 
         // TODO: Enviar email para o escritório
