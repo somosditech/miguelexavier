@@ -12,17 +12,25 @@
  */
 
 import { Helmet } from 'react-helmet-async';
+import { useContent } from '../hooks/useContent';
 
 function SEO({
     title = 'Miguel & Xavier Advocacia - Excelência Jurídica',
     description = 'Escritório de advocacia com mais de 20 anos de experiência. Especialistas em Direito Empresarial, Família, Trabalhista, Imobiliário, Civil e Penal.',
-    keywords = 'advocacia, advogado, direito empresarial, direito de família, direito trabalhista, escritório de advocacia, advogado sp, consultoria jurídica',
-    image = 'https://miguelexavier.vercel.app/og-image.jpg',
-    url = 'https://miguelexavier.vercel.app',
+    keywords = 'advocacia, advogados, direito, consultoria jurídica, Miguel e Xavier, David Miguel, Ariane Xavier, processos jurídicos, direito trabalhista, direito previdenciário, direito do consumidor, direito de família, direito criminal, direito tributário, direito administrativo, direito empresarial, direito ambiental, direito imobiliário, direito internacional, direito digital, direito eleitoral, direito desportivo, direito do idoso, direito da criança e do adolescente, direito do trabalho, direito previdenciário, direito do consumidor, direito de família, direito criminal, direito tributário, direito administrativo, direito empresarial, direito ambiental, direito imobiliário, direito internacional, direito digital, direito eleitoral, direito desportivo, direito do idoso, direito da criança e do adolescente',
+    image = 'https://miguelexavier.adv.br/og-image.jpg',
+    url = 'https://miguelexavier.adv.br',
     type = 'website'
 }) {
     const siteName = 'Miguel & Xavier Advocacia';
-    const twitterHandle = '@miguelxavier'; // Atualizar com handle real
+    const { content: hero } = useContent('hero');
+
+    // Define a imagem para compartilhamento:
+    // 1. Usa a imagem passada como prop (se houver)
+    // 2. Usa a imagem de fundo do Hero
+    // 3. Fallback para og-image.jpg
+    const ogImage = image ||
+        (hero?.backgroundImage ? hero.backgroundImage : `${url}/og-image.jpg`);
 
     return (
         <Helmet>
@@ -39,18 +47,9 @@ function SEO({
             <meta property="og:url" content={url} />
             <meta property="og:title" content={title} />
             <meta property="og:description" content={description} />
-            <meta property="og:image" content={image} />
+            <meta property="og:image" content={ogImage} />
             <meta property="og:site_name" content={siteName} />
             <meta property="og:locale" content="pt_BR" />
-
-            {/* Twitter Card */}
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:url" content={url} />
-            <meta name="twitter:title" content={title} />
-            <meta name="twitter:description" content={description} />
-            <meta name="twitter:image" content={image} />
-            <meta name="twitter:site" content={twitterHandle} />
-            <meta name="twitter:creator" content={twitterHandle} />
 
             {/* Outras Meta Tags */}
             <meta name="robots" content="index, follow" />

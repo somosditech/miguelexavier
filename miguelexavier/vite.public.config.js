@@ -10,7 +10,13 @@ export default defineConfig({
         emptyOutDir: true,
         manifest: true,
         rollupOptions: {
-            input: 'resources/public-site/main.jsx'
+            input: 'resources/public-site/main.jsx',
+            output: {
+                manualChunks: {
+                    // Agrupa todos os ícones do lucide-react em um único arquivo
+                    'lucide': ['lucide-react']
+                }
+            }
         }
     },
     server: {
