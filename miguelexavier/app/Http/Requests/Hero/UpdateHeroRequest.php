@@ -22,7 +22,7 @@ class UpdateHeroRequest extends FormRequest
     {
         return [
             'title' => 'sometimes|string|max:255',
-            'subtitle' => 'sometimes|string|max:255',
+            'subtitle' => 'nullable|string|max:255',
             'description' => 'sometimes|string',
             'background_image_url' => 'sometimes|string|max:255',
             'cta_button_text' => 'sometimes|string|max:100',

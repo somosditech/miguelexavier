@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, PanelBottomClose, FileText, Wallpaper, Layers, Users, Star, MessageSquare, Palette } from 'lucide-react';
+import { LayoutDashboard, PanelBottomClose, FileText, Wallpaper, Layers, Users, Star, MessageSquare, Palette, AlertCircle, ClipboardCheck } from 'lucide-react';
 import { getUnreadMessagesCount } from '../services/adminApi';
 import '../styles/Sidebar.css';
 
@@ -57,6 +57,8 @@ function Sidebar() {
         { path: '/hero', icon: Wallpaper, label: 'Hero' },
         { path: '/about', icon: FileText, label: 'Sobre' },
         { path: '/services', icon: Layers, label: 'Serviços' },
+        { path: '/situations', icon: AlertCircle, label: 'Situações' },
+        { path: '/service-work', icon: ClipboardCheck, label: 'Atendimento' },
         { path: '/team', icon: Users, label: 'Equipe' },
         // { path: '/testimonials', icon: Star, label: 'Depoimentos' },
         { path: '/footer', icon: PanelBottomClose, label: 'Rodapé' },

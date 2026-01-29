@@ -23,7 +23,8 @@ Route::prefix('content')->group(function () {
     Route::get('/about', [PublicContentController::class, 'getAbout']);
     Route::get('/services', [PublicContentController::class, 'getServices']);
     Route::get('/team', [PublicContentController::class, 'getTeam']);
-    // Route::get('/testimonials', [PublicContentController::class, 'getTestimonials']);
+    Route::get('/situations', [PublicContentController::class, 'getSituations']);
+    Route::get('/service-work', [PublicContentController::class, 'getServiceWork']);
     Route::get('/footer', [PublicContentController::class, 'getFooter']);
     Route::get('/whatsapp', [PublicContentController::class, 'getWhatsapp']);
 });
@@ -78,8 +79,15 @@ Route::middleware('auth:api')->prefix('admin')->group(function () {
     // Team (CRUD completo)
     Route::apiResource('team', App\Http\Controllers\Admin\TeamMemberController::class);
 
-    // Testimonials (CRUD completo)
-    // Route::apiResource('testimonials', App\Http\Controllers\Admin\TestimonialController::class);
+    // Service Work (Fluxo de Atendimento)
+    Route::get('/service-work', [App\Http\Controllers\Admin\ServiceWorkController::class, 'show']);
+    Route::put('/service-work', [App\Http\Controllers\Admin\ServiceWorkController::class, 'update']);
+    Route::apiResource('service-work-items', App\Http\Controllers\Admin\ServiceWorkController::class)->except(['index', 'update', 'show']);
+
+    // Situations (Situações CTA)
+    Route::get('/situations', [App\Http\Controllers\Admin\SituationController::class, 'show']);
+    Route::put('/situations', [App\Http\Controllers\Admin\SituationController::class, 'update']);
+    Route::apiResource('situations-items', App\Http\Controllers\Admin\SituationController::class)->except(['index', 'update', 'show']);
 
     // Footer
     Route::get('/footer', [App\Http\Controllers\Admin\FooterController::class, 'show']);

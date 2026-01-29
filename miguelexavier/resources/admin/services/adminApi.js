@@ -215,6 +215,54 @@ export const deleteTeamMember = async (id) => {
 // };
 
 // ============================================
+// SITUATIONS
+// ============================================
+
+export const getSituation = async () => {
+    const response = await adminApi.get('/admin/situations');
+    return response.data.data;
+};
+
+export const createSituation = async (data) => {
+    const response = await adminApi.post('/admin/situations-items', data);
+    return response.data.data;
+};
+
+export const updateSituation = async (data) => {
+    const response = await adminApi.put('/admin/situations', data);
+    return response.data;
+};
+
+export const deleteSituation = async (id) => {
+    const response = await adminApi.delete(`/admin/situations/${id}`);
+    return response.data;
+};
+
+// ============================================
+// SERVICE WORK (Atendimento)
+// ============================================
+
+export const getServiceWork = async () => {
+    const response = await adminApi.get('/admin/service-work');
+    return response.data.data;
+};
+
+export const createServiceWork = async (data) => {
+    const response = await adminApi.post('/admin/service-work-items', data);
+    return response.data.data;
+};
+
+export const updateServiceWork = async (data) => {
+    const response = await adminApi.put('/admin/service-work', data);
+    return response.data;
+};
+
+export const deleteServiceWork = async (id) => {
+    const response = await adminApi.delete(`/admin/service-work/${id}`);
+    return response.data;
+};
+
+// ============================================
 // FOOTER
 // ============================================
 

@@ -153,7 +153,7 @@ function HeroEditor() {
                 </div>
 
                 <div className="form-field">
-                    <label>Subtítulo</label>
+                    <label>Subtítulo (opcional)</label>
                     <input
                         type="text"
                         value={hero?.subtitle || ''}

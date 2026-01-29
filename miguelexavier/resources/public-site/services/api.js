@@ -64,7 +64,9 @@ const fetchAllContent = async () => {
                 team: apiData.data.team || mockTeam,
                 testimonials: apiData.data.testimonials || mockTestimonials,
                 footer: apiData.data.footer || mockFooter,
-                whatsapp: apiData.data.whatsapp || mockWhatsapp
+                whatsapp: apiData.data.whatsapp || mockWhatsapp,
+                situations: apiData.data.situations,
+                serviceWork: apiData.data.serviceWork
             };
 
             return contentCache;
@@ -170,6 +172,26 @@ export const fetchFooter = async () => {
     }
 };
 
+export const fetchSituations = async () => {
+    try {
+        const content = await fetchAllContent();
+        return content?.situations;
+    } catch (error) {
+        console.error('Error fetching situations:', error);
+        return null;
+    }
+};
+
+export const fetchServiceWork = async () => {
+    try {
+        const content = await fetchAllContent();
+        return content?.serviceWork;
+    } catch (error) {
+        console.error('Error fetching service work:', error);
+        return null;
+    }
+};
+
 // ============================================
 // FUNÇÕES PARA ENVIAR DADOS
 // ============================================
@@ -198,5 +220,7 @@ export default {
     // fetchTestimonials,
     fetchFooter,
     submitContactForm,
-    fetchWhatsapp
+    fetchWhatsapp,
+    fetchSituations,
+    fetchServiceWork
 };

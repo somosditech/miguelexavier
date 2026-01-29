@@ -10,6 +10,8 @@ use App\Models\TeamMember;
 use App\Models\Testimonial;
 use App\Models\WhatsAppSetting;
 use App\Models\FooterContent;
+use App\Models\Situation;
+use App\Models\ServiceWork;
 
 class PublicContentController extends Controller
 {
@@ -29,6 +31,8 @@ class PublicContentController extends Controller
                 'testimonials' => Testimonial::orderBy('order')->get()->map(fn($t) => $this->mapTestimonial($t)),
                 'footer' => $this->mapFooter(FooterContent::first()),
                 'whatsapp' => $this->mapWhatsApp(WhatsAppSetting::first()),
+                'situations' => $this->mapSituation(Situation::first()),
+                'serviceWork' => $this->mapServiceWork(ServiceWork::first()),
             ]
         ]);
     }
@@ -119,6 +123,56 @@ class PublicContentController extends Controller
             'success' => true,
             'data' => $this->mapWhatsApp(WhatsAppSetting::first())
         ]);
+    }
+    /**
+     * Retorna conteúdo de Situações
+     */
+    public function getSituations()
+    {
+        return response()->json([
+            'success' => true,
+            'data' => $this->mapSituation(Situation::first())
+        ]);
+    }
+
+    /**
+     * Retorna conteúdo de Atendimento (Service Work)
+     */
+    public function getServiceWork()
+    {
+        return response()->json([
+            'success' => true,
+            'data' => $this->mapServiceWork(ServiceWork::first())
+        ]);
+    }
+
+    /**
+     * Mapeia Situation para camelCase
+     */
+    private function mapSituation($situation)
+    {
+        if (!$situation) return null;
+        return [
+            'id' => $situation->id,
+            'title' => $situation->title,
+            'content' => $situation->content ?? [],
+            'message' => $situation->message,
+            'ctaButtonText' => $situation->cta_button_text,
+        ];
+    }
+
+    /**
+     * Mapeia ServiceWork para camelCase
+     */
+    private function mapServiceWork($serviceWork)
+    {
+        if (!$serviceWork) return null;
+        return [
+            'id' => $serviceWork->id,
+            'title' => $serviceWork->title,
+            'content' => $serviceWork->content ?? [],
+            'ctaButtonText' => $serviceWork->cta_button_text,
+        ];
     }
 
     // ============================================

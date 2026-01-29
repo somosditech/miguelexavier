@@ -1,0 +1,1 @@
+import{c as e}from"./main-UXLCO5Zn.js";const i=e("MoveDiagonal",[["polyline",{points:"13 5 19 5 19 11",key:"11219e"}],["polyline",{points:"11 19 5 19 5 13",key:"sfq3wq"}],["line",{x1:"19",x2:"5",y1:"5",y2:"19",key:"1x9vlm"}]]);export{i as default};

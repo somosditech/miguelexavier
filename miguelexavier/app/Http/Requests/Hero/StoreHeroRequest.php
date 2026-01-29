@@ -23,7 +23,7 @@ class StoreHeroRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'subtitle' => 'required|string|max:255',
+            'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
             'background_image_url' => 'sometimes|string|max:500',
             'cta_button_text' => 'sometimes|string|max:100',

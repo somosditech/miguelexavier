@@ -22,7 +22,9 @@ import {
     fetchServices,
     fetchTeam,
     fetchFooter,
-    fetchWhatsapp
+    fetchWhatsapp,
+    fetchSituations,
+    fetchServiceWork
 } from '../services/api';
 
 // Mapeamento de seções para suas respectivas funções de busca
@@ -33,7 +35,9 @@ const contentFetchers = {
     services: fetchServices,
     team: fetchTeam,
     footer: fetchFooter,
-    whatsapp: fetchWhatsapp
+    whatsapp: fetchWhatsapp,
+    situations: fetchSituations,
+    serviceWork: fetchServiceWork
 };
 
 /**

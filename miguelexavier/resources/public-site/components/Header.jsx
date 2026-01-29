@@ -158,7 +158,7 @@ function Header() {
                         {theme?.logoUrl ? (
                             <img
                                 src={`/storage/${theme.logoUrl}`}
-                                alt="Miguel & Xavier Advocacia"
+                                alt="Logo de Miguel & Xavier Advocacia"
                                 className="logo-image"
                             />
                         ) : (

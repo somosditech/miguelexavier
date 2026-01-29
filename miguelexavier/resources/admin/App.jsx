@@ -15,6 +15,8 @@ import ThemeEditor from './pages/ThemeEditor';
 import Messages from './pages/Messages';
 import ProfileEditor from './pages/ProfileEditor';
 import WhatsAppEditor from './pages/WhatsAppEditor';
+import Situation from './pages/Situation';
+import ServiceWork from './pages/ServiceWork';
 
 function App() {
     return (
@@ -36,6 +38,8 @@ function App() {
                     <Route path="messages" element={<Messages />} />
                     <Route path="profile" element={<ProfileEditor />} />
                     <Route path="whatsapp" element={<WhatsAppEditor />} />
+                    <Route path="situations" element={<Situation />} />
+                    <Route path="service-work" element={<ServiceWork />} />
                 </Route>
             </Routes>
         </AuthProvider>
