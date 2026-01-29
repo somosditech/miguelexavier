@@ -7,6 +7,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Sidebar from './Sidebar';
 import Header from './Header';
+import PusherNotifications from './PusherNotifications';
 import '../styles/AdminLayout.css';
 
 function AdminLayout() {
@@ -42,6 +43,7 @@ function AdminLayout() {
                     <Outlet />
                 </main>
             </div>
+            <PusherNotifications />
         </div>
     );
 }

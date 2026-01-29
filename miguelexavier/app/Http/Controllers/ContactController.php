@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ContactMessage;
 use Illuminate\Support\Facades\Mail;
+use App\Events\NewContactMessage;
 
 class ContactController extends Controller
 {
@@ -23,6 +24,9 @@ class ContactController extends Controller
         $validated['excluded'] = false;
 
         $contactMessage = ContactMessage::create($validated);
+
+        // Disparar evento para notificar admin em tempo real
+        event(new NewContactMessage($contactMessage));
 
         // TODO: Enviar email para o escritório
         // Mail::to('contato@miguelxavier.adv.br')->send(new ContactFormMail($contactMessage));

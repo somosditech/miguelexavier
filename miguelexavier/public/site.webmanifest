@@ -1,0 +1,28 @@
+{
+    "name": "Miguel & Xavier Advocacia",
+    "short_name": "M&X",
+    "description": "Escritório de Advocacia especializado em soluções jurídicas",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#771220",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/favicon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ]
+}
