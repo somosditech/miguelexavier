@@ -116,6 +116,18 @@
     margin-top: var(--spacing-xs);
 }
 
+.button-whatsapp {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    padding: 1rem 3rem;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 15px rgba(119, 18, 32, 0.3);
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
 /* ============================================
    RESPONSIVIDADE
    ============================================ */

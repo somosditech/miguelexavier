@@ -39,8 +39,7 @@ function CookieBanner() {
     const [showSettings, setShowSettings] = useState(false);
     const [preferences, setPreferences] = useState({
         essential: true, // Sempre true, não pode ser desabilitado
-        analytics: false,
-        marketing: false
+        analytics: false
     });
 
     useEffect(() => {
@@ -61,14 +60,13 @@ function CookieBanner() {
             timestamp: new Date().toISOString(),
             preferences: {
                 essential: true,
-                analytics: true,
-                marketing: true
+                analytics: true
             }
         };
         localStorage.setItem('cookie_consent', JSON.stringify(consent));
         setShowBanner(false);
 
-        // Aqui você pode inicializar scripts de analytics/marketing
+        // Aqui você pode inicializar scripts de analytics
         initializeAnalytics();
     };
 
@@ -77,8 +75,7 @@ function CookieBanner() {
             timestamp: new Date().toISOString(),
             preferences: {
                 essential: true,
-                analytics: false,
-                marketing: false
+                analytics: false
             }
         };
         localStorage.setItem('cookie_consent', JSON.stringify(consent));
@@ -125,11 +122,11 @@ function CookieBanner() {
                     </div>
 
                     <div className="cookie-text">
-                        <h3>Este site usa cookies</h3>
+                        <h3>Privacidade e Cookies</h3>
                         <p>
-                            Utilizamos cookies para melhorar sua experiência, personalizar conteúdo e analisar nosso tráfego.
-                            Ao clicar em "Aceitar todos", você concorda com o uso de cookies conforme nossa{' '}
-                            <a href="#privacy" className="cookie-link">Política de Privacidade</a>.
+                            Este site utiliza cookies para garantir a melhor experiência.
+                            <strong>Não coletamos dados sensíveis</strong> (como CPF, RG, religião).
+                            Os dados informados (Nome, Email e Telefone) são utilizados <strong>exclusivamente para retorno de solicitações ou dúvidas</strong> e não serão usados para nenhum outro objetivo.
                         </p>
                     </div>
 
@@ -152,7 +149,7 @@ function CookieBanner() {
                             onClick={handleAcceptAll}
                             className="btn-accept"
                         >
-                            Aceitar todos
+                            Aceitar e Continuar
                         </button>
                     </div>
                 </div>
@@ -163,7 +160,7 @@ function CookieBanner() {
                 <div className="cookie-modal-overlay" onClick={() => setShowSettings(false)}>
                     <div className="cookie-modal" onClick={(e) => e.stopPropagation()}>
                         <div className="cookie-modal-header">
-                            <h2>Configurações de Cookies</h2>
+                            <h2>Configurações de Privacidade</h2>
                             <button
                                 onClick={() => setShowSettings(false)}
                                 className="btn-close"
@@ -175,8 +172,8 @@ function CookieBanner() {
 
                         <div className="cookie-modal-body">
                             <p className="cookie-modal-intro">
-                                Personalize suas preferências de cookies. Os cookies essenciais são necessários
-                                para o funcionamento básico do site e não podem ser desabilitados.
+                                Respeitamos sua privacidade. Coletamos apenas dados estritamente necessários (Nome, Email, Telefone) para contato direto.
+                                Não realizamos spam nem compartilhamos seus dados com terceiros para fins de marketing.
                             </p>
 
                             {/* Cookies Essenciais */}
@@ -202,31 +199,13 @@ function CookieBanner() {
                                 <div className="cookie-category-header">
                                     <div>
                                         <h3>Cookies de Análise</h3>
-                                        <p>Nos ajudam a entender como os visitantes usam o site</p>
+                                        <p>Nos ajudam a entender como os visitantes usam o site (dados anônimos)</p>
                                     </div>
                                     <label className="cookie-toggle">
                                         <input
                                             type="checkbox"
                                             checked={preferences.analytics}
                                             onChange={() => togglePreference('analytics')}
-                                        />
-                                        <span className="toggle-slider"></span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            {/* Cookies de Marketing */}
-                            <div className="cookie-category">
-                                <div className="cookie-category-header">
-                                    <div>
-                                        <h3>Cookies de Marketing</h3>
-                                        <p>Usados para personalizar anúncios e conteúdo</p>
-                                    </div>
-                                    <label className="cookie-toggle">
-                                        <input
-                                            type="checkbox"
-                                            checked={preferences.marketing}
-                                            onChange={() => togglePreference('marketing')}
                                         />
                                         <span className="toggle-slider"></span>
                                     </label>

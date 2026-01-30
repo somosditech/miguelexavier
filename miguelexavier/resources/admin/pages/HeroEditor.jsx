@@ -202,22 +202,12 @@ function HeroEditor() {
                 </div>
 
                 <div className="form-field">
-                    <label>Texto do Botão CTA</label>
+                    <label>Texto do Botão CTA (Redirecionamento configurado no menu <a href="/p_admin/whatsapp" style={{ color: 'rgb(79 70 255)', textDecoration: 'none' }}>WhatsApp</a>)</label>
                     <input
                         type="text"
                         value={hero?.cta_button_text || ''}
                         onChange={(e) => handleChange('cta_button_text', e.target.value)}
                         placeholder="Ex: Fale com um Advogado"
-                    />
-                </div>
-
-                <div className="form-field">
-                    <label>Link do Botão CTA</label>
-                    <input
-                        type="text"
-                        value={hero?.cta_button_href || ''}
-                        onChange={(e) => handleChange('cta_button_href', e.target.value)}
-                        placeholder="Ex: #contact"
                     />
                 </div>
 

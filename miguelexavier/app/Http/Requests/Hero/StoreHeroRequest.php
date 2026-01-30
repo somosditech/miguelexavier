@@ -27,7 +27,7 @@ class StoreHeroRequest extends FormRequest
             'description' => 'required|string',
             'background_image_url' => 'sometimes|string|max:500',
             'cta_button_text' => 'sometimes|string|max:100',
-            'cta_button_href' => 'sometimes|string|max:255',
+            'cta_button_href' => 'nullable|string|max:255',
         ];
     }
 

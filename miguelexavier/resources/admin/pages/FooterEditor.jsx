@@ -23,6 +23,16 @@ function FooterEditor() {
     const [privacyContent, setPrivacyContent] = useState('');
     const [termsContent, setTermsContent] = useState('');
 
+    const formatPhoneNumber = (value) => {
+        if (!value) return '';
+        const numbers = value.toString().replace(/\D/g, '');
+        const limit = numbers.slice(0, 11);
+
+        return limit
+            .replace(/^(\d{2})(\d)/g, '($1) $2')
+            .replace(/(\d)(\d{4})$/, '$1-$2');
+    };
+
     useEffect(() => {
         loadFooter();
     }, []);
@@ -52,7 +62,11 @@ function FooterEditor() {
     };
 
     const handleChange = (field, value) => {
-        setFooter({ ...footer, [field]: value });
+        let finalValue = value;
+        if (field === 'contact_phone') {
+            finalValue = formatPhoneNumber(value);
+        }
+        setFooter(prev => ({ ...prev, [field]: finalValue }));
     };
 
     const handleSave = async () => {
