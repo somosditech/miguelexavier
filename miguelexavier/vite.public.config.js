@@ -14,7 +14,11 @@ export default defineConfig({
             input: 'resources/public-site/main.jsx',
             output: {
                 manualChunks: {
-                    // Agrupa todos os ícones do lucide-react em um único arquivo
+                    // Separa bibliotecas do React
+                    'vendor-react': ['react', 'react-dom', 'react-router-dom', 'react-helmet-async'],
+                    // Separa bibliotecas de UI pesadas
+                    'vendor-ui': ['framer-motion', 'recharts'],
+                    // Agrupa ícones
                     'lucide': ['lucide-react']
                 }
             }

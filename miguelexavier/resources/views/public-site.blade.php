@@ -12,6 +12,11 @@
     <link rel="manifest" href="/site.webmanifest?v=2" />
     
     <title>Miguel & Xavier Advocacia</title>
+    
+    <!-- Preload Critical Fonts -->
+    <link rel="preload" href="/fonts/Trajan.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    
     @if($cssPath = vite_css('main.jsx', 'site'))
         <link rel="preload" href="{{ $cssPath }}" as="style">
         <link rel="stylesheet" href="{{ $cssPath }}">
