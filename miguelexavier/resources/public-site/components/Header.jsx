@@ -213,6 +213,7 @@ function Header() {
                         {/* Botão de call-to-action */}
                         <a
                             href={whatsappUrl}
+                            target="_blank"
                             className="btn-primary cta-button"
                         >
                             Fale conosco

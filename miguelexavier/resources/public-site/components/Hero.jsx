@@ -35,16 +35,30 @@ function Hero() {
     }
 
     return (
-        <section
-            id="hero"
-            className="hero"
-            style={{
-                // Define a imagem de fundo dinamicamente da API
-                backgroundImage: `url(${content.backgroundImage})`
-            }}
-        >
+        <section id="hero" className="hero">
+            {/* Imagem de Fundo Otimizada para LCP */}
+            {content.backgroundImage && (
+                <img
+                    src={content.backgroundImage}
+                    alt="Background"
+                    className="hero-bg-image"
+                    fetchpriority="high" // Alta prioridade para LCP
+                    loading="eager"      // Carregamento imediato
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        zIndex: 0,
+                        filter: 'brightness(0.6)' // Ajuste visual se necessário, ou usar overlay
+                    }}
+                />
+            )}
+
             {/* Overlay escuro sobre a imagem para melhorar legibilidade do texto */}
-            <div className="hero-overlay">
+            <div className="hero-overlay" style={{ zIndex: 1 }}>
                 <div className="container">
                     <motion.div
                         className="hero-content"
@@ -95,6 +109,7 @@ function Hero() {
                                 <motion.a
                                     key={index}
                                     href={whatsappUrl}
+                                    target="_blank"
                                     className='btn-primary button-whatsapp'
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}

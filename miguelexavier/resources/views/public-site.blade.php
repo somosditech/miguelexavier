@@ -13,6 +13,7 @@
     
     <title>Miguel & Xavier Advocacia</title>
     @if($cssPath = vite_css('main.jsx', 'site'))
+        <link rel="preload" href="{{ $cssPath }}" as="style">
         <link rel="stylesheet" href="{{ $cssPath }}">
     @endif
 </head>

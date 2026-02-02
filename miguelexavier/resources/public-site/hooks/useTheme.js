@@ -13,7 +13,7 @@
  * }
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { fetchTheme } from '../services/api';
 
 export const useTheme = () => {
@@ -26,8 +26,9 @@ export const useTheme = () => {
     // Estado para armazenar erros
     const [error, setError] = useState(null);
 
-    // useEffect executa quando o componente é montado
-    useEffect(() => {
+    // useLayoutEffect executa sincronicamente após todas as mutações do DOM
+    // Isso evita "piscas" visuais e múltiplos reflows ao aplicar o tema
+    useLayoutEffect(() => {
         // Função para carregar o tema
         const loadTheme = async () => {
             try {

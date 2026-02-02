@@ -9,6 +9,7 @@ export default defineConfig({
         outDir: '../../public/site-assets',
         emptyOutDir: true,
         manifest: true,
+        sourcemap: true, // Habilita source maps para corrigir erro no PageSpeed
         rollupOptions: {
             input: 'resources/public-site/main.jsx',
             output: {
