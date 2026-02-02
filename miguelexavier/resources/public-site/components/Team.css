@@ -148,7 +148,7 @@
 
 .member-role {
     font-size: 1rem;
-    color: var(--color-secondary);
+    color: var(--color-secondary-accessible);
     margin-bottom: 30px;
 }
 

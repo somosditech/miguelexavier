@@ -138,6 +138,9 @@ body {
   /* 36px */
   --font-5xl: 3rem;
   /* 48px */
+  
+  /* Cores acessíveis (Alto Contraste) */
+  --color-secondary-accessible: #85641B; /* Ouro escuro apara texto em fundo claro (Passa WCAG AA) */
 
   /* Sombras com dourado */
   --shadow-sm: 0 1px 2px 0 rgba(207, 167, 80, 0.1);
@@ -236,6 +239,21 @@ a:hover {
 /* Seção com espaçamento padrão */
 .section {
   padding: var(--spacing-3xl) 0;
+}
+
+/* Títulos de Seção Globais */
+.section-subtitle {
+  color: var(--color-secondary-accessible);
+  font-size: var(--font-base);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-sm);
+}
+
+.section-title {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
 }
 
 /* Botão primário */

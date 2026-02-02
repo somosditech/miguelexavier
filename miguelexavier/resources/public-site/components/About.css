@@ -40,19 +40,7 @@
    CONTEÚDO
    ============================================ */
 
-.section-subtitle {
-    color: var(--color-secondary);
-    font-size: var(--font-base);
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: var(--spacing-sm);
-}
-
-.section-title {
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-md);
-}
+/* .section-subtitle and .section-title moved to global index.css */
 
 .about-description {
     font-size: var(--font-lg);
