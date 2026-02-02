@@ -89,7 +89,9 @@ function ThemeEditor() {
                 setLogoError('Erro ao enviar logo');
             }
         } catch (error) {
-            console.error('Error uploading logo:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error uploading logo:', error);
+            }
             setLogoError('Erro ao enviar logo');
         } finally {
             setUploading(false);
