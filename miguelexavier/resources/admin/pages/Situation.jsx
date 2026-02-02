@@ -35,7 +35,9 @@ function Situation() {
                 });
             }
         } catch (error) {
-            console.error('Error loading situation:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error loading situation:', error);
+            }
             setMessage('Erro ao carregar dados');
         } finally {
             setLoading(false);

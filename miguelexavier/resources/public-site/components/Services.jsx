@@ -24,7 +24,9 @@ const DynamicIcon = ({ name, ...props }) => {
         const dynamicIcon = dynamicIconImports[iconName];
 
         if (!dynamicIcon) {
-            console.warn(`Ícone "${name}" (convertido para "${iconName}") não encontrado em lucide-react.`);
+            if (import.meta.env.DEV) {
+                console.warn(`Ícone "${name}" (convertido para "${iconName}") não encontrado em lucide-react.`);
+            }
             return lazy(dynamicIconImports['briefcase']); // Fallback
         }
 

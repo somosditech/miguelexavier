@@ -63,7 +63,9 @@ function ProfileEditor() {
                 setPhotoPreview(`/storage/${data.profile_photo}`);
             }
         } catch (error) {
-            console.error('Erro ao carregar perfil:', error);
+            if (import.meta.env.DEV) {
+                console.error('Erro ao carregar perfil:', error);
+            }
             setMessage('Erro ao carregar perfil');
         } finally {
             setLoading(false);
@@ -99,7 +101,9 @@ function ProfileEditor() {
             setPhotoPreview(`/storage/${response.data.profile_photo}`);
 
         } catch (error) {
-            console.error('Erro ao fazer upload:', error);
+            if (import.meta.env.DEV) {
+                console.error('Erro ao fazer upload:', error);
+            }
 
             // Trata erros de validação
             if (error.response?.data?.errors) {
@@ -174,7 +178,9 @@ function ProfileEditor() {
             }));
 
         } catch (error) {
-            console.error('Erro ao atualizar:', error);
+            if (import.meta.env.DEV) {
+                console.error('Erro ao atualizar:', error);
+            }
 
             // Trata erros de validação
             if (error.response?.data?.errors) {

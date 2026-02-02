@@ -28,7 +28,9 @@ function MessagesChart() {
             const data = await getMessagesStats();
             setStats(data);
         } catch (error) {
-            console.error('Error loading stats:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error loading stats:', error);
+            }
         } finally {
             setLoading(false);
         }

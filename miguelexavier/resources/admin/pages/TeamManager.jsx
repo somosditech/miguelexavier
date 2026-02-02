@@ -45,7 +45,9 @@ function TeamManager() {
             const data = await getTeamMembers();
             setMembers(data);
         } catch (error) {
-            console.error('Error loading members:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error loading members:', error);
+            }
         } finally {
             setLoading(false);
         }
@@ -128,7 +130,9 @@ function TeamManager() {
                 setMessage('Erro ao enviar foto');
             }
         } catch (error) {
-            console.error('Error uploading photo:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error uploading photo:', error);
+            }
             setMessage('Erro ao enviar foto');
         } finally {
             setUploading(false);
@@ -148,7 +152,9 @@ function TeamManager() {
             handleCancel();
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
-            console.error('Error saving member:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error saving member:', error);
+            }
 
             // Extrai mensagem de erro do backend
             let errorMessage = 'Erro ao salvar membro';
@@ -193,7 +199,9 @@ function TeamManager() {
             loadMembers();
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
-            console.error('Error deleting member:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error deleting member:', error);
+            }
             setMessage('Erro ao deletar membro');
         }
     };

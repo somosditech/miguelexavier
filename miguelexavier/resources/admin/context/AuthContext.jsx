@@ -40,7 +40,9 @@ export const AuthProvider = ({ children }) => {
             setUser(response.user);
             setIsAuthenticated(true);
         } catch (error) {
-            console.error('Auth check failed:', error);
+            if (import.meta.env.DEV) {
+                console.error('Auth check failed:', error);
+            }
             localStorage.removeItem('admin_token');
             localStorage.removeItem('admin_user');
         } finally {
@@ -65,7 +67,9 @@ export const AuthProvider = ({ children }) => {
                 message: response?.message || 'Credenciais inválidas'
             };
         } catch (error) {
-            console.error('Login error:', error);
+            if (import.meta.env.DEV) {
+                console.error('Login error:', error);
+            }
 
             // Trata diferentes tipos de erro
             if (error.response) {
@@ -86,7 +90,9 @@ export const AuthProvider = ({ children }) => {
         try {
             await apiLogout();
         } catch (error) {
-            console.error('Logout error:', error);
+            if (import.meta.env.DEV) {
+                console.error('Logout error:', error);
+            }
         } finally {
             setUser(null);
             setIsAuthenticated(false);

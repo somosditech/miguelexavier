@@ -38,7 +38,9 @@ function TestimonialsManager() {
             const data = await getTestimonials();
             setTestimonials(data);
         } catch (error) {
-            console.error('Error loading testimonials:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error loading testimonials:', error);
+            }
         } finally {
             setLoading(false);
         }
@@ -84,7 +86,9 @@ function TestimonialsManager() {
             handleCancel();
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
-            console.error('Error saving testimonial:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error saving testimonial:', error);
+            }
 
             // Extrai mensagem de erro do backend
             let errorMessage = 'Erro ao salvar depoimento';
@@ -129,7 +133,9 @@ function TestimonialsManager() {
             loadTestimonials();
             setTimeout(() => setMessage(''), 3000);
         } catch (error) {
-            console.error('Error deleting testimonial:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error deleting testimonial:', error);
+            }
             setMessage('Erro ao deletar depoimento');
         }
     };

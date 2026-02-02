@@ -73,7 +73,9 @@ export const useContent = (section) => {
                 setContent(data);
                 setError(null);
             } catch (err) {
-                console.error(`Erro ao carregar conteúdo da seção ${section}:`, err);
+                if (import.meta.env.DEV) {
+                    console.error(`Erro ao carregar conteúdo da seção ${section}:`, err);
+                }
                 setError(err.message);
             } finally {
                 setLoading(false);

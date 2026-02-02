@@ -73,9 +73,11 @@ function AboutEditor() {
                 } else if (error.response?.data?.message) {
                     setMessage(error.response.data.message);
                 } else {
-                    console.log(result);
-                    console.log(result.errors);
-                    console.log(result.message);
+                    if (import.meta.env.DEV) {
+                        console.log(result);
+                        console.log(result.errors);
+                        console.log(result.message);
+                    }
                     setMessage('Erro ao salvar Foto');
                 }
             }
@@ -85,9 +87,11 @@ function AboutEditor() {
             } else if (error.response?.data?.message) {
                 setMessage(error.response.data.message);
             } else {
-                console.log(error);
-                console.log(error.errors);
-                console.log(error.message);
+                if (import.meta.env.DEV) {
+                    console.log(error);
+                    console.log(error.errors);
+                    console.log(error.message);
+                }
                 setMessage('Erro ao salvar Foto');
             }
         } finally {

@@ -50,7 +50,9 @@ export const useTheme = () => {
 
                 setError(null);
             } catch (err) {
-                console.error('Erro ao carregar tema:', err);
+                if (import.meta.env.DEV) {
+                    console.error('Erro ao carregar tema:', err);
+                }
                 setError(err.message);
             } finally {
                 setLoading(false);

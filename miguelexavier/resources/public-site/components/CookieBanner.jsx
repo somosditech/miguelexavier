@@ -98,8 +98,9 @@ function CookieBanner() {
     };
 
     const initializeAnalytics = () => {
-        // Aqui você pode adicionar Google Analytics, etc
-        console.log('Analytics initialized');
+        if (import.meta.env.DEV) {
+            console.log('Analytics initialized');
+        }
     };
 
     const togglePreference = (key) => {

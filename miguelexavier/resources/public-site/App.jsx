@@ -28,17 +28,14 @@ import SkipLink from './components/SkipLink';
 import CookieBanner from './components/CookieBanner';
 
 function App() {
-    // Carrega o tema (cores) da API
-    // O hook useTheme aplica as cores automaticamente no documento
     const { theme, loading, error } = useTheme();
 
-    // Se houver erro ao carregar o tema, mostra mensagem
     if (error) {
-        console.error('Erro ao carregar tema:', error);
-        // Continua mesmo com erro, usando cores padrão do CSS
+        if (import.meta.env.DEV) {
+            console.error('Erro ao carregar tema:', error);
+        }
     }
 
-    // Enquanto carrega o tema, mostra um skeleton loading
     if (loading) {
         return <LoadingSkeleton />;
     }

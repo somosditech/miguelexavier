@@ -21,7 +21,9 @@ function Messages() {
             const data = await getContactMessages();
             setMessages(data);
         } catch (error) {
-            console.error('Error loading messages:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error loading messages:', error);
+            }
         } finally {
             setLoading(false);
         }
@@ -56,7 +58,9 @@ function Messages() {
             setIsModalOpen(false);
             setMessageToDelete(null);
         } catch (error) {
-            console.error('Error deleting message:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error deleting message:', error);
+            }
         }
     };
 
@@ -69,7 +73,9 @@ function Messages() {
             // Atualiza o contador na sidebar/header
             window.dispatchEvent(new CustomEvent('messageRead'));
         } catch (error) {
-            console.error('Error marking as read:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error marking as read:', error);
+            }
         }
     };
 

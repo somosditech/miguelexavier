@@ -12,7 +12,9 @@ export function registerServiceWorker() {
             navigator.serviceWorker
                 .register('/service-worker.js')
                 .then((registration) => {
-                    console.log('✅ Service Worker registrado com sucesso:', registration.scope);
+                    if (import.meta.env.DEV) {
+                        console.log('✅ Service Worker registrado com sucesso:', registration.scope);
+                    }
 
                     // Verifica atualizações a cada 1 hora
                     setInterval(() => {
@@ -26,7 +28,9 @@ export function registerServiceWorker() {
                         newWorker.addEventListener('statechange', () => {
                             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                                 // Nova versão disponível
-                                console.log('🔄 Nova versão disponível! Recarregue a página.');
+                                if (import.meta.env.DEV) {
+                                    console.log('🔄 Nova versão disponível! Recarregue a página.');
+                                }
 
                                 // Opcional: Mostrar notificação ao usuário
                                 if (confirm('Nova versão disponível! Deseja atualizar agora?')) {
@@ -38,17 +42,23 @@ export function registerServiceWorker() {
                     });
                 })
                 .catch((error) => {
-                    console.error('❌ Erro ao registrar Service Worker:', error);
+                    if (import.meta.env.DEV) {
+                        console.error('❌ Erro ao registrar Service Worker:', error);
+                    }
                 });
 
             // Listener para quando o Service Worker tomar controle
             navigator.serviceWorker.addEventListener('controllerchange', () => {
-                console.log('🔄 Service Worker atualizado, recarregando...');
+                if (import.meta.env.DEV) {
+                    console.log('🔄 Service Worker atualizado, recarregando...');
+                }
                 window.location.reload();
             });
         });
     } else {
-        console.warn('⚠️ Service Workers não são suportados neste navegador');
+        if (import.meta.env.DEV) {
+            console.warn('⚠️ Service Workers não são suportados neste navegador');
+        }
     }
 }
 
@@ -58,10 +68,14 @@ export function unregisterServiceWorker() {
         navigator.serviceWorker.ready
             .then((registration) => {
                 registration.unregister();
-                console.log('Service Worker desregistrado');
+                if (import.meta.env.DEV) {
+                    console.log('Service Worker desregistrado');
+                }
             })
             .catch((error) => {
-                console.error('Erro ao desregistrar Service Worker:', error);
+                if (import.meta.env.DEV) {
+                    console.error('Erro ao desregistrar Service Worker:', error);
+                }
             });
     }
 }

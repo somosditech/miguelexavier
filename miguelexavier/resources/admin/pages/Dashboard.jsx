@@ -42,7 +42,9 @@ function Dashboard() {
             // Mostrar todas as mensagens (não apenas não lidas)
             setRecentMessages(messages || []);
         } catch (error) {
-            console.error('Error loading dashboard data:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error loading dashboard data:', error);
+            }
         } finally {
             setLoading(false);
         }

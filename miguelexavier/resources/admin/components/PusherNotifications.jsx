@@ -14,7 +14,9 @@ export const usePusherNotifications = () => {
         const pusherCluster = import.meta.env.VITE_PUSHER_APP_CLUSTER;
 
         if (!pusherKey || !pusherCluster) {
-            console.warn('Pusher credentials not configured');
+            if (import.meta.env.DEV) {
+                console.warn('Pusher credentials not configured');
+            }
             return;
         }
 

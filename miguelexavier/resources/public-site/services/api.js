@@ -74,7 +74,9 @@ const fetchAllContent = async () => {
 
         return null;
     } catch (error) {
-        console.error('Error fetching content:', error);
+        if (import.meta.env.DEV) {
+            console.error('Error fetching content:', error);
+        }
         return null;
     }
 };
@@ -88,7 +90,9 @@ export const fetchTheme = async () => {
         const content = await fetchAllContent();
         return content?.theme || mockTheme;
     } catch (error) {
-        console.error('Error fetching theme:', error);
+        if (import.meta.env.DEV) {
+            console.error('Error fetching theme:', error);
+        }
         return mockTheme;
     }
 };
@@ -97,7 +101,9 @@ export const fetchHeader = async () => {
     try {
         return mockHeader; // Header ainda usa mock
     } catch (error) {
-        console.error('Error fetching header:', error);
+        if (import.meta.env.DEV) {
+            console.error('Error fetching header:', error);
+        }
         return mockHeader;
     }
 };
@@ -107,7 +113,9 @@ export const fetchHero = async () => {
         const content = await fetchAllContent();
         return content?.hero || mockHero;
     } catch (error) {
-        console.error('Error fetching hero:', error);
+        if (import.meta.env.DEV) {
+            console.error('Error fetching hero:', error);
+        }
         return mockHero;
     }
 };
@@ -117,7 +125,9 @@ export const fetchAbout = async () => {
         const content = await fetchAllContent();
         return content?.about || mockAbout;
     } catch (error) {
-        console.error('Error fetching about:', error);
+        if (import.meta.env.DEV) {
+            console.error('Error fetching about:', error);
+        }
         return mockAbout;
     }
 };
@@ -127,7 +137,9 @@ export const fetchServices = async () => {
         const content = await fetchAllContent();
         return content?.services || mockServices;
     } catch (error) {
-        console.error('Error fetching services:', error);
+        if (import.meta.env.DEV) {
+            console.error('Error fetching services:', error);
+        }
         return mockServices;
     }
 };
@@ -137,7 +149,9 @@ export const fetchTeam = async () => {
         const content = await fetchAllContent();
         return content?.team || mockTeam;
     } catch (error) {
-        console.error('Error fetching team:', error);
+        if (import.meta.env.DEV) {
+            console.error('Error fetching team:', error);
+        }
         return mockTeam;
     }
 };
@@ -147,27 +161,21 @@ export const fetchWhatsapp = async () => {
         const content = await fetchAllContent();
         return content?.whatsapp || mockWhatsapp;
     } catch (error) {
-        console.error('Error fetching whatsapp:', error);
+        if (import.meta.env.DEV) {
+            console.error('Error fetching whatsapp:', error);
+        }
         return mockWhatsapp;
     }
 };
-
-// export const fetchTestimonials = async () => {
-//     try {
-//         const content = await fetchAllContent();
-//         return content?.testimonials || mockTestimonials;
-//     } catch (error) {
-//         console.error('Error fetching testimonials:', error);
-//         return mockTestimonials;
-//     }
-// };
 
 export const fetchFooter = async () => {
     try {
         const content = await fetchAllContent();
         return content?.footer || mockFooter;
     } catch (error) {
-        console.error('Error fetching footer:', error);
+        if (import.meta.env.DEV) {
+            console.error('Error fetching footer:', error);
+        }
         return mockFooter;
     }
 };
@@ -177,7 +185,9 @@ export const fetchSituations = async () => {
         const content = await fetchAllContent();
         return content?.situations;
     } catch (error) {
-        console.error('Error fetching situations:', error);
+        if (import.meta.env.DEV) {
+            console.error('Error fetching situations:', error);
+        }
         return null;
     }
 };
@@ -187,7 +197,9 @@ export const fetchServiceWork = async () => {
         const content = await fetchAllContent();
         return content?.serviceWork;
     } catch (error) {
-        console.error('Error fetching service work:', error);
+        if (import.meta.env.DEV) {
+            console.error('Error fetching service work:', error);
+        }
         return null;
     }
 };
@@ -201,7 +213,9 @@ export const submitContactForm = async (formData) => {
         const response = await api.post('/contact', formData);
         return response.data;
     } catch (error) {
-        console.error('Error submitting contact form:', error);
+        if (import.meta.env.DEV) {
+            console.error('Error submitting contact form:', error);
+        }
         throw error;
     }
 };
@@ -217,7 +231,6 @@ export default {
     fetchAbout,
     fetchServices,
     fetchTeam,
-    // fetchTestimonials,
     fetchFooter,
     submitContactForm,
     fetchWhatsapp,

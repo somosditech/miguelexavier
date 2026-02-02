@@ -32,7 +32,9 @@ function Header() {
                 const themeData = await fetchTheme();
                 setTheme(themeData);
             } catch (error) {
-                console.error('Error loading theme:', error);
+                if (import.meta.env.DEV) {
+                    console.error('Error loading theme:', error);
+                }
             }
         };
         loadTheme();

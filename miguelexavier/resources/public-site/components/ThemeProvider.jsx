@@ -19,7 +19,9 @@ function ThemeProvider({ children }) {
             setTheme(themeData);
             applyTheme(themeData);
         } catch (error) {
-            console.error('Error loading theme:', error);
+            if (import.meta.env.DEV) {
+                console.error('Error loading theme:', error);
+            }
         }
     };
 
