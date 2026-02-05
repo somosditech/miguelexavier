@@ -15,8 +15,8 @@ use App\Http\Controllers\ContactController;
 // ROTAS PÚBLICAS (sem autenticação)
 // ============================================
 
-// Conteúdo do site
-Route::prefix('content')->group(function () {
+// Conteúdo do site (300 requisições por minuto - permite ~30 visitantes simultâneos)
+Route::prefix('content')->middleware('throttle.custom:300,1')->group(function () {
     Route::get('/', [PublicContentController::class, 'getAll']);
     Route::get('/theme', [PublicContentController::class, 'getTheme']);
     Route::get('/hero', [PublicContentController::class, 'getHero']);
@@ -29,33 +29,35 @@ Route::prefix('content')->group(function () {
     Route::get('/whatsapp', [PublicContentController::class, 'getWhatsapp']);
 });
 
-// Formulário de contato
-Route::post('/contact', [ContactController::class, 'store']);
-
-// TESTE: Upload sem autenticação (REMOVER DEPOIS)
-Route::post('/test-upload', [App\Http\Controllers\Admin\UploadController::class, 'uploadLogo']);
-Route::post('/upload-team-photo', [App\Http\Controllers\Admin\UploadController::class, 'uploadTeamPhoto']);
+// Formulário de contato (3 envios por hora + honeypot)
+Route::post('/contact', [ContactController::class, 'store'])
+    ->middleware(['honeypot', 'throttle.custom:3,60']);
 
 // ============================================
 // ROTAS DE AUTENTICAÇÃO
 // ============================================
 
 Route::prefix('auth')->group(function () {
-    Route::post('/login', [AuthController::class, 'login']);
+    // Login limitado a 5 tentativas por minuto
+    Route::post('/login', [AuthController::class, 'login'])
+        ->middleware('throttle.custom:5,1');
+    
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
     Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api');
     Route::get('/me', [AuthController::class, 'me'])->middleware('auth:api');
     
-    // Recuperação de senha
-    Route::post('/password/email', [App\Http\Controllers\Admin\PasswordResetController::class, 'sendResetLink']);
-    Route::post('/password/reset', [App\Http\Controllers\Admin\PasswordResetController::class, 'reset']);
+    // Recuperação de senha (5 tentativas por minuto)
+    Route::post('/password/email', [App\Http\Controllers\Admin\PasswordResetController::class, 'sendResetLink'])
+        ->middleware('throttle.custom:5,1');
+    Route::post('/password/reset', [App\Http\Controllers\Admin\PasswordResetController::class, 'reset'])
+        ->middleware('throttle.custom:5,1');
 });
 
 // ============================================
-// ROTAS ADMIN (protegidas por JWT)
+// ROTAS ADMIN (protegidas por JWT + rate limiting 100 req/min)
 // ============================================
 
-Route::middleware('auth:api')->prefix('admin')->group(function () {
+Route::middleware(['auth:api', 'throttle.custom:100,1'])->prefix('admin')->group(function () {
     // Upload
     Route::post('/upload/logo', [App\Http\Controllers\Admin\UploadController::class, 'uploadLogo']);
     

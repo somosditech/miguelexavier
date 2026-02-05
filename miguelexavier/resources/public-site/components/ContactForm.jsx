@@ -19,7 +19,8 @@ function ContactForm() {
         name: '',
         email: '',
         phone: '',
-        message: ''
+        message: '',
+        website: '' // Campo honeypot - deve permanecer vazio
     });
 
     // Estado para controlar o envio
@@ -117,7 +118,8 @@ function ContactForm() {
                 name: '',
                 email: '',
                 phone: '',
-                message: ''
+                message: '',
+                website: ''
             });
         } catch (error) {
             // Erro
@@ -200,6 +202,24 @@ function ContactForm() {
                             placeholder="(11) 99999-9999"
                         />
                     </div>
+
+                    {/* Campo Honeypot - Invisível para usuários, visível para bots */}
+                    <input
+                        type="text"
+                        name="website"
+                        value={formData.website}
+                        onChange={handleChange}
+                        style={{
+                            position: 'absolute',
+                            left: '-9999px',
+                            width: '1px',
+                            height: '1px',
+                            opacity: 0
+                        }}
+                        tabIndex="-1"
+                        autoComplete="off"
+                        aria-hidden="true"
+                    />
 
                     {/* Mensagem */}
                     <div className="form-group">

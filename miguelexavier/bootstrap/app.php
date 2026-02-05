@@ -13,6 +13,15 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->append(\Illuminate\Http\Middleware\HandleCors::class);
+        
+        // Middlewares de segurança
+        $middleware->append(\App\Http\Middleware\SecurityHeadersMiddleware::class);
+        
+        // Aliases para throttle customizado
+        $middleware->alias([
+            'throttle.custom' => \App\Http\Middleware\CustomThrottle::class,
+            'honeypot' => \App\Http\Middleware\HoneypotMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
