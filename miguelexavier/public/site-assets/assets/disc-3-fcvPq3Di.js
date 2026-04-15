@@ -1,0 +1,2 @@
+import{c}from"./main-BRJKKjvY.js";import"./vendor-ui-Msgoh0Zx.js";import"./vendor-react-DceWNovG.js";const t=c("Disc3",[["circle",{cx:"12",cy:"12",r:"10",key:"1mglay"}],["path",{d:"M6 12c0-1.7.7-3.2 1.8-4.2",key:"oqkarx"}],["circle",{cx:"12",cy:"12",r:"2",key:"1c9p78"}],["path",{d:"M18 12c0 1.7-.7 3.2-1.8 4.2",key:"1eah9h"}]]);export{t as default};
+//# sourceMappingURL=disc-3-fcvPq3Di.js.map

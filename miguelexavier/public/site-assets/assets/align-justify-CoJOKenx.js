@@ -1,0 +1,2 @@
+import{c as y}from"./main-BRJKKjvY.js";import"./vendor-ui-Msgoh0Zx.js";import"./vendor-react-DceWNovG.js";const n=y("AlignJustify",[["line",{x1:"3",x2:"21",y1:"6",y2:"6",key:"4m8b97"}],["line",{x1:"3",x2:"21",y1:"12",y2:"12",key:"10d38w"}],["line",{x1:"3",x2:"21",y1:"18",y2:"18",key:"kwyyxn"}]]);export{n as default};
+//# sourceMappingURL=align-justify-CoJOKenx.js.map

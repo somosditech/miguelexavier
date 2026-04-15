@@ -375,10 +375,20 @@ export const updateWhatsAppSettings = async (data) => {
     return response.data;
 };
 
-export const createWhatsAppSettings = async (data) => {
-    const response = await adminApi.post('/admin/whatsapp', data);
+// ============================================
+// HOTSITE LINKS
+// ============================================
+
+export const fetchHotsiteLinks = async () => {
+    const response = await adminApi.get('/admin/hotsite-links');
+    // API returns {success:true, data:[...]}
+    return response.data.data;
+};
+
+export const updateHotsiteLink = async (id, data) => {
+    const response = await adminApi.put(`/admin/hotsite-links/${id}`, data);
     return response.data;
-}
+};
 
 export default adminApi;
 

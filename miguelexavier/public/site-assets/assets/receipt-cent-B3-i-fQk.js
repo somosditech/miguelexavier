@@ -1,0 +1,2 @@
+import{c as e}from"./main-BRJKKjvY.js";import"./vendor-ui-Msgoh0Zx.js";import"./vendor-react-DceWNovG.js";const c=e("ReceiptCent",[["path",{d:"M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z",key:"q3az6g"}],["path",{d:"M12 6.5v11",key:"ecfhkf"}],["path",{d:"M15 9.4a4 4 0 1 0 0 5.2",key:"1makmb"}]]);export{c as default};
+//# sourceMappingURL=receipt-cent-B3-i-fQk.js.map

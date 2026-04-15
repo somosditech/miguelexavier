@@ -1,0 +1,2 @@
+import{c as t}from"./main-BRJKKjvY.js";import"./vendor-ui-Msgoh0Zx.js";import"./vendor-react-DceWNovG.js";const r=t("DraftingCompass",[["circle",{cx:"12",cy:"5",r:"2",key:"f1ur92"}],["path",{d:"m3 21 8.02-14.26",key:"1ssaw4"}],["path",{d:"m12.99 6.74 1.93 3.44",key:"iwagvd"}],["path",{d:"M19 12c-3.87 4-10.13 4-14 0",key:"1tsu18"}],["path",{d:"m21 21-2.16-3.84",key:"vylbct"}]]);export{r as default};
+//# sourceMappingURL=drafting-compass-akLrdUl1.js.map

@@ -1,0 +1,2 @@
+import{c as e}from"./main-BRJKKjvY.js";import"./vendor-ui-Msgoh0Zx.js";import"./vendor-react-DceWNovG.js";const r=e("FileCode",[["path",{d:"M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z",key:"1rqfz7"}],["path",{d:"M14 2v4a2 2 0 0 0 2 2h4",key:"tnqrlb"}],["path",{d:"m10 13-2 2 2 2",key:"17smn8"}],["path",{d:"m14 17 2-2-2-2",key:"14mezr"}]]);export{r as default};
+//# sourceMappingURL=file-code-DfdFq2rn.js.map

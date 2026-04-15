@@ -12,6 +12,7 @@ use App\Models\WhatsAppSetting;
 use App\Models\FooterContent;
 use App\Models\Situation;
 use App\Models\ServiceWork;
+use App\Models\HotsiteLink;
 
 class PublicContentController extends Controller
 {
@@ -143,6 +144,27 @@ class PublicContentController extends Controller
         return response()->json([
             'success' => true,
             'data' => $this->mapServiceWork(ServiceWork::first())
+        ]);
+    }
+
+    /**
+     * Retorna links ativos do hotsite
+     */
+    public function getHotsiteLinks()
+    {
+        $links = HotsiteLink::where('is_active', true)
+            ->orderBy('order')
+            ->get()
+            ->map(fn($link) => [
+                'id'    => $link->id,
+                'label' => $link->label,
+                'url'   => $link->url,
+                'icon'  => $link->icon,
+            ]);
+
+        return response()->json([
+            'success' => true,
+            'data'    => $links,
         ]);
     }
 

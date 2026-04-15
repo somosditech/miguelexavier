@@ -14,9 +14,10 @@ import FooterEditor from './pages/FooterEditor';
 import ThemeEditor from './pages/ThemeEditor';
 import Messages from './pages/Messages';
 import ProfileEditor from './pages/ProfileEditor';
-import WhatsAppEditor from './pages/WhatsAppEditor';
+import HotsiteEditor from './pages/HotsiteEditor';
 import Situation from './pages/Situation';
 import ServiceWork from './pages/ServiceWork';
+import WhatsAppEditor from './pages/WhatsAppEditor';
 
 function App() {
     return (
@@ -37,9 +38,10 @@ function App() {
                     <Route path="theme" element={<ThemeEditor />} />
                     <Route path="messages" element={<Messages />} />
                     <Route path="profile" element={<ProfileEditor />} />
-                    <Route path="whatsapp" element={<WhatsAppEditor />} />
+                    <Route path="hotsite" element={<HotsiteEditor />} />
                     <Route path="situations" element={<Situation />} />
                     <Route path="service-work" element={<ServiceWork />} />
+                    <Route path="whatsapp" element={<WhatsAppEditor />} />
                 </Route>
             </Routes>
         </AuthProvider>

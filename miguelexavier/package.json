@@ -4,11 +4,13 @@
     "type": "module",
     "scripts": {
         "dev": "concurrently -c \"#93c5fd,#c4b5fd\" \"npm run site:dev\" \"npm run admin:dev\" --names=site,admin",
-        "build": "npm run site:build && npm run admin:build",
+        "build": "npm run site:build && npm run admin:build && npm run hotsite:build",
         "site:dev": "vite --config vite.public.config.js",
         "site:build": "vite build --config vite.public.config.js",
         "admin:dev": "vite --config vite.admin.config.js",
-        "admin:build": "vite build --config vite.admin.config.js"
+        "admin:build": "vite build --config vite.admin.config.js",
+        "hotsite:dev": "vite --config vite.hotsite.config.js",
+        "hotsite:build": "vite build --config vite.hotsite.config.js"
     },
     "dependencies": {
         "framer-motion": "^12.26.2",

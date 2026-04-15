@@ -27,11 +27,12 @@ Route::prefix('content')->middleware('throttle.custom:300,1')->group(function ()
     Route::get('/service-work', [PublicContentController::class, 'getServiceWork']);
     Route::get('/footer', [PublicContentController::class, 'getFooter']);
     Route::get('/whatsapp', [PublicContentController::class, 'getWhatsapp']);
+    Route::get('/hotsite-links', [PublicContentController::class, 'getHotsiteLinks']);
 });
 
-// Formulário de contato (3 envios por hora + honeypot)
+// Formulário de contato ( envios por hora + honeypot)
 Route::post('/contact', [ContactController::class, 'store'])
-    ->middleware(['honeypot', 'throttle.custom:3,60']);
+    ->middleware(['honeypot', 'throttle.custom:7,60']);
 
 // ============================================
 // ROTAS DE AUTENTICAÇÃO
@@ -102,6 +103,9 @@ Route::middleware(['auth:api', 'throttle.custom:100,1'])->prefix('admin')->group
     Route::get('/contact-messages/{id}', [App\Http\Controllers\Admin\ContactMessageController::class, 'show']);
     Route::put('/contact-messages/{id}/mark-read', [App\Http\Controllers\Admin\ContactMessageController::class, 'markAsRead']);
     Route::delete('/contact-messages/{id}', [App\Http\Controllers\Admin\ContactMessageController::class, 'delete']);
+
+    // Hotsite links (CRUD apenas edição)
+    Route::apiResource('hotsite-links', App\Http\Controllers\Admin\HotsiteLinkController::class)->only(['index','show','update']);
 
     // Image Upload
     Route::post('/upload/image', [App\Http\Controllers\Admin\ImageUploadController::class, 'upload']);

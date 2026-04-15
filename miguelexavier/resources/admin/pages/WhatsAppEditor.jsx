@@ -3,7 +3,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { getWhatsAppSettings, updateWhatsAppSettings, createWhatsAppSettings } from '../services/adminApi';
+import { getWhatsAppSettings, updateWhatsAppSettings } from '../services/adminApi';
 import { Save, MessageSquare } from 'lucide-react';
 import '../styles/Editor.css';
 

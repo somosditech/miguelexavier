@@ -17,9 +17,8 @@ export default defineConfig({
                     // Separa bibliotecas do React
                     'vendor-react': ['react', 'react-dom', 'react-router-dom', 'react-helmet-async'],
                     // Separa bibliotecas de UI pesadas
-                    'vendor-ui': ['framer-motion', 'recharts'],
-                    // Agrupa ícones
-                    'lucide': ['lucide-react']
+                    'vendor-ui': ['framer-motion', 'recharts']
+                    // Removido agrupamento do lucide-react para permitir code-splitting individual dos ícones
                 }
             }
         }

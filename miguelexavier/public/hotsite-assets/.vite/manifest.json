@@ -1,0 +1,35 @@
+{
+  "_vendor-react-N--QU9DW.js": {
+    "file": "assets/vendor-react-N--QU9DW.js",
+    "name": "vendor-react"
+  },
+  "assets/favicon.png": {
+    "file": "assets/favicon-BVdzPBSW.png",
+    "src": "assets/favicon.png"
+  },
+  "assets/logo.png": {
+    "file": "assets/logo-B-rdObSm.png",
+    "src": "assets/logo.png"
+  },
+  "assets/pattern.png": {
+    "file": "assets/pattern-BwU2EBFv.png",
+    "src": "assets/pattern.png"
+  },
+  "index.html": {
+    "file": "assets/index-cqAfMDVK.js",
+    "name": "index",
+    "src": "index.html",
+    "isEntry": true,
+    "imports": [
+      "_vendor-react-N--QU9DW.js"
+    ],
+    "css": [
+      "assets/index-CXGZ6ZWe.css"
+    ],
+    "assets": [
+      "assets/logo-B-rdObSm.png",
+      "assets/pattern-BwU2EBFv.png",
+      "assets/favicon-BVdzPBSW.png"
+    ]
+  }
+}
