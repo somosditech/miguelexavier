@@ -1,0 +1,2 @@
+import{c as t}from"./main-DhJUcTzB.js";import"./vendor-ui-BruHcHM1.js";import"./vendor-react-Db9uldxG.js";const r=t("CandlestickChart",[["path",{d:"M9 5v4",key:"14uxtq"}],["rect",{width:"4",height:"6",x:"7",y:"9",rx:"1",key:"f4fvz0"}],["path",{d:"M9 15v2",key:"r5rk32"}],["path",{d:"M17 3v2",key:"1l2re6"}],["rect",{width:"4",height:"8",x:"15",y:"5",rx:"1",key:"z38je5"}],["path",{d:"M17 13v3",key:"5l0wba"}],["path",{d:"M3 3v18h18",key:"1s2lah"}]]);export{r as default};
+//# sourceMappingURL=candlestick-chart-B0gyw6xo.js.map

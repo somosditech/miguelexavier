@@ -1,0 +1,2 @@
+import{c as e}from"./main-DhJUcTzB.js";import"./vendor-ui-BruHcHM1.js";import"./vendor-react-Db9uldxG.js";const y=e("GalleryThumbnails",[["rect",{width:"18",height:"14",x:"3",y:"3",rx:"2",key:"74y24f"}],["path",{d:"M4 21h1",key:"16zlid"}],["path",{d:"M9 21h1",key:"15o7lz"}],["path",{d:"M14 21h1",key:"v9vybs"}],["path",{d:"M19 21h1",key:"edywat"}]]);export{y as default};
+//# sourceMappingURL=gallery-thumbnails-Dkl1CVdv.js.map

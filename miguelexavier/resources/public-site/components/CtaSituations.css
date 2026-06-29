@@ -1,152 +1,233 @@
+/* ============================================
+   CTA SITUATIONS — Seção de impacto
+   ============================================ */
+
 .cta-situations {
-    background-color: var(--color-background);
-    /* Bege claro padrão do site */
+    background: linear-gradient(135deg, #160408 0%, #1e0509 50%, #0d0204 100%);
     padding: var(--spacing-3xl) 0;
     position: relative;
     overflow: hidden;
 }
 
+/* Linha dourada decorativa no topo da seção */
+.cta-situations::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(207, 167, 80, 0.5), transparent);
+}
+
+/* Linha dourada decorativa na base da seção */
+.cta-situations::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(207, 167, 80, 0.5), transparent);
+}
+
+/* Layout dois colunas */
 .cta-situations-wrapper {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 0 var(--spacing-lg);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--spacing-3xl);
+    align-items: center;
 }
 
-/* Título principal */
-.cta-title {
-    font-family: 'Trajan', serif;
-    font-size: 2rem;
-    color: var(--color-text-secondary);
-    text-align: center;
-    line-height: 1.3;
-    margin-bottom: var(--spacing-2xl);
-    letter-spacing: 0.05em;
-    font-weight: 700;
-}
+/* ============================================
+   COLUNA ESQUERDA — Título + CTA
+   ============================================ */
 
-/* Lista de situações */
-.situations-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 var(--spacing-3xl) 0;
+.cta-situations-left {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--spacing-md);
-    width: 100%;
-    max-width: 600px;
-    /* Alinha a lista à esquerda mas centraliza o bloco */
-}
-
-/* Itens da lista */
-.situation-item {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    width: 100%;
-}
-
-.icon-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text-primary);
-}
-
-.check-icon {
-    flex-shrink: 0;
-}
-
-.situation-text {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-text-primary);
-    letter-spacing: 0.02em;
-}
-
-/* Rodapé do CTA */
-.cta-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     gap: var(--spacing-xl);
-    width: 100%;
 }
 
+/* Eyebrow */
+.cta-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cta-eyebrow-line {
+    width: 28px;
+    height: 1px;
+    background: var(--color-secondary);
+    opacity: 0.7;
+}
+
+.cta-eyebrow-text {
+    color: var(--color-secondary);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* Título */
+.cta-title {
+    font-family: 'Trajan', serif;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: #f0ece4;
+    text-align: left;
+    line-height: 1.3;
+    margin-bottom: 0;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+}
+
+/* Subtexto */
 .cta-subtext {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--color-text-secondary);
-    text-align: center;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(207, 167, 80, 0.65);
+    text-align: left;
+    line-height: 1.7;
     margin-bottom: 0;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
-/* Botão customizado para ser maior que o padrão */
+/* Botão CTA */
 .cta-button {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.1rem;
-    padding: 1.2rem 3rem;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    border-radius: var(--radius-sm);
+    padding: 0.85rem 1.8rem !important;
+    border-radius: 2px !important;
     white-space: nowrap;
     display: flex !important;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 20px rgba(119, 18, 32, 0.45) !important;
+}
+
+.cta-button svg {
+    width: 18px;
+    height: 18px;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(119, 18, 32, 0.6) !important;
+    color: #fff !important;
+}
+
+/* ============================================
+   COLUNA DIREITA — Lista de situações
+   ============================================ */
+
+.situations-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.situation-item {
+    display: flex;
+    align-items: center;
     gap: 16px;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(207, 167, 80, 0.1);
+    transition: border-color 0.2s ease;
 }
 
-/* Utilitários de visibilidade */
-.mobile-only {
-    display: none;
+.situation-item:first-child {
+    border-top: 1px solid rgba(207, 167, 80, 0.1);
 }
 
-/* Responsividade */
+.situation-item:hover {
+    border-bottom-color: rgba(207, 167, 80, 0.25);
+}
+
+.situation-dash {
+    flex-shrink: 0;
+    width: 20px;
+    height: 1px;
+    background: var(--color-secondary);
+    opacity: 0.6;
+}
+
+.situation-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: rgba(240, 234, 220, 0.85);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.4;
+}
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+
 @media (max-width: 768px) {
     .cta-situations {
         padding: var(--spacing-2xl) 0;
     }
 
+    .cta-situations-wrapper {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--spacing-2xl);
+        max-width: 100%;
+    }
+
     .cta-title {
-        font-size: 1.5rem;
-        margin-bottom: var(--spacing-xl);
-    }
-
-    .situations-list {
-        gap: var(--spacing-sm);
-        margin-bottom: var(--spacing-2xl);
-    }
-
-    .situation-text {
-        font-size: 1rem;
+        font-size: 1.3rem;
+        word-break: break-word;
     }
 
     .cta-subtext {
-        font-size: 1rem;
+        word-break: break-word;
+    }
+
+    .cta-situations-left {
+        align-items: stretch;
+        width: 100%;
+        min-width: 0;
     }
 
     .cta-button {
-        font-size: 1rem;
-        padding: 1rem 2rem;
-        width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        align-self: stretch;
         text-align: center;
-        flex-direction: column !important;
+        white-space: normal;
+        box-sizing: border-box;
     }
 
-    .mobile-only {
-        display: block;
+    .situations-list {
+        min-width: 0;
     }
-}
 
-@media (min-width: 769px) {
-    .desktop-only {
-        display: block;
+    .situation-item {
+        min-width: 0;
+    }
+
+    .situation-text {
+        min-width: 0;
+        overflow-wrap: anywhere;
     }
 }

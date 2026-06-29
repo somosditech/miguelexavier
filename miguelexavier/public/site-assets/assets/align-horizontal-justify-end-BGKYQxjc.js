@@ -1,0 +1,2 @@
+import{c as t}from"./main-DhJUcTzB.js";import"./vendor-ui-BruHcHM1.js";import"./vendor-react-Db9uldxG.js";const o=t("AlignHorizontalJustifyEnd",[["rect",{width:"6",height:"14",x:"2",y:"5",rx:"2",key:"dy24zr"}],["rect",{width:"6",height:"10",x:"12",y:"7",rx:"2",key:"1ht384"}],["path",{d:"M22 2v20",key:"40qfg1"}]]);export{o as default};
+//# sourceMappingURL=align-horizontal-justify-end-BGKYQxjc.js.map

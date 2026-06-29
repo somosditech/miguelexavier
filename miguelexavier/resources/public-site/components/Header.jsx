@@ -19,11 +19,18 @@ function Header() {
     const location = useLocation();
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const [theme, setTheme] = useState(null);
     const { content: whatsappContent } = useContent('whatsapp');
     const phoneNumber = whatsappContent?.phoneNumber || '554184737511';
     const message = whatsappContent?.predefinedMessage || 'Olá! Gostaria de agendar um atendimento.';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
 
     // Carrega o tema ao montar o componente
     useEffect(() => {
@@ -149,14 +156,14 @@ function Header() {
     }
 
     return (
-        <header className="header">
+        <header className={`header${scrolled ? ' scrolled' : ''}`}>
             <div className="container">
                 <div className="header-content">
                     {/* Logo do escritório */}
                     <a href="/" className="logo" onClick={handleLogoClick}>
                         {theme?.logoUrl ? (
                             <img
-                                src={`/storage/${theme.logoUrl}`}
+                                src={theme.logoUrl.startsWith('http') ? theme.logoUrl : `${(import.meta.env.VITE_API_URL || 'https://miguelexavier.adv.br/api').replace('/api', '')}/storage/${theme.logoUrl}`}
                                 alt="Logo de Miguel & Xavier Advocacia"
                                 className="logo-image"
                             />

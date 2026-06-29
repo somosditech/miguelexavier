@@ -1,41 +1,75 @@
 .team-editorial {
-    padding: var(--spacing-4xl) 0;
-    background-color: var(--color-background);
+    padding: var(--spacing-3xl) 0;
+    background: linear-gradient(135deg, #160408 0%, #1e0509 50%, #0d0204 100%);
+    position: relative;
+}
+
+.team-editorial::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(207, 167, 80, 0.5), transparent);
+}
+
+.team-editorial::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(207, 167, 80, 0.5), transparent);
 }
 
 .editorial-header {
     text-align: center;
-    margin-bottom: var(--spacing-4xl);
+    margin-bottom: var(--spacing-3xl);
+}
+
+/* Override section-subtitle/title para fundo escuro */
+.team-editorial .section-subtitle {
+    color: var(--color-secondary);
+}
+
+.team-editorial .section-title {
+    color: #f0ece4;
 }
 
 .ed-line {
-    width: 100px;
-    height: 3px;
-    background: var(--color-primary);
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
     margin: 0 auto;
     margin-bottom: var(--spacing-xl);
+    opacity: 0.8;
 }
 
 /* Lista de Membros */
 .members-list {
     display: flex;
     flex-direction: column;
-    gap: 120px;
+    gap: 100px;
 }
 
 .member-row {
     display: flex;
     align-items: center;
-    gap: 80px;
+    gap: 70px;
 }
 
 .member-row:nth-child(even) {
     flex-direction: row-reverse;
 }
 
-/* Moldura e Imagem */
+/* ============================================
+   MOLDURA E IMAGEM — NÃO ALTERAR EFEITOS
+   ============================================ */
+
 .member-image-side {
-    flex: 0 0 380px;
+    flex: 0 0 360px;
     position: relative;
 }
 
@@ -49,7 +83,7 @@
 
 .member-row:hover .img-border-outer {
     border-color: var(--color-primary);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
 .img-frame {
@@ -73,7 +107,7 @@
     transform: scale(1.05);
 }
 
-/* Novos Ícones Sociais (Vibrantes) */
+/* Ícones Sociais */
 .member-social-float {
     position: absolute;
     bottom: 20px;
@@ -84,7 +118,6 @@
     z-index: 10;
 }
 
-/* Inverter posição dos ícones quando a linha for invertida */
 .member-row:nth-child(even) .member-social-float {
     right: auto;
     left: 20px;
@@ -94,15 +127,14 @@
     width: 45px;
     height: 45px;
     background: var(--color-primary);
-    color: #000 !important;
-    /* Contraste alto para não ficar apagado */
+    color: #fff !important;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     font-weight: 800;
-    font-size: 1.1rem;
+    font-size: 1rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     opacity: 0;
     transform: translateY(10px);
@@ -114,59 +146,99 @@
     transform: translateY(0);
 }
 
-/* Delay para os ícones aparecerem um após o outro */
 .social-icon-circle:nth-child(2) {
     transition-delay: 0.1s;
 }
 
 .social-icon-circle:hover {
-    background: #fff;
+    background: var(--color-secondary);
+    color: #1a0508 !important;
     transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 0 20px var(--color-primary);
+    box-shadow: 0 0 20px rgba(207, 167, 80, 0.4);
 }
 
-/* Conteúdo de Texto */
+/* ============================================
+   CONTEÚDO DE TEXTO
+   ============================================ */
+
 .member-content-side {
     flex: 1;
 }
 
+.member-meta {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid rgba(207, 167, 80, 0.15);
+}
+
 .member-oab {
-    color: var(--color-primary);
-    font-size: 0.8rem;
+    color: var(--color-secondary);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
     font-weight: 700;
     display: block;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
+    margin-bottom: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
 }
 
 .member-name {
+    font-family: 'Trajan', serif;
     font-size: 1.8rem;
-    color: var(--color-text-primary);
+    color: #f0ece4;
     margin-bottom: 10px;
     font-weight: 400;
+    letter-spacing: 0.02em;
 }
 
 .member-role {
-    font-size: 1rem;
-    color: var(--color-secondary-accessible);
-    margin-bottom: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(207, 167, 80, 0.65);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0;
 }
 
 .member-role .sep {
-    color: var(--color-primary);
+    color: rgba(207, 167, 80, 0.3);
     margin: 0 10px;
     font-weight: 300;
 }
 
 .member-bio {
-    font-size: var(--font-sm);
-    line-height: 1.8;
-    color: var(--color-text-secondary);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: rgba(240, 234, 220, 0.55);
 }
 
-/* Responsividade */
-@media (max-width: 992px) {
+.member-bio p {
+    margin: 0;
+    color: rgba(240, 234, 220, 0.55);
+}
 
+/* Skeleton */
+.skeleton .skel-frame {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0px 40px 0px 40px;
+    aspect-ratio: 4/5;
+}
+
+.skel-line {
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 2px;
+    margin-bottom: 12px;
+}
+
+.skel-line.title { height: 32px; width: 60%; }
+.skel-line.text  { height: 16px; width: 90%; }
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+
+@media (max-width: 992px) {
     .member-row,
     .member-row:nth-child(even) {
         flex-direction: column;
@@ -176,11 +248,10 @@
 
     .member-image-side {
         width: 100%;
-        max-width: 380px;
-        margin-bottom: var(--spacing-xl);
+        max-width: 360px;
+        margin-bottom: var(--spacing-lg);
     }
 
-    /* Remove o filtro preto e branco no mobile */
     .member-img {
         filter: grayscale(0%) contrast(1);
     }
@@ -188,11 +259,10 @@
     .social-icon-circle {
         opacity: 1;
         transform: translateY(0);
-        width: 50px;
-        height: 50px;
+        width: 48px;
+        height: 48px;
     }
 
-    /* Ajusta os botões sociais para ficarem dentro do card */
     .member-social-float {
         flex-direction: row;
         bottom: 15px;
@@ -202,10 +272,13 @@
         gap: 15px;
     }
 
-    /* Centraliza os ícones sociais em todas as linhas no mobile */
     .member-row:nth-child(even) .member-social-float {
         left: 0;
         right: 0;
         justify-content: center;
+    }
+
+    .member-meta {
+        text-align: center;
     }
 }

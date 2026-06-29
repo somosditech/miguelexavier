@@ -1,0 +1,2 @@
+import{c as e}from"./main-DhJUcTzB.js";import"./vendor-ui-BruHcHM1.js";import"./vendor-react-Db9uldxG.js";const a=e("Dice4",[["rect",{width:"18",height:"18",x:"3",y:"3",rx:"2",ry:"2",key:"1m3agn"}],["path",{d:"M16 8h.01",key:"cr5u4v"}],["path",{d:"M8 8h.01",key:"1e4136"}],["path",{d:"M8 16h.01",key:"18s6g9"}],["path",{d:"M16 16h.01",key:"1f9h7w"}]]);export{a as default};
+//# sourceMappingURL=dice-4-CP9YwsNq.js.map

@@ -1,0 +1,2 @@
+import{c as t}from"./main-DhJUcTzB.js";import"./vendor-ui-BruHcHM1.js";import"./vendor-react-Db9uldxG.js";const i=t("Minimize",[["path",{d:"M8 3v3a2 2 0 0 1-2 2H3",key:"hohbtr"}],["path",{d:"M21 8h-3a2 2 0 0 1-2-2V3",key:"5jw1f3"}],["path",{d:"M3 16h3a2 2 0 0 1 2 2v3",key:"198tvr"}],["path",{d:"M16 21v-3a2 2 0 0 1 2-2h3",key:"ph8mxp"}]]);export{i as default};
+//# sourceMappingURL=minimize-Cpkn1raJ.js.map

@@ -7,26 +7,36 @@
 
 .header {
     position: fixed;
-    /* Fixa o header no topo ao rolar a página */
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.98);
-    /* Fundo branco semi-transparente */
-    backdrop-filter: blur(10px);
-    /* Efeito de desfoque no fundo */
-    box-shadow: 0 2px 8px rgba(119, 18, 32, 0.1);
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(207, 167, 80, 0.25);
+    box-shadow: none;
     z-index: 1000;
-    /* Garante que o header fique acima de outros elementos */
-    transition: all var(--transition-base);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.header.scrolled {
+    background: rgba(255, 255, 255, 0.99);
+    border-bottom-color: rgba(207, 167, 80, 0.4);
+    box-shadow: 0 4px 24px rgba(45, 36, 22, 0.08);
 }
 
 .header-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem 0;
-    min-height: 60px;
+    padding: 0.65rem 0;
+    min-height: 64px;
+    transition: min-height 0.3s ease, padding 0.3s ease;
+}
+
+.header.scrolled .header-content {
+    min-height: 56px;
+    padding: 0.5rem 0;
 }
 
 /* ============================================
@@ -72,27 +82,29 @@
 }
 
 .nav-link {
-    color: var(--color-text-primary);
+    color: var(--color-text-secondary);
     font-weight: 500;
-    font-size: var(--font-base);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     position: relative;
+    padding-bottom: 2px;
     transition: color var(--transition-fast);
 }
 
-/* Efeito de sublinhado ao passar o mouse */
 .nav-link::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -4px;
     left: 0;
     width: 0;
-    height: 2px;
-    background: var(--color-primary);
-    transition: width var(--transition-base);
+    height: 1.5px;
+    background: var(--color-secondary);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link:hover {
-    color: var(--color-primary);
+    color: var(--color-text-primary);
 }
 
 .nav-link:hover::after {
@@ -101,20 +113,30 @@
 
 /* Botão CTA no header */
 .cta-button {
-    font-size: 0.8rem !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     white-space: nowrap;
     font-family: 'Montserrat', sans-serif;
-    padding: 1rem 3rem;
-    border-radius: var(--radius-sm);
-    box-shadow: 0 4px 15px rgba(119, 18, 32, 0.3);
+    padding: 0.6rem 1.4rem;
+    border-radius: 2px;
+    box-shadow: 0 2px 10px rgba(119, 18, 32, 0.2);
     display: flex !important;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 10px;
+    transition: all 0.25s ease;
+}
+
+.cta-button svg {
+    width: 18px !important;
+    height: 18px !important;
 }
 
 .cta-button:hover {
     color: #FFF !important;
+    box-shadow: 0 4px 16px rgba(119, 18, 32, 0.35);
+    transform: translateY(-1px);
 }
 
 /* ============================================

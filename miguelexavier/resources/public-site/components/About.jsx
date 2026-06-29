@@ -40,7 +40,7 @@ function About() {
                         transition={{ duration: 0.6 }}
                     >
                         <LazyImage
-                            src={content.imageUrl}
+                            src={content.imageUrl || content.image}
                             alt="Escritório Miguel & Xavier - Ambiente profissional e acolhedor"
                             className="about-image"
                         />
@@ -59,6 +59,27 @@ function About() {
                         <p className="about-description">{content.description}</p>
                     </motion.div>
                 </div>
+                {/* Números de impacto — temporariamente oculto
+                <motion.div
+                    className="about-stats"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                    {(content.highlights || [
+                        { title: '+20 Anos', description: 'De experiência jurídica' },
+                        { title: '+500 Casos', description: 'Resolvidos com sucesso' },
+                        { title: '100%', description: 'Comprometimento com o cliente' },
+                        { title: 'Digital', description: 'Atendimento online seguro' },
+                    ]).map((stat, i) => (
+                        <div key={stat.id || i} className="about-stat">
+                            <span className="stat-value">{stat.title}</span>
+                            <span className="stat-label">{stat.description}</span>
+                        </div>
+                    ))}
+                </motion.div>
+                */}
             </div>
         </section>
     );

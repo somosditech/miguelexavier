@@ -1,9 +1,5 @@
-/**
- * ESTILOS DO COMPONENTE: Services
- */
-
 .services {
-    background: linear-gradient(180deg, #f7fafc 0%, #edf2f7 100%);
+    background: var(--color-background);
 }
 
 .section-header {
@@ -14,10 +10,6 @@
     align-items: center;
 }
 
-/* ============================================
-   GRID DE SERVIÇOS
-   ============================================ */
-
 .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -25,17 +17,17 @@
 }
 
 .service-card {
-    background: var(--color-background);
-    border-radius: var(--radius-lg);
+    background: linear-gradient(145deg, #200609 0%, #160406 100%);
+    border: none;
+    border-top: 2px solid rgba(207, 167, 80, 0.35);
+    border-radius: 4px;
     padding: var(--spacing-xl);
-    box-shadow: var(--shadow-md);
-    transition: all var(--transition-base);
-    border: 2px solid transparent;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
 }
 
-/* Efeito de brilho dourado sutil no fundo */
 .service-card::before {
     content: '';
     position: absolute;
@@ -43,9 +35,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, transparent 0%, rgba(207, 167, 80, 0.05) 100%);
+    background: linear-gradient(135deg, transparent 0%, rgba(207, 167, 80, 0.04) 100%);
     opacity: 0;
-    transition: opacity var(--transition-base);
+    transition: opacity 0.3s ease;
     z-index: 0;
 }
 
@@ -54,53 +46,43 @@
 }
 
 .service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px -10px rgba(119, 18, 32, 0.15),
-        0 0 20px rgba(207, 167, 80, 0.3);
-    border-color: var(--color-secondary);
+    border-top-color: var(--color-secondary);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 20px rgba(207, 167, 80, 0.1);
+    transform: translateY(-6px);
 }
 
-/* Garantir que o conteúdo fique acima do overlay */
-.service-card>* {
+.service-card > * {
     position: relative;
     z-index: 1;
 }
 
-/* ============================================
-   CONTEÚDO DO CARD
-   ============================================ */
-
 .service-icon {
-    font-size: var(--font-5xl);
-    margin-bottom: var(--spacing-md);
-    display: inline-block;
-    transition: transform var(--transition-base);
-    /* Estilos para ícones Lucide React */
-    color: var(--color-primary);
+    color: var(--color-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: var(--spacing-md);
+    width: 48px;
+    height: 48px;
+    transition: transform 0.3s ease;
 }
 
 .service-card:hover .service-icon {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.1);
 }
 
 .service-title {
-    color: var(--color-primary);
+    color: #f0ece4;
     font-size: var(--font-xl);
     margin-bottom: var(--spacing-sm);
 }
 
 .service-description {
-    color: var(--color-text-secondary);
+    color: rgba(240, 234, 220, 0.65);
     margin-bottom: var(--spacing-md);
-    line-height: 1.6;
+    line-height: 1.7;
+    font-size: 0.9rem;
 }
-
-/* ============================================
-   LISTA DE FEATURES
-   ============================================ */
 
 .service-features {
     list-style: none;
@@ -112,20 +94,22 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-    padding: var(--spacing-xs) 0;
-    color: var(--color-text-secondary);
+    padding: 0.4rem 0;
+    color: rgba(240, 234, 220, 0.55);
     font-size: var(--font-sm);
+    border-bottom: 1px solid rgba(207, 167, 80, 0.08);
+}
+
+.service-feature:last-child {
+    border-bottom: none;
 }
 
 .feature-bullet {
     color: var(--color-secondary);
     font-weight: 700;
-    font-size: var(--font-lg);
+    font-size: var(--font-base);
+    flex-shrink: 0;
 }
-
-/* ============================================
-   RESPONSIVIDADE
-   ============================================ */
 
 @media (max-width: 1024px) {
     .services-grid {

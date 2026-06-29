@@ -13,7 +13,8 @@
 /* Fonte Trajan - Para títulos e logotipo */
 @font-face {
   font-family: 'Trajan';
-  src: url('/fonts/Trajan.ttf') format('truetype');
+  src: url('/fonts/Trajan.woff2') format('woff2'),
+       url('/fonts/Trajan.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -43,7 +44,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  /* 1rem = 16px */
+  overflow-x: hidden;
 }
 
 /* Configuração do body */
@@ -55,6 +56,7 @@ body {
   line-height: 1.6;
   color: var(--color-text-primary, #1a202c);
   background-color: var(--color-background, #ffffff);
+  overflow-x: hidden;
 }
 
 /* ============================================
@@ -244,16 +246,31 @@ a:hover {
 /* Títulos de Seção Globais */
 .section-subtitle {
   color: var(--color-secondary-accessible);
-  font-size: var(--font-base);
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.section-subtitle::before,
+.section-subtitle::after {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-secondary);
+  opacity: 0.7;
+  flex-shrink: 0;
 }
 
 .section-title {
   color: var(--color-primary);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
 }
 
 /* Botão primário */

@@ -36,3 +36,6 @@ logs/
 # Temporários
 tmp/
 temp/
+
+# Artefatos de deploy
+*-deploy.zip

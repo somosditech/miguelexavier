@@ -12,9 +12,21 @@
     <link rel="manifest" href="/site.webmanifest?v=2" />
     
     <title>Miguel & Xavier Advocacia</title>
-    
+    <meta name="description" content="Escritório de advocacia especializado em Direito Civil e Previdenciário. Atendimento online com sigilo absoluto.">
+
+    <!-- Open Graph / WhatsApp / redes sociais -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://miguelexavier.adv.br/">
+    <meta property="og:title" content="Miguel & Xavier Advocacia">
+    <meta property="og:description" content="Advocacia especializada para proteger seus direitos. Atendimento online com sigilo absoluto.">
+    <meta property="og:image" content="https://miguelexavier.adv.br/apple-touch-icon.png">
+    <meta property="og:image:width" content="180">
+    <meta property="og:image:height" content="180">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary_large_image">
+
     <!-- Preload Critical Fonts -->
-    <link rel="preload" href="/fonts/Trajan.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Trajan.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
     
     @if($cssPath = vite_css('main.jsx', 'site'))
