@@ -1,0 +1,2 @@
+import{c as o}from"./main-9aCQt6tq.js";import"./vendor-ui-BruHcHM1.js";import"./vendor-react-Db9uldxG.js";const n=o("MoveHorizontal",[["polyline",{points:"18 8 22 12 18 16",key:"1hqrds"}],["polyline",{points:"6 8 2 12 6 16",key:"f0ernq"}],["line",{x1:"2",x2:"22",y1:"12",y2:"12",key:"1dnqot"}]]);export{n as default};
+//# sourceMappingURL=move-horizontal-CW-XEGtG.js.map

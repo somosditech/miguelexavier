@@ -1,0 +1,2 @@
+import{c as t}from"./main-9aCQt6tq.js";import"./vendor-ui-BruHcHM1.js";import"./vendor-react-Db9uldxG.js";const r=t("TramFront",[["rect",{width:"16",height:"16",x:"4",y:"3",rx:"2",key:"1wxw4b"}],["path",{d:"M4 11h16",key:"mpoxn0"}],["path",{d:"M12 3v8",key:"1h2ygw"}],["path",{d:"m8 19-2 3",key:"13i0xs"}],["path",{d:"m18 22-2-3",key:"1p0ohu"}],["path",{d:"M8 15h0",key:"q9eq1f"}],["path",{d:"M16 15h0",key:"pzrbjg"}]]);export{r as default};
+//# sourceMappingURL=tram-front-yuvrCCJH.js.map

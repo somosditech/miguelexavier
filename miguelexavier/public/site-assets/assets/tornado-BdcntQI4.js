@@ -1,0 +1,2 @@
+import{c as o}from"./main-9aCQt6tq.js";import"./vendor-ui-BruHcHM1.js";import"./vendor-react-Db9uldxG.js";const e=o("Tornado",[["path",{d:"M21 4H3",key:"1hwok0"}],["path",{d:"M18 8H6",key:"41n648"}],["path",{d:"M19 12H9",key:"1g4lpz"}],["path",{d:"M16 16h-6",key:"1j5d54"}],["path",{d:"M11 20H9",key:"39obr8"}]]);export{e as default};
+//# sourceMappingURL=tornado-BdcntQI4.js.map

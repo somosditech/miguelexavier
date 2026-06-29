@@ -1,0 +1,2 @@
+import{c as e}from"./main-9aCQt6tq.js";import"./vendor-ui-BruHcHM1.js";import"./vendor-react-Db9uldxG.js";const i=e("Videotape",[["rect",{width:"20",height:"16",x:"2",y:"4",rx:"2",key:"18n3k1"}],["path",{d:"M2 8h20",key:"d11cs7"}],["circle",{cx:"8",cy:"14",r:"2",key:"1k2qr5"}],["path",{d:"M8 12h8",key:"1wcyev"}],["circle",{cx:"16",cy:"14",r:"2",key:"14k7lr"}]]);export{i as default};
+//# sourceMappingURL=videotape-CCXEi5-M.js.map

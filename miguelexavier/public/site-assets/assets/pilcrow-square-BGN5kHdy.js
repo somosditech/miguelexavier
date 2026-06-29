@@ -1,0 +1,2 @@
+import{c as t}from"./main-9aCQt6tq.js";import"./vendor-ui-BruHcHM1.js";import"./vendor-react-Db9uldxG.js";const i=t("PilcrowSquare",[["rect",{width:"18",height:"18",x:"3",y:"3",rx:"2",key:"afitv7"}],["path",{d:"M12 12H9.5a2.5 2.5 0 0 1 0-5H17",key:"1l9586"}],["path",{d:"M12 7v10",key:"jspqdw"}],["path",{d:"M16 7v10",key:"lavkr4"}]]);export{i as default};
+//# sourceMappingURL=pilcrow-square-BGN5kHdy.js.map

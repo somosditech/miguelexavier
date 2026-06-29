@@ -3,7 +3,7 @@
  */
 
 .footer {
-    background: linear-gradient(135deg, rgba(26, 35, 50, 0.95), rgba(26, 35, 50, 0.85)), url('https://miguelexavier.adv.br/storage/footer.png');
+    background: linear-gradient(135deg, rgba(22, 4, 8, 0.95), rgba(13, 2, 4, 0.9)), url('https://miguelexavier.adv.br/storage/footer.png');
     background-size: contain;
     color: var(--color-text-light);
     padding: var(--spacing-sm) 0 var(--spacing-sm);

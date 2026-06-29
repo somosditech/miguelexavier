@@ -3,7 +3,7 @@
  */
 
 .contact {
-    background: linear-gradient(135deg, #160408 0%, #1e0509 50%, #0d0204 100%);
+    background: linear-gradient(180deg, #f0ebe2 0%, #f5f1eb 100%);
     position: relative;
     overflow: hidden;
 }
@@ -33,12 +33,12 @@
 }
 
 .contact .section-title {
-    color: #f0ece4;
+    color: var(--color-text-primary);
 }
 
 .section-description {
     text-align: center;
-    color: rgba(207,167,80,0.65);
+    color: var(--color-text-secondary);
     font-size: var(--font-lg);
     max-width: 600px;
     margin: 0 auto var(--spacing-xl);
@@ -49,14 +49,26 @@
    ============================================ */
 
 .contact-form {
-    max-width: 700px;
+    position: relative;
+    max-width: 640px;
     margin: 0 auto;
-    background: rgba(255,255,255,0.04);
-    padding: var(--spacing-2xl);
-    border-radius: 4px;
-    border: 1px solid rgba(207,167,80,0.15);
-    backdrop-filter: blur(4px);
-    box-shadow: var(--shadow-lg);
+    background: #ffffff;
+    padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-xl);
+    border-radius: 6px;
+    border: 1px solid rgba(207,167,80,0.25);
+    box-shadow: 0 20px 50px -20px rgba(119, 18, 32, 0.18), 0 6px 18px rgba(45, 36, 22, 0.06);
+    overflow: hidden;
+}
+
+/* Barra de detalhe no topo do card (vinho -> dourado) */
+.contact-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
 }
 
 .form-grid {
@@ -80,8 +92,8 @@
 }
 
 .form-label {
-    color: rgba(240,234,220,0.8);
-    font-weight: 600;
+    color: var(--color-primary);
+    font-weight: 700;
     font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -89,28 +101,32 @@
 
 .form-input,
 .form-textarea {
-    padding: 8px 14px;
-    /* Reduzido padding vertical de 10px para 8px - inputs mais finos */
-    border: 1px solid rgba(207,167,80,0.2);
-    border-radius: 2px;
+    padding: 11px 14px;
+    border: 1px solid rgba(45, 36, 22, 0.14);
+    border-radius: 4px;
     font-size: var(--font-base);
     font-family: inherit;
     transition: all var(--transition-base);
-    background: rgba(255,255,255,0.06);
-    color: #f0ece4;
+    background: #f7f3ec;
+    color: var(--color-text-primary);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: rgba(90, 74, 53, 0.5);
 }
 
 .form-input:focus,
 .form-textarea:focus {
     outline: none;
+    background: #ffffff;
     border-color: var(--color-secondary);
-    box-shadow: 0 0 0 2px rgba(207,167,80,0.15);
-    transform: translateY(-1px);
+    box-shadow: 0 0 0 3px rgba(207,167,80,0.18);
 }
 
 .form-input:hover,
 .form-textarea:hover {
-    border-color: var(--color-secondary);
+    border-color: rgba(207,167,80,0.6);
 }
 
 .form-textarea {
